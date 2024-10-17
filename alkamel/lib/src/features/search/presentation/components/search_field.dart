@@ -3,6 +3,7 @@ import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cub
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
@@ -20,7 +21,7 @@ class SearchField extends StatelessWidget {
                   context.read<HomeCubit>().searchController.clear();
                   context.read<HomeCubit>().search("");
                 },
-                icon: const Icon(Icons.clean_hands_outlined),
+                icon: Icon(MdiIcons.eraser),
               ),
             ),
             onChanged: (value) {
