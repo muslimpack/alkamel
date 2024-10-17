@@ -1,6 +1,7 @@
 import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/di/dependency_injection.dart';
 import 'package:alkamel/src/core/extensions/extension_platform.dart';
+import 'package:alkamel/src/features/home/presentation/screens/home_screen.dart';
 import 'package:alkamel/src/features/themes/presentation/controller/cubit/theme_cubit.dart';
 import 'package:alkamel/src/features/ui/presentation/components/desktop_window_wrapper.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -43,7 +44,7 @@ class AlkamelApp extends StatelessWidget {
               }
               return child ?? const SizedBox();
             },
-            home: const Scaffold(),
+            home: const HomeScreen(),
           );
         },
       ),
