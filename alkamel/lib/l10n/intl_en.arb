@@ -2,6 +2,8 @@
   "@@locale": "en",
   "appTitle": "Al-Kamel fe al-Sunan",
   "chat": "Chat",
+  "copiedToClipboard": "Copied to clipboard",
+  "copy": "Copy",
   "misspelled": "Misspelled",
   "prefAppLanguage": "App language",
   "prefThemeDarkMode": "Dark Mode",

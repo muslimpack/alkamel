@@ -25,6 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle":
             MessageLookupByLibrary.simpleMessage("Al-Kamel fe al-Sunan"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
+        "copiedToClipboard":
+            MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
+        "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "misspelled": MessageLookupByLibrary.simpleMessage("Misspelled"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("App language"),
         "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),

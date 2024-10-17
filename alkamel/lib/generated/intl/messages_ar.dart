@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("الكامل في السنن"),
         "chat": MessageLookupByLibrary.simpleMessage("تواصل"),
+        "copiedToClipboard":
+            MessageLookupByLibrary.simpleMessage("تم النسخ إلى الحافظة"),
+        "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
         "misspelled": MessageLookupByLibrary.simpleMessage("خطأ إملائي"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
         "prefThemeDarkMode":

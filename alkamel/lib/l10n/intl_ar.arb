@@ -2,6 +2,8 @@
   "@@locale": "ar",
   "appTitle": "الكامل في السنن",
   "chat": "تواصل",
+  "copiedToClipboard": "تم النسخ إلى الحافظة",
+  "copy": "نسخ",
   "misspelled": "خطأ إملائي",
   "prefAppLanguage": "لغة التطبيق",
   "prefThemeDarkMode": "الوضع الليلي",
