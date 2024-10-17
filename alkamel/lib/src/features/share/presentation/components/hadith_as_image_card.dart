@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class HadithAsImageCard extends StatelessWidget {
@@ -60,15 +61,24 @@ class HadithAsImageCard extends StatelessWidget {
                       (hadith.rawyReference.isNotEmpty
                           ? "(${hadith.rawyReference})"
                           : ""),
-                  style: const TextStyle(fontSize: 30, color: secondaryColor),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    color: secondaryColor,
+                    fontFamily: "alhadari-medium",
+                  ),
                 ),
                 const SizedBox(height: 30),
                 Expanded(
                   child: Center(
-                    child: Text(
+                    child: AutoSizeText(
+                      maxFontSize: 80,
+                      minFontSize: 15,
                       hadith.hadith,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(
-                        fontSize: 30,
+                        fontSize: 80,
+                        fontFamily: "djadli_sarkha",
                       ),
                     ),
                   ),
@@ -77,8 +87,12 @@ class HadithAsImageCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 50),
                   child: Text(
-                    "المرتبة: ${hadith.grade}  |  الحكم: [${hadith.gradeEnum.title}]",
-                    style: const TextStyle(fontSize: 30, color: secondaryColor),
+                    "المرتبة: ${hadith.grade}\nالحكم: [${hadith.gradeEnum.title}]",
+                    style: const TextStyle(
+                      fontSize: 30,
+                      color: secondaryColor,
+                      fontFamily: "alhadari-medium",
+                    ),
                   ),
                 ),
               ],

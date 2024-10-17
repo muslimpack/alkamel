@@ -64,6 +64,12 @@ flutter:
     - family: Amiri
       fonts:
         - asset: assets/fonts/Amiri-Regular.ttf
+    - family: djadli_sarkha
+      fonts:
+        - asset: assets/fonts/djadli_sarkha.ttf
+    - family: alhadari-medium
+      fonts:
+        - asset: assets/fonts/alhadari-medium.ttf
 
 flutter_intl:
   enabled: true
