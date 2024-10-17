@@ -12,7 +12,7 @@ class SqlDBHelper {
   late final int dbVersion;
 
   SqlDBHelper({required this.dbName, required this.dbVersion}) {
-    appPrint("DatabaseHelper for $dbName");
+    appPrint("SqlDBHelper for $dbName");
   }
 
   Future<String> getDbPath() async {
@@ -29,27 +29,32 @@ class SqlDBHelper {
     return path;
   }
 
-  /// Instead of copying a .db file, this will load and execute the .sql file
-  Future<void> executeSqlFromAssets(Database db, String sqlAssetPath) async {
+  /// Loads the .sql file and executes it using a "cursor-like" approach
+  Future<void> executeSqlFromAssetsCursor(
+    Database db,
+    String sqlAssetPath,
+  ) async {
     appPrint("Loading SQL file $sqlAssetPath...");
 
     try {
-      // Load the .sql file from assets
+      // Load the SQL file from assets
       final ByteData data = await rootBundle.load(sqlAssetPath);
       final String sql = String.fromCharCodes(data.buffer.asUint8List());
 
-      // Split the SQL file into individual commands
-      final List<String> sqlCommands =
-          sql.split(';').where((cmd) => cmd.trim().isNotEmpty).toList();
+      // Use a batch for cursor-like execution of SQL commands
+      final Batch batch = db.batch();
 
-      // Execute each SQL command in the database
-      for (final String command in sqlCommands) {
-        await db.execute(command.trim());
+      for (final cmd in sql.split(";")) {
+        appPrint(cmd);
+        batch.execute(cmd);
       }
 
-      appPrint("SQL execution done");
+      // Commit the batch (executing all the commands)
+      await batch.commit(noResult: true); // Use noResult to reduce memory usage
+
+      appPrint("SQL batch execution done");
     } catch (e) {
-      appPrint("SQL execution failed: $e");
+      appPrint("SQL batch execution failed: $e");
     }
   }
 
@@ -60,37 +65,39 @@ class SqlDBHelper {
 
     final fileName = dbName.split(".").first;
 
+    final Database resultDB;
     if (!exist) {
-      // If database does not exist, create it by executing the .sql file
+      // If the database does not exist, create it by executing the SQL file
       appPrint("$dbName does not exist, creating new db...");
-      final Database db = await openDatabase(
+      resultDB = await openDatabase(
         path,
         version: dbVersion,
         onCreate: (db, version) async {
-          await executeSqlFromAssets(db, 'assets/db/$fileName.sql');
+          await executeSqlFromAssetsCursor(db, 'assets/db/$fileName.sql');
         },
       );
-      return db;
     } else {
-      // If database exists, open it
-      final Database db = await openDatabase(path);
+      // If the database exists, open it
+      final db = await openDatabase(path);
 
-      await db.getVersion().then((currentVersion) async {
-        if (currentVersion < dbVersion) {
-          appPrint("$dbName detect new version");
-          await deleteDatabase(path);
-          final Database newDb = await openDatabase(
-            path,
-            version: dbVersion,
-            onCreate: (db, version) async {
-              await executeSqlFromAssets(db, 'assets/db/$fileName.sql');
-            },
-          );
-          return newDb;
-        }
-      });
+      final currentVersion = await db.getVersion();
 
-      return db;
+      ///currentVersion < dbVersion
+      if (true) {
+        appPrint("$dbName detect new version");
+        await deleteDatabase(path);
+        resultDB = await openDatabase(
+          path,
+          version: dbVersion,
+          onCreate: (db, version) async {
+            await executeSqlFromAssetsCursor(db, 'assets/db/$fileName.sql');
+          },
+        );
+      } else {
+        resultDB = db;
+      }
     }
+
+    return resultDB;
   }
 }
