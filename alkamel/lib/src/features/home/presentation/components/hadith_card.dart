@@ -64,7 +64,7 @@ class HadithCard extends StatelessWidget {
               ),
               const Divider(),
               Text(
-                hadith.grade,
+                "المرتبة: ${hadith.grade}  |  الحكم: [${hadithGradeEnum.title}]",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: hadithGradeEnum.color,
                       fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class ResponsiveText extends StatefulWidget {
 
 class _ResponsiveTextState extends State<ResponsiveText> {
   late bool expanded;
-  late bool isLong;
+  bool isLong = true;
   final int length = 280;
 
   @override
@@ -107,10 +107,13 @@ class _ResponsiveTextState extends State<ResponsiveText> {
 
   @override
   Widget build(BuildContext context) {
-    final textSpan = HighlightText(
-      text: expanded
-          ? widget.text
-          : widget.text.substring(0, min(widget.text.length, length)),
+    /// bodyText
+    final bodyText = expanded
+        ? widget.text
+        : widget.text.substring(0, min(widget.text.length, length));
+
+    final bodyTextSpan = HighlightText(
+      text: bodyText,
       textToHighlight: widget.searchedText ?? "",
       highlightStyle: widget.style?.copyWith(
         color: Theme.of(context).colorScheme.primary,
@@ -118,21 +121,26 @@ class _ResponsiveTextState extends State<ResponsiveText> {
       style: widget.style,
     ).textSpan();
 
+    /// show more
+    final bool showMoreText = !expanded && widget.text.length > length;
+
+    final moreTextSpan = TextSpan(
+      text: " ...المزيد",
+      style: const TextStyle(color: Colors.blue),
+      recognizer: TapGestureRecognizer()
+        ..onTap = () {
+          setState(() {
+            expanded = true;
+          });
+        },
+    );
+
+    ///
     final textWidget = Text.rich(
       TextSpan(
         children: [
-          textSpan,
-          if (!expanded && widget.text.length > length)
-            TextSpan(
-              text: " ...المزيد", // "المزيد" as a clickable blue text
-              style: const TextStyle(color: Colors.blue),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  setState(() {
-                    expanded = true;
-                  });
-                },
-            ),
+          bodyTextSpan,
+          if (showMoreText) moreTextSpan,
         ],
       ),
     );
