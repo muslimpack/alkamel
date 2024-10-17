@@ -24,12 +24,14 @@ class HomeCubit extends Cubit<HomeState> {
   Future start() async {
     final authenticHadith = await alkamelDbHelper.randomHadith("صحيح");
     final weakHadith = await alkamelDbHelper.randomHadith("ضعيف");
+    final abandonedHadith = await alkamelDbHelper.randomHadith("ضعيف جد");
     final fabricatedHadith = await alkamelDbHelper.randomHadith("مكذوب");
 
     emit(
       HomeLoadedState(
         authenticHadith: authenticHadith,
         weakHadith: weakHadith,
+        abandonedHadith: abandonedHadith,
         fabricatedHadith: fabricatedHadith,
         searchText: "",
         search: false,

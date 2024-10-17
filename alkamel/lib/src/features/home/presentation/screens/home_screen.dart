@@ -73,6 +73,8 @@ class HomeScreen extends StatelessWidget {
                         HadithCard(hadith: state.authenticHadith!),
                       if (state.weakHadith != null)
                         HadithCard(hadith: state.weakHadith!),
+                      if (state.abandonedHadith != null)
+                        HadithCard(hadith: state.abandonedHadith!),
                       if (state.fabricatedHadith != null)
                         HadithCard(hadith: state.fabricatedHadith!),
                     ],

@@ -14,6 +14,7 @@ class HomeLoadedState extends HomeState {
   final Hadith? authenticHadith;
   final Hadith? weakHadith;
   final Hadith? fabricatedHadith;
+  final Hadith? abandonedHadith;
   final String searchText;
   final bool search;
 
@@ -21,6 +22,7 @@ class HomeLoadedState extends HomeState {
     required this.authenticHadith,
     required this.weakHadith,
     required this.fabricatedHadith,
+    this.abandonedHadith,
     required this.searchText,
     required this.search,
   });
@@ -29,6 +31,7 @@ class HomeLoadedState extends HomeState {
     Hadith? authenticHadith,
     Hadith? weakHadith,
     Hadith? fabricatedHadith,
+    Hadith? abandonedHadith,
     String? searchText,
     bool? search,
   }) {
@@ -36,6 +39,7 @@ class HomeLoadedState extends HomeState {
       authenticHadith: authenticHadith ?? this.authenticHadith,
       weakHadith: weakHadith ?? this.weakHadith,
       fabricatedHadith: fabricatedHadith ?? this.fabricatedHadith,
+      abandonedHadith: abandonedHadith ?? this.abandonedHadith,
       searchText: searchText ?? this.searchText,
       search: search ?? this.search,
     );
@@ -45,6 +49,7 @@ class HomeLoadedState extends HomeState {
   List<Object?> get props => [
         authenticHadith,
         weakHadith,
+        abandonedHadith,
         fabricatedHadith,
         searchText,
         search,
