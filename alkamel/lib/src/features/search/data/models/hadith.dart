@@ -16,7 +16,7 @@ class Hadith extends HadithEntity {
       'id': id,
       'number': number,
       'rawy': rawy,
-      'rawyRefrence': rawyReference,
+      'rawyReference': rawyReference,
       'grade': grade,
       'hadith': hadith,
     };
@@ -27,7 +27,7 @@ class Hadith extends HadithEntity {
       id: map['id'] as int,
       number: map['number'] as int,
       rawy: map['rawy'] as String? ?? "",
-      rawyReference: (map['rawyRefrence'] as String? ?? "").removeBrackets(),
+      rawyReference: (map['rawyReference'] as String? ?? "").removeBrackets(),
       grade: (map['grade'] as String? ?? "").removeBrackets(),
       hadith: map['hadith'] as String,
     );
