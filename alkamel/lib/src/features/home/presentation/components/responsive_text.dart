@@ -53,7 +53,8 @@ class _ResponsiveTextState extends State<ResponsiveText> {
     final bool showMoreText = !expanded && widget.text.length > length;
 
     final moreTextSpan = TextSpan(
-      text: " ...المزيد",
+      text:
+          " ...المزيد (${widget.text.split(" ").length - bodyText.split(" ").length})",
       style: const TextStyle(color: Colors.blue),
       recognizer: TapGestureRecognizer()
         ..onTap = () {
