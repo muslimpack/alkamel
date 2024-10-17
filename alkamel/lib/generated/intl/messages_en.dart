@@ -28,8 +28,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "misspelled": MessageLookupByLibrary.simpleMessage("Misspelled"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("App language"),
         "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "reportMisspelled":
+            MessageLookupByLibrary.simpleMessage("Report misspelled"),
         "searchResultCount":
             MessageLookupByLibrary.simpleMessage("Search result count"),
-        "settings": MessageLookupByLibrary.simpleMessage("Settings")
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
+        "shareAsImage": MessageLookupByLibrary.simpleMessage("Share as image")
       };
 }

@@ -100,6 +100,16 @@ class S {
     );
   }
 
+  /// `Report misspelled`
+  String get reportMisspelled {
+    return Intl.message(
+      'Report misspelled',
+      name: 'reportMisspelled',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Search result count`
   String get searchResultCount {
     return Intl.message(
@@ -115,6 +125,26 @@ class S {
     return Intl.message(
       'Settings',
       name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share as image`
+  String get shareAsImage {
+    return Intl.message(
+      'Share as image',
+      name: 'shareAsImage',
       desc: '',
       args: [],
     );

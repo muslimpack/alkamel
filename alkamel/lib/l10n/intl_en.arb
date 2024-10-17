@@ -5,6 +5,9 @@
   "misspelled": "Misspelled",
   "prefAppLanguage": "App language",
   "prefThemeDarkMode": "Dark Mode",
+  "reportMisspelled": "Report misspelled",
   "searchResultCount": "Search result count",
-  "settings": "Settings"
+  "settings": "Settings",
+  "share": "Share",
+  "shareAsImage": "Share as image"
 }

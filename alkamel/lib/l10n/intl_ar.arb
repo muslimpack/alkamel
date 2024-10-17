@@ -5,6 +5,9 @@
   "misspelled": "خطأ إملائي",
   "prefAppLanguage": "لغة التطبيق",
   "prefThemeDarkMode": "الوضع الليلي",
+  "reportMisspelled": "تبليغ عن خطأ",
   "searchResultCount": "عدد نتائج البحث",
-  "settings": "الإعدادات"
+  "settings": "الإعدادات",
+  "share": "مشاركة",
+  "shareAsImage": "مشاركة كصورة"
 }
