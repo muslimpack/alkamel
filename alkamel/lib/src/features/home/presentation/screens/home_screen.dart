@@ -51,20 +51,11 @@ class HomeScreen extends StatelessWidget {
                 const SearchField(),
                 const SizedBox(height: 20),
                 if (state.authenticHadith != null)
-                  HadithCard(
-                    backgroundColor: Colors.green.withOpacity(.3),
-                    hadith: state.authenticHadith!,
-                  ),
+                  HadithCard(hadith: state.authenticHadith!),
                 if (state.weakHadith != null)
-                  HadithCard(
-                    backgroundColor: Colors.orange.withOpacity(.3),
-                    hadith: state.weakHadith!,
-                  ),
+                  HadithCard(hadith: state.weakHadith!),
                 if (state.fabricatedHadith != null)
-                  HadithCard(
-                    backgroundColor: Colors.red.withOpacity(.3),
-                    hadith: state.fabricatedHadith!,
-                  ),
+                  HadithCard(hadith: state.fabricatedHadith!),
               ],
             ),
           ),

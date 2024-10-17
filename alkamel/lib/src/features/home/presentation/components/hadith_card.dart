@@ -1,22 +1,31 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:alkamel/src/core/functions/print.dart';
+import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:flutter/material.dart';
 
 class HadithCard extends StatelessWidget {
   final Hadith hadith;
-  final Color? backgroundColor;
   final EdgeInsetsGeometry? margin;
-  final double backgroundColorOpacity;
   const HadithCard({
     super.key,
     required this.hadith,
-    this.backgroundColor,
-    this.backgroundColorOpacity = .25,
     this.margin = const EdgeInsets.symmetric(vertical: 10),
   });
 
   @override
   Widget build(BuildContext context) {
+    HadithGradeEnum? hadithGradeEnum;
+    for (final grade in HadithGradeEnum.values) {
+      if (hadithGradeEnum != null) break;
+      for (final dbG in grade.dbNames) {
+        if (hadith.grade.contains(dbG)) {
+          hadithGradeEnum = grade;
+          break;
+        }
+      }
+    }
+    appPrint(hadithGradeEnum);
     return Card(
       margin: margin,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
@@ -24,8 +33,8 @@ class HadithCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             right: BorderSide(
-              color: backgroundColor?.withOpacity(backgroundColorOpacity) ??
-                  Colors.transparent,
+              color:
+                  hadithGradeEnum?.color.withOpacity(.25) ?? Colors.transparent,
               width: 7,
             ),
           ),
