@@ -110,26 +110,23 @@ class FontSettingsBar extends StatelessWidget {
 class TextSample extends StatelessWidget {
   const TextSample({super.key});
   static String text =
-      "سُبْحَانَكَ اللَّهُمَّ رَبَّنَا وَبِحَمْدِكَ، اللَّهُمَّ اغْفِرْ لِي";
+      "اللَّهُمَّ ‌صَلِّ ‌عَلَى ‌مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ ‌فِي ‌الْعَالَمِينَ ‌إِنَّكَ ‌حَمِيدٌ ‌مَجِيدٌ";
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, state) {
-        return SizedBox(
-          height: 200,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Center(
-                child: Text(
-                  state.showDiacritics ? text : text.removeDiacritics,
-                  textAlign: TextAlign.center,
-                  softWrap: true,
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    fontSize: state.fontSize * 10,
-                  ),
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Center(
+              child: Text(
+                state.showDiacritics ? text : text.removeDiacritics,
+                textAlign: TextAlign.center,
+                softWrap: true,
+                textDirection: TextDirection.rtl,
+                style: TextStyle(
+                  fontSize: state.fontSize * 10,
                 ),
               ),
             ),

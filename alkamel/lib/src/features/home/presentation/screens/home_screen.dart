@@ -4,6 +4,7 @@ import 'package:alkamel/src/features/home/presentation/components/hadith_card.da
 import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:alkamel/src/features/search/presentation/components/search_field.dart';
 import 'package:alkamel/src/features/search/presentation/screens/search_screen.dart';
+import 'package:alkamel/src/features/settings/presentation/components/font_settings_widgets.dart';
 import 'package:alkamel/src/features/settings/presentation/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,7 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             title: state.search ? const SearchField() : null,
+            leading: const FontSettingsIconButton(),
             actions: [
               ///toogle search
               if (!state.search)
