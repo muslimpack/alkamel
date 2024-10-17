@@ -1,3 +1,4 @@
+import 'package:alkamel/src/core/extensions/string_extension.dart';
 import 'package:alkamel/src/features/search/domain/entities/hadith_entity.dart';
 
 class Hadith extends HadithEntity {
@@ -26,8 +27,8 @@ class Hadith extends HadithEntity {
       id: map['id'] as int,
       number: map['number'] as int,
       rawy: map['rawy'] as String? ?? "",
-      rawyReference: map['rawyRefrence'] as String? ?? "",
-      grade: map['grade'] as String? ?? "",
+      rawyReference: (map['rawyRefrence'] as String? ?? "").removeBrackets(),
+      grade: (map['grade'] as String? ?? "").removeBrackets(),
       hadith: map['hadith'] as String,
     );
   }
