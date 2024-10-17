@@ -43,7 +43,7 @@ class _UIAppBarState extends State<UIAppBar> {
                         child: Padding(
                           padding: const EdgeInsets.all(10),
                           child: Image.asset(
-                            "assets/images/app_icon.png",
+                            "assets/images/app_icon2.png",
                           ),
                         ),
                       ),
