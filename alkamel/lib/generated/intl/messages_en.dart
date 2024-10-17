@@ -21,5 +21,11 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "appTitle":
+            MessageLookupByLibrary.simpleMessage("Al-Kamel fe al-Sunan"),
+        "chat": MessageLookupByLibrary.simpleMessage("Chat"),
+        "misspelled": MessageLookupByLibrary.simpleMessage("Misspelled"),
+        "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode")
+      };
 }

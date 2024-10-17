@@ -1,1 +1,7 @@
-{}
+{
+  "@@locale": "en",
+  "appTitle": "Al-Kamel fe al-Sunan",
+  "chat": "Chat",
+  "misspelled": "Misspelled",
+  "prefThemeDarkMode": "Dark Mode"
+}
