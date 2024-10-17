@@ -25,7 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("الكامل في السنن"),
         "chat": MessageLookupByLibrary.simpleMessage("تواصل"),
         "misspelled": MessageLookupByLibrary.simpleMessage("خطأ إملائي"),
+        "prefAppLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
         "prefThemeDarkMode":
-            MessageLookupByLibrary.simpleMessage("الوضع الليلي")
+            MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+        "settings": MessageLookupByLibrary.simpleMessage("الإعدادات")
       };
 }

@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Al-Kamel fe al-Sunan"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "misspelled": MessageLookupByLibrary.simpleMessage("Misspelled"),
-        "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode")
+        "prefAppLanguage": MessageLookupByLibrary.simpleMessage("App language"),
+        "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings")
       };
 }

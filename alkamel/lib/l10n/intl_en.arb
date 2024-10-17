@@ -3,5 +3,7 @@
   "appTitle": "Al-Kamel fe al-Sunan",
   "chat": "Chat",
   "misspelled": "Misspelled",
-  "prefThemeDarkMode": "Dark Mode"
+  "prefAppLanguage": "App language",
+  "prefThemeDarkMode": "Dark Mode",
+  "settings": "Settings"
 }

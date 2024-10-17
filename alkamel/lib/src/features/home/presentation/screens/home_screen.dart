@@ -1,4 +1,6 @@
+import 'package:alkamel/src/core/extensions/extension.dart';
 import 'package:alkamel/src/core/shared/custom_field_decoration.dart';
+import 'package:alkamel/src/features/settings/presentation/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,7 +13,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.push(const SettingsScreen());
+            },
             icon: const Icon(Icons.settings),
           ),
         ],

@@ -80,11 +80,31 @@ class S {
     );
   }
 
+  /// `App language`
+  String get prefAppLanguage {
+    return Intl.message(
+      'App language',
+      name: 'prefAppLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Dark Mode`
   String get prefThemeDarkMode {
     return Intl.message(
       'Dark Mode',
       name: 'prefThemeDarkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
       desc: '',
       args: [],
     );
