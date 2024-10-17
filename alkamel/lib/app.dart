@@ -17,36 +17,35 @@ class AlkamelApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => sl<ThemeCubit>()),
       ],
-      child: MaterialApp(
-        onGenerateTitle: (context) => S.of(context).appTitle,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.cyan,
-            brightness: Brightness.dark,
-          ),
-          useMaterial3: true,
-        ),
-        supportedLocales: S.delegate.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        navigatorObservers: [
-          BotToastNavigatorObserver(),
-        ],
-        builder: (context, child) {
-          if (PlatformExtension.isDesktop) {
-            final botToastBuilder = BotToastInit();
-            return DesktopWindowWrapper(
-              child: botToastBuilder(context, child),
-            );
-          }
-          return child ?? const SizedBox();
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            onGenerateTitle: (context) => S.of(context).appTitle,
+            theme: state.theme,
+            locale: state.locale,
+            supportedLocales: S.delegate.supportedLocales,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            navigatorObservers: [
+              BotToastNavigatorObserver(),
+            ],
+            builder: (context, child) {
+              if (PlatformExtension.isDesktop) {
+                final botToastBuilder = BotToastInit();
+                return DesktopWindowWrapper(
+                  child: botToastBuilder(context, child),
+                );
+              }
+              return child ?? const SizedBox();
+            },
+            home: const Scaffold(),
+          );
         },
-        home: const Scaffold(),
       ),
     );
   }
