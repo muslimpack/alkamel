@@ -66,7 +66,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     emit(state.copyWith(showLoadingIndicator: true));
 
     try {
-      const double pixelRatio = 3;
+      const double pixelRatio = 2;
       final image = await captureWidgetController.getImage(pixelRatio);
       final byteData = await image?.toByteData(format: ImageByteFormat.png);
 
