@@ -90,6 +90,46 @@ class S {
     );
   }
 
+  /// `Decreae font size`
+  String get fontDecreaeSize {
+    return Intl.message(
+      'Decreae font size',
+      name: 'fontDecreaeSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Increase font size`
+  String get fontIncreaeSize {
+    return Intl.message(
+      'Increase font size',
+      name: 'fontIncreaeSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset font size`
+  String get fontResetSize {
+    return Intl.message(
+      'Reset font size',
+      name: 'fontResetSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Font settings`
+  String get fontSettings {
+    return Intl.message(
+      'Font settings',
+      name: 'fontSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Misspelled`
   String get misspelled {
     return Intl.message(
@@ -165,6 +205,16 @@ class S {
     return Intl.message(
       'Share as image',
       name: 'shareAsImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show diacritics`
+  String get showDiacritics {
+    return Intl.message(
+      'Show diacritics',
+      name: 'showDiacritics',
       desc: '',
       args: [],
     );

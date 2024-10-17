@@ -28,6 +28,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
+        "fontDecreaeSize":
+            MessageLookupByLibrary.simpleMessage("Decreae font size"),
+        "fontIncreaeSize":
+            MessageLookupByLibrary.simpleMessage("Increase font size"),
+        "fontResetSize":
+            MessageLookupByLibrary.simpleMessage("Reset font size"),
+        "fontSettings": MessageLookupByLibrary.simpleMessage("Font settings"),
         "misspelled": MessageLookupByLibrary.simpleMessage("Misspelled"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("App language"),
         "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
@@ -37,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Search result count"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
-        "shareAsImage": MessageLookupByLibrary.simpleMessage("Share as image")
+        "shareAsImage": MessageLookupByLibrary.simpleMessage("Share as image"),
+        "showDiacritics":
+            MessageLookupByLibrary.simpleMessage("Show diacritics")
       };
 }

@@ -2,6 +2,8 @@ import 'package:alkamel/src/core/constants/constant.dart';
 import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:alkamel/src/features/search/data/repository/alkamel_db_helper.dart';
 import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
+import 'package:alkamel/src/features/settings/domain/repository/text_font_repo.dart';
+import 'package:alkamel/src/features/settings/presentation/controller/cubit/settings_cubit.dart';
 import 'package:alkamel/src/features/share/presentation/controller/cubit/share_image_cubit.dart';
 import 'package:alkamel/src/features/themes/data/repository/theme_repo.dart';
 import 'package:alkamel/src/features/themes/presentation/controller/cubit/theme_cubit.dart';
@@ -16,6 +18,7 @@ Future<void> initSL() async {
   sl.registerLazySingleton(() => Hive.box(kHiveBoxName));
   sl.registerLazySingleton(() => UIRepo(sl()));
   sl.registerLazySingleton(() => ThemeRepo(sl()));
+  sl.registerLazySingleton(() => TextFontRepo(sl()));
 
   ///MARK: Init Repo
   sl.registerLazySingleton(() => AlkamelDbHelper());
@@ -25,6 +28,7 @@ Future<void> initSL() async {
   ///MARK: Init BLOC
 
   /// Singleton BLoC
+  sl.registerLazySingleton(() => SettingsCubit(sl()));
   sl.registerLazySingleton(() => ThemeCubit(sl()));
   sl.registerLazySingleton(() => SearchCubit(sl()));
   sl.registerLazySingleton(() => HomeCubit(sl(), sl()));

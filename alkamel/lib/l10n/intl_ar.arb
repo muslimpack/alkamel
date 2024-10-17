@@ -4,6 +4,10 @@
   "chat": "تواصل",
   "copiedToClipboard": "تم النسخ إلى الحافظة",
   "copy": "نسخ",
+  "fontDecreaeSize": "تقليل حجم الخط",
+  "fontIncreaeSize": "تكبير حجم الخط",
+  "fontResetSize": "إعادة تعيين حجم الخط",
+  "fontSettings": "إعدادات الخط",
   "misspelled": "خطأ إملائي",
   "prefAppLanguage": "لغة التطبيق",
   "prefThemeDarkMode": "الوضع الليلي",
@@ -11,5 +15,6 @@
   "searchResultCount": "عدد نتائج البحث",
   "settings": "الإعدادات",
   "share": "مشاركة",
-  "shareAsImage": "مشاركة كصورة"
+  "shareAsImage": "مشاركة كصورة",
+  "showDiacritics": "عرض التشكيل"
 }

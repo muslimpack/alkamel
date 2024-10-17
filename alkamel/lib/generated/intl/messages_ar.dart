@@ -27,6 +27,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("تم النسخ إلى الحافظة"),
         "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
+        "fontDecreaeSize":
+            MessageLookupByLibrary.simpleMessage("تقليل حجم الخط"),
+        "fontIncreaeSize":
+            MessageLookupByLibrary.simpleMessage("تكبير حجم الخط"),
+        "fontResetSize":
+            MessageLookupByLibrary.simpleMessage("إعادة تعيين حجم الخط"),
+        "fontSettings": MessageLookupByLibrary.simpleMessage("إعدادات الخط"),
         "misspelled": MessageLookupByLibrary.simpleMessage("خطأ إملائي"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
         "prefThemeDarkMode":
@@ -37,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("عدد نتائج البحث"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
-        "shareAsImage": MessageLookupByLibrary.simpleMessage("مشاركة كصورة")
+        "shareAsImage": MessageLookupByLibrary.simpleMessage("مشاركة كصورة"),
+        "showDiacritics": MessageLookupByLibrary.simpleMessage("عرض التشكيل")
       };
 }

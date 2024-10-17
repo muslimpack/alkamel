@@ -4,6 +4,10 @@
   "chat": "Chat",
   "copiedToClipboard": "Copied to clipboard",
   "copy": "Copy",
+  "fontDecreaeSize": "Decreae font size",
+  "fontIncreaeSize": "Increase font size",
+  "fontResetSize": "Reset font size",
+  "fontSettings": "Font settings",
   "misspelled": "Misspelled",
   "prefAppLanguage": "App language",
   "prefThemeDarkMode": "Dark Mode",
@@ -11,5 +15,6 @@
   "searchResultCount": "Search result count",
   "settings": "Settings",
   "share": "Share",
-  "shareAsImage": "Share as image"
+  "shareAsImage": "Share as image",
+  "showDiacritics": "Show diacritics"
 }
