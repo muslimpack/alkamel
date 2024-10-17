@@ -13,9 +13,11 @@ class SearchScreen extends StatelessWidget {
         if (state is! SearchLoadedState) {
           return const SizedBox();
         }
+
         return Column(
           children: [
             if (state.isSeaching) const LinearProgressIndicator(),
+            const SizedBox(height: 15),
             Text("${state.hadithToView.length}"),
             Expanded(
               child: ListView.builder(

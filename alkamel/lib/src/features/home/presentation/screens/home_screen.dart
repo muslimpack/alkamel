@@ -59,8 +59,6 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const SearchField(),
-                      const SizedBox(height: 20),
                       if (state.authenticHadith != null)
                         HadithCard(hadith: state.authenticHadith!),
                       if (state.weakHadith != null)
