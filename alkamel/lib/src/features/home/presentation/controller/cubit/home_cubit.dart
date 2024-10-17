@@ -3,6 +3,7 @@ import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/search/data/repository/alkamel_db_helper.dart';
 import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
 import 'package:bloc/bloc.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -53,5 +54,11 @@ class HomeCubit extends Cubit<HomeState> {
     if (state is! HomeLoadedState) return;
 
     emit(state.copyWith(search: search));
+  }
+
+  @override
+  Future<void> close() {
+    EasyDebounce.cancelAll();
+    return super.close();
   }
 }
