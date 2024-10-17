@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:math';
+
+import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +15,22 @@ class HadithAsImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String hadithText = hadith.hadith;
+
+    final int heightFactor = hadithText.length ~/ 2500;
+
+    final int imageHeight = 1080 * max(1, heightFactor);
+    final int imageWidth =
+        (1080 + (heightFactor > 1 ? (imageHeight / 2) : 0)).toInt();
+
+    appPrint("$imageHeight $imageWidth");
     const imageBackgroundColor = Color(0xff313B47);
 
     const secondaryColor = Color(0xfff2dc5d);
     return Container(
       color: imageBackgroundColor,
-      width: 1080,
-      height: 1080,
+      width: imageWidth.toDouble(),
+      height: imageHeight.toDouble(),
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -42,15 +54,15 @@ class HadithAsImageCard extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.all(40),
+            margin: const EdgeInsets.all(40).copyWith(top: 60, bottom: 60),
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(.11),
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(40),
-                topRight: Radius.circular(40),
-                bottomRight: Radius.circular(40),
-                bottomLeft: Radius.circular(200),
+                topLeft: Radius.circular(50),
+                topRight: Radius.circular(50),
+                bottomRight: Radius.circular(50),
+                bottomLeft: Radius.circular(250),
               ),
             ),
             child: Column(
@@ -74,7 +86,7 @@ class HadithAsImageCard extends StatelessWidget {
                     child: AutoSizeText(
                       maxFontSize: 80,
                       minFontSize: 15,
-                      hadith.hadith,
+                      hadithText,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 80,
@@ -103,8 +115,8 @@ class HadithAsImageCard extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Image.asset(
-                "assets/images/app_icon2.png",
-                fit: BoxFit.cover,
+                "assets/images/app_icon.png",
+                height: 70,
               ),
             ),
           ),
