@@ -100,6 +100,16 @@ class S {
     );
   }
 
+  /// `Search result count`
+  String get searchResultCount {
+    return Intl.message(
+      'Search result count',
+      name: 'searchResultCount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message(

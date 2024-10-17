@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
         "prefThemeDarkMode":
             MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+        "searchResultCount":
+            MessageLookupByLibrary.simpleMessage("عدد نتائج البحث"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات")
       };
 }
