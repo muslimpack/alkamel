@@ -1,7 +1,9 @@
 import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/di/dependency_injection.dart';
 import 'package:alkamel/src/core/extensions/extension_platform.dart';
+import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:alkamel/src/features/home/presentation/screens/home_screen.dart';
+import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
 import 'package:alkamel/src/features/themes/presentation/controller/cubit/theme_cubit.dart';
 import 'package:alkamel/src/features/ui/presentation/components/desktop_window_wrapper.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -17,6 +19,8 @@ class AlkamelApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<ThemeCubit>()),
+        BlocProvider(create: (_) => sl<HomeCubit>()..start()),
+        BlocProvider(create: (_) => sl<SearchCubit>()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
