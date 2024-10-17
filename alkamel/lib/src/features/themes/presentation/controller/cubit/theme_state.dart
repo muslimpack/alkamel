@@ -17,6 +17,7 @@ class ThemeState extends Equatable {
         seedColor: Colors.cyan,
         brightness: brightness,
       ),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
       useMaterial3: true,
     );
   }
