@@ -1,5 +1,8 @@
 import 'package:alkamel/src/core/shared/custom_field_decoration.dart';
+import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({super.key});
@@ -10,16 +13,22 @@ class SearchField extends StatelessWidget {
       children: [
         Expanded(
           child: TextField(
+            controller: context.read<HomeCubit>().searchController,
             decoration: customInputDecoration.copyWith(
-              contentPadding: const EdgeInsets.all(20),
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(10),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search),
-                ),
+              suffixIcon: const Padding(
+                padding: EdgeInsets.all(15),
+                child: Icon(Icons.search),
               ),
             ),
+            onChanged: (value) {
+              EasyDebounce.debounce(
+                'search',
+                const Duration(milliseconds: 500),
+                () {
+                  context.read<HomeCubit>().search(value);
+                },
+              );
+            },
           ),
         ),
       ],

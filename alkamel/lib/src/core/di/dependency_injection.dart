@@ -26,7 +26,7 @@ Future<void> initSL() async {
   /// Singleton BLoC
   sl.registerLazySingleton(() => ThemeCubit(sl()));
   sl.registerLazySingleton(() => SearchCubit(sl()));
-  sl.registerLazySingleton(() => HomeCubit(sl()));
+  sl.registerLazySingleton(() => HomeCubit(sl(), sl()));
 
   /// Factory BLoC
 }
