@@ -19,21 +19,38 @@ class HadithCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: margin,
-      color: backgroundColor?.withOpacity(backgroundColorOpacity),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(hadith.rawy + hadith.rawyReference),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(hadith.hadith),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            right: BorderSide(
+              color: backgroundColor?.withOpacity(backgroundColorOpacity) ??
+                  Colors.transparent,
+              width: 7,
             ),
-            const Divider(),
-            Text(hadith.grade),
-          ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                hadith.rawy + hadith.rawyReference,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  hadith.hadith,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+              const Divider(),
+              Text(hadith.grade),
+            ],
+          ),
         ),
       ),
     );
