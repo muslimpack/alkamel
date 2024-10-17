@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: state.search && state.searchText.isNotEmpty
+          body: state.search
               ? const SearchScreen()
               : SingleChildScrollView(
                   padding: const EdgeInsets.all(20),

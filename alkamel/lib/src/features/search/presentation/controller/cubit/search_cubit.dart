@@ -32,6 +32,16 @@ class SearchCubit extends Cubit<SearchState> {
 
   Future _search(String searchText, SearchLoadedState state) async {
     emit(state.copyWith(searchText: searchText, isSeaching: true));
+    if (searchText.isEmpty) {
+      emit(
+        state.copyWith(
+          isSeaching: false,
+          dbHadith: [],
+          searchText: searchText,
+        ),
+      );
+      return;
+    }
     final searchResult = await alkamelDbHelper.searchByHadithText(searchText);
     emit(
       state.copyWith(
