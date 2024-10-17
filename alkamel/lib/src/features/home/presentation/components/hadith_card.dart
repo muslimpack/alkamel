@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:alkamel/src/core/extensions/string_extension.dart';
 import 'package:alkamel/src/features/home/presentation/components/hadith_card_popup_menu.dart';
 import 'package:alkamel/src/features/home/presentation/components/responsive_text.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:alkamel/src/features/settings/presentation/controller/cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HadithCard extends StatelessWidget {
   final Hadith hadith;
@@ -42,7 +45,10 @@ class HadithCard extends StatelessWidget {
                           (hadith.rawyReference.isNotEmpty
                               ? "(${hadith.rawyReference})"
                               : ""),
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: TextStyle(
+                        fontSize:
+                            context.watch<SettingsCubit>().state.fontSize * 6,
+                      ),
                     ),
                   ),
                   HadithCardPopupMenu(hadith: hadith),
@@ -52,18 +58,23 @@ class HadithCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ResponsiveText(
-                  hadith.hadith,
+                  context.watch<SettingsCubit>().state.showDiacritics
+                      ? hadith.hadith
+                      : hadith.hadith.removeDiacritics,
                   searchedText: searchedText,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: TextStyle(
+                    fontSize: context.watch<SettingsCubit>().state.fontSize * 8,
+                  ),
                 ),
               ),
               const Divider(),
               Text(
                 "المرتبة: ${hadith.grade}  |  الحكم: [${hadith.gradeEnum.title}]",
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: hadith.gradeEnum.color,
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: TextStyle(
+                  fontSize: context.watch<SettingsCubit>().state.fontSize * 6,
+                  color: hadith.gradeEnum.color,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
