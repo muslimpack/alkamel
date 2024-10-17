@@ -22,12 +22,6 @@ class SearchField extends StatelessWidget {
                 },
                 icon: const Icon(Icons.clean_hands_outlined),
               ),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  context.read<HomeCubit>().toggleSearch(false);
-                },
-                icon: const Icon(Icons.clear),
-              ),
             ),
             onChanged: (value) {
               EasyDebounce.debounce(

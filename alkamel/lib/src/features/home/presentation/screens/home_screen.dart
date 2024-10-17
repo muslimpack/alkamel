@@ -28,13 +28,23 @@ class HomeScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             title: state.search ? const SearchField() : null,
             actions: [
+              ///toogle search
               if (!state.search)
                 IconButton(
                   onPressed: () {
                     context.read<HomeCubit>().toggleSearch(true);
                   },
                   icon: const Icon(Icons.search),
+                )
+              else
+                IconButton(
+                  onPressed: () {
+                    context.read<HomeCubit>().toggleSearch(false);
+                  },
+                  icon: const Icon(Icons.clear),
                 ),
+
+              ///settings screen
               IconButton(
                 onPressed: () {
                   context.push(const SettingsScreen());
