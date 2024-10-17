@@ -117,8 +117,9 @@ class _ResponsiveTextState extends State<ResponsiveText> {
           ? widget.text
           : widget.text.substring(0, min(widget.text.length, length)),
       textToHighlight: widget.searchedText ?? "",
-      highlightStyle:
-          widget.style?.copyWith(color: Theme.of(context).colorScheme.primary),
+      highlightStyle: widget.style?.copyWith(
+        color: Theme.of(context).colorScheme.primary,
+      ),
       style: widget.style,
     ).textSpan();
 
