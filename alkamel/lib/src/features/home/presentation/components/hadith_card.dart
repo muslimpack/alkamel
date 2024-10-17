@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:math';
 
+import 'package:alkamel/src/core/shared/text_highlighter.dart';
 import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:flutter/gestures.dart';
@@ -9,9 +10,11 @@ import 'package:flutter/material.dart';
 class HadithCard extends StatelessWidget {
   final Hadith hadith;
   final EdgeInsetsGeometry? margin;
+  final String? searchedText;
   const HadithCard({
     super.key,
     required this.hadith,
+    this.searchedText,
     this.margin = const EdgeInsets.symmetric(vertical: 10),
   });
 
@@ -60,6 +63,7 @@ class HadithCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ResponsiveText(
                   hadith.hadith,
+                  searchedText: searchedText,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
@@ -81,11 +85,13 @@ class HadithCard extends StatelessWidget {
 
 class ResponsiveText extends StatefulWidget {
   final String text;
+  final String? searchedText;
   final TextStyle? style;
   const ResponsiveText(
     this.text, {
     super.key,
     this.style,
+    this.searchedText,
   });
 
   @override
@@ -106,14 +112,20 @@ class _ResponsiveTextState extends State<ResponsiveText> {
 
   @override
   Widget build(BuildContext context) {
+    final textSpan = HighlightText(
+      text: expanded
+          ? widget.text
+          : widget.text.substring(0, min(widget.text.length, length)),
+      textToHighlight: widget.searchedText ?? "",
+      highlightStyle:
+          widget.style?.copyWith(color: Theme.of(context).colorScheme.primary),
+      style: widget.style,
+    ).textSpan();
+
     final textWidget = Text.rich(
       TextSpan(
         children: [
-          TextSpan(
-            text: expanded
-                ? widget.text
-                : widget.text.substring(0, min(widget.text.length, length)),
-          ),
+          textSpan,
           if (!expanded && widget.text.length > length)
             TextSpan(
               text: " ...المزيد", // "المزيد" as a clickable blue text

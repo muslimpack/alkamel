@@ -35,7 +35,10 @@ class SearchScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 itemCount: state.hadithToView.length,
                 itemBuilder: (context, index) {
-                  return HadithCard(hadith: state.hadithToView[index]);
+                  return HadithCard(
+                    hadith: state.hadithToView[index],
+                    searchedText: state.searchText,
+                  );
                 },
               ),
             ),
