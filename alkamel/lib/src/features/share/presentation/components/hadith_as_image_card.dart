@@ -15,18 +15,24 @@ class HadithAsImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const int standardImageSize = 1080;
+    const int charLengthPer1080 = 1500;
+    // ignore: unused_local_variable
+    const goldenRatio = 1.618;
+
     final String hadithText = hadith.hadith;
 
-    final int heightFactor = hadithText.length ~/ 2500;
+    final double heightFactor = hadithText.length / charLengthPer1080;
 
-    final int imageHeight = 1080 * max(1, heightFactor);
-    final int imageWidth =
-        (1080 + (heightFactor > 1 ? (imageHeight / 2) : 0)).toInt();
+    final int imageSize = (standardImageSize * max(1, heightFactor)).toInt();
+    final int imageHeight = imageSize;
+    final int imageWidth = imageSize;
 
-    appPrint("$imageHeight $imageWidth");
+    appPrint("WIdth: $imageWidth | Height: $imageHeight");
+
     const imageBackgroundColor = Color(0xff313B47);
-
     const secondaryColor = Color(0xfff2dc5d);
+
     return Container(
       color: imageBackgroundColor,
       width: imageWidth.toDouble(),
@@ -85,12 +91,13 @@ class HadithAsImageCard extends StatelessWidget {
                   child: Center(
                     child: AutoSizeText(
                       maxFontSize: 80,
-                      minFontSize: 15,
+                      minFontSize: 30,
                       hadithText,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 80,
                         fontFamily: "djadli_sarkha",
+                        color: Colors.white,
                       ),
                     ),
                   ),
