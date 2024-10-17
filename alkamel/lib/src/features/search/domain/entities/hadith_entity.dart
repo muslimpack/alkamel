@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
 import 'package:equatable/equatable.dart';
 
 /// ID	numbers in book b4	rawy	texts_in_first_bracket	texts_in_second_bracket	hadith
@@ -11,6 +12,8 @@ class HadithEntity extends Equatable {
   final String rawyReference;
   final String grade;
   final String hadith;
+
+  HadithGradeEnum get gradeEnum => HadithGradeEnum.getFromString(grade);
 
   const HadithEntity({
     required this.id,
