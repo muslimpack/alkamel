@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HadithCard extends StatelessWidget {
@@ -105,13 +106,27 @@ class _ResponsiveTextState extends State<ResponsiveText> {
 
   @override
   Widget build(BuildContext context) {
-    final textWidget = Text(
-      expanded
-          ? widget.text
-          : "${widget.text.substring(
-              0,
-              min(widget.text.length, length),
-            )}...المزيد",
+    final textWidget = Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(
+            text: expanded
+                ? widget.text
+                : widget.text.substring(0, min(widget.text.length, length)),
+          ),
+          if (!expanded && widget.text.length > length)
+            TextSpan(
+              text: " ...المزيد", // "المزيد" as a clickable blue text
+              style: const TextStyle(color: Colors.blue),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  setState(() {
+                    expanded = true;
+                  });
+                },
+            ),
+        ],
+      ),
     );
 
     if (isLong) {
