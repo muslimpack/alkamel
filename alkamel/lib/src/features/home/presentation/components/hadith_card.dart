@@ -44,7 +44,10 @@ class HadithCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      hadith.rawy + hadith.rawyReference,
+                      hadith.rawy +
+                          (hadith.rawyReference.isNotEmpty
+                              ? "(${hadith.rawyReference})"
+                              : ""),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
