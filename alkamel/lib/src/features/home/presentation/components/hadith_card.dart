@@ -20,16 +20,9 @@ class HadithCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HadithGradeEnum? hadithGradeEnum;
-    for (final grade in HadithGradeEnum.values) {
-      if (hadithGradeEnum != null) break;
-      for (final dbG in grade.dbNames) {
-        if (hadith.grade.contains(dbG)) {
-          hadithGradeEnum = grade;
-          break;
-        }
-      }
-    }
+    final HadithGradeEnum hadithGradeEnum =
+        HadithGradeEnum.getFromString(hadith.grade);
+
     return Card(
       margin: margin,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
@@ -37,8 +30,7 @@ class HadithCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             right: BorderSide(
-              color:
-                  hadithGradeEnum?.color.withOpacity(.3) ?? Colors.transparent,
+              color: hadithGradeEnum.color.withOpacity(.3),
               width: 7,
             ),
           ),
@@ -71,7 +63,7 @@ class HadithCard extends StatelessWidget {
               Text(
                 hadith.grade,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: hadithGradeEnum?.color,
+                      color: hadithGradeEnum.color,
                       fontWeight: FontWeight.bold,
                     ),
               ),
