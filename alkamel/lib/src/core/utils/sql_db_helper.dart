@@ -82,8 +82,7 @@ class SqlDBHelper {
 
       final currentVersion = await db.getVersion();
 
-      ///currentVersion < dbVersion
-      if (true) {
+      if (currentVersion < dbVersion) {
         appPrint("$dbName detect new version");
         await deleteDatabase(path);
         resultDB = await openDatabase(
