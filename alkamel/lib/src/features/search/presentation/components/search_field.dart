@@ -15,9 +15,11 @@ class SearchField extends StatelessWidget {
           child: TextField(
             controller: context.read<HomeCubit>().searchController,
             decoration: customInputDecoration.copyWith(
-              suffixIcon: const Padding(
-                padding: EdgeInsets.all(15),
-                child: Icon(Icons.search),
+              suffixIcon: IconButton(
+                onPressed: () {
+                  context.read<HomeCubit>().toggleSearch(false);
+                },
+                icon: const Icon(Icons.clear),
               ),
             ),
             onChanged: (value) {
