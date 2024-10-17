@@ -15,13 +15,6 @@ class SearchScreen extends StatelessWidget {
           return const SizedBox();
         }
 
-        if (state.searchText.isNotEmpty && state.hadithToView.isEmpty) {
-          return Center(
-            child:
-                Text("${S.of(context).searchResultCount}: ${state.searchText}"),
-          );
-        }
-
         return Column(
           children: [
             const SizedBox(height: 15),
@@ -33,16 +26,26 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(15),
-                itemCount: state.hadithToView.length,
-                itemBuilder: (context, index) {
-                  return HadithCard(
-                    hadith: state.hadithToView[index],
-                    searchedText: state.searchText,
+              child: () {
+                if (state.searchText.isNotEmpty && state.hadithToView.isEmpty) {
+                  return Center(
+                    child: Text(
+                      "${S.of(context).searchResultCount}: ${state.searchText}",
+                    ),
                   );
-                },
-              ),
+                }
+
+                return ListView.builder(
+                  padding: const EdgeInsets.all(15),
+                  itemCount: state.hadithToView.length,
+                  itemBuilder: (context, index) {
+                    return HadithCard(
+                      hadith: state.hadithToView[index],
+                      searchedText: state.searchText,
+                    );
+                  },
+                );
+              }(),
             ),
           ],
         );
