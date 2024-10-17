@@ -22,17 +22,18 @@ Future<void> initServices() async {
 
   Bloc.observer = AppBlocObserver();
 
-  service_locator.initSL();
-  await initHive();
-
-  await loadLocalizations();
-
-  await phoneDeviceBars();
+  await service_locator.initSL();
 
   if (PlatformExtension.isDesktopOrWeb) {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
+
+  await initHive();
+
+  await loadLocalizations();
+
+  await phoneDeviceBars();
 
   await initWindowsManager();
 }
