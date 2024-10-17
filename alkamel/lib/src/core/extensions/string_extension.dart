@@ -9,7 +9,6 @@ extension StringExtension on String {
   }
 
   String removeBrackets() {
-    // Use RegExp to remove text inside parentheses along with the parentheses
-    return replaceAll(RegExp(r'\(.*?\)'), '').trim();
+    return replaceAll(RegExp('[()]'), '');
   }
 }
