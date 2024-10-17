@@ -26,9 +26,11 @@ class SearchScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 15),
             if (state.isSeaching) const LinearProgressIndicator(),
-            const SizedBox(height: 15),
-            Text(
-              "${S.of(context).searchResultCount}: ${state.hadithToView.length}",
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                "${S.of(context).searchResultCount}: ${state.hadithToView.length}",
+              ),
             ),
             Expanded(
               child: ListView.builder(
