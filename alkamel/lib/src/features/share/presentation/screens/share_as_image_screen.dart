@@ -38,6 +38,12 @@ class ShareAsImageScreen extends StatelessWidget {
                   icon: const Icon(Icons.share),
                 ),
               ],
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(10),
+                child: state.showLoadingIndicator
+                    ? const LinearProgressIndicator()
+                    : const SizedBox.shrink(),
+              ),
             ),
             body: GestureDetector(
               onDoubleTap: () {
