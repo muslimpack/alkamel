@@ -68,7 +68,7 @@ class HadithAsImageCard extends StatelessWidget {
                 topLeft: Radius.circular(50),
                 topRight: Radius.circular(50),
                 bottomRight: Radius.circular(50),
-                bottomLeft: Radius.circular(250),
+                bottomLeft: Radius.circular(255),
               ),
             ),
             child: Column(
@@ -123,7 +123,7 @@ class HadithAsImageCard extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               child: Image.asset(
                 "assets/images/app_icon.png",
-                height: 70,
+                height: 80,
               ),
             ),
           ),
