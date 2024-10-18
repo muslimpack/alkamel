@@ -7,44 +7,38 @@ import 'package:flutter/material.dart';
 
 enum HadithRulingEnum {
   authentic(
+    id: 1,
     title: "صحيح",
     color: Colors.green,
-    lookupWords: ["صحيح", "حسن"],
-    lookupOrder: 3,
   ),
   weak(
+    id: 2,
     title: "ضعيف",
     color: Colors.yellow,
-    lookupWords: ["ضعيف", "مرسل"],
-    lookupOrder: 2,
   ),
   abandoned(
+    id: 3,
     title: "متروك",
     color: Colors.orange,
-    lookupWords: ["ضعيف جد"],
-    lookupOrder: 1,
   ),
   fabricated(
+    id: 4,
     title: "مكذوب",
     color: Colors.red,
-    lookupWords: ["مكذوب"],
-    lookupOrder: 0,
   ),
   ;
 
   const HadithRulingEnum({
+    required this.id,
     required this.title,
     required this.color,
-    required this.lookupWords,
-    required this.lookupOrder,
   });
 
   static HadithRulingEnum fromString(String rulingText) {
     return HadithRulingEnum.values.where((e) => e.title == rulingText).first;
   }
 
-  final List<String> lookupWords;
+  final int id;
   final String title;
   final Color color;
-  final int lookupOrder;
 }
