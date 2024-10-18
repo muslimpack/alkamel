@@ -34,11 +34,17 @@ class HadithCardPopupMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
           value: 'report',
-          child: Text(S.of(context).reportMisspelled),
+          child: ListTile(
+            leading: const Icon(Icons.report_gmailerrorred),
+            title: Text(S.of(context).reportMisspelled),
+          ),
         ),
         PopupMenuItem<String>(
           value: 'share',
-          child: Text(S.of(context).share),
+          child: ListTile(
+            leading: const Icon(Icons.share),
+            title: Text(S.of(context).share),
+          ),
         ),
       ],
     );
