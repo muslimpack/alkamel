@@ -16,8 +16,8 @@ class Hadith extends HadithEntity {
     return Hadith(
       id: map['id'] as int,
       srcBookId: map['srcBookId'] as int,
-      narrator: map['narrator'] as String,
-      narratorReference: map['narratorReference'] as String,
+      narrator: map['narrator'] as String? ?? "",
+      narratorReference: map['narratorReference'] as String? ?? "",
       rank: map['rank'] as String,
       ruling: HadithRulingEnum.fromString(map['ruling'] as String),
       hadith: map['hadith'] as String,

@@ -16,30 +16,31 @@ class SearchLoadedState extends SearchState {
   final String searchText;
   final bool isSeaching;
   final List<Hadith> dbHadith;
-  List<Hadith> get hadithToView => dbHadith;
+  final List<HadithRulingEnum> activeRuling;
+  List<Hadith> get hadithToView =>
+      dbHadith.where((e) => activeRuling.contains(e.ruling)).toList();
 
   const SearchLoadedState({
     required this.searchText,
-    required this.dbHadith,
     required this.isSeaching,
+    required this.dbHadith,
+    required this.activeRuling,
   });
 
   @override
-  List<Object> get props => [
-        searchText,
-        dbHadith,
-        isSeaching,
-      ];
+  List<Object> get props => [searchText, dbHadith, isSeaching, activeRuling];
 
   SearchLoadedState copyWith({
     String? searchText,
     bool? isSeaching,
     List<Hadith>? dbHadith,
+    List<HadithRulingEnum>? activeRuling,
   }) {
     return SearchLoadedState(
       searchText: searchText ?? this.searchText,
       isSeaching: isSeaching ?? this.isSeaching,
       dbHadith: dbHadith ?? this.dbHadith,
+      activeRuling: activeRuling ?? this.activeRuling,
     );
   }
 }

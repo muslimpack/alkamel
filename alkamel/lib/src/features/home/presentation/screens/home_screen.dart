@@ -4,6 +4,7 @@ import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/home/presentation/components/hadith_card.dart';
 import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:alkamel/src/features/search/presentation/components/search_field.dart';
+import 'package:alkamel/src/features/search/presentation/components/search_filters_dialog.dart';
 import 'package:alkamel/src/features/search/presentation/screens/search_screen.dart';
 import 'package:alkamel/src/features/settings/presentation/components/font_settings_widgets.dart';
 import 'package:alkamel/src/features/settings/presentation/screens/settings_screen.dart';
@@ -40,7 +41,8 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.search),
                 )
-              else
+              else ...[
+                const SearchFiltersButton(),
                 IconButton(
                   tooltip: S.of(context).close,
                   onPressed: () {
@@ -48,6 +50,7 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.clear),
                 ),
+              ],
 
               ///settings screen
               IconButton(
