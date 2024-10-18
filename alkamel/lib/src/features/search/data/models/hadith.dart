@@ -1,4 +1,4 @@
-import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
+import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/domain/entities/hadith_entity.dart';
 
 class Hadith extends HadithEntity {
@@ -19,7 +19,7 @@ class Hadith extends HadithEntity {
       narrator: map['narrator'] as String,
       narratorReference: map['narratorReference'] as String,
       rank: map['rank'] as String,
-      ruling: HadithGradeEnum.fromString(map['ruling'] as String),
+      ruling: HadithRulingEnum.fromString(map['ruling'] as String),
       hadith: map['hadith'] as String,
     );
   }

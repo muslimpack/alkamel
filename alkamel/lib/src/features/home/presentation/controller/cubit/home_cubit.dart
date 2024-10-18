@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
+import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/search/data/repository/alkamel_db_helper.dart';
 import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
@@ -25,16 +25,16 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future start() async {
     final authenticHadith = await alkamelDbHelper.randomHadith(
-      HadithGradeEnum.authentic,
+      HadithRulingEnum.authentic,
     );
     final weakHadith = await alkamelDbHelper.randomHadith(
-      HadithGradeEnum.weak,
+      HadithRulingEnum.weak,
     );
     final abandonedHadith = await alkamelDbHelper.randomHadith(
-      HadithGradeEnum.abandoned,
+      HadithRulingEnum.abandoned,
     );
     final fabricatedHadith = await alkamelDbHelper.randomHadith(
-      HadithGradeEnum.fabricated,
+      HadithRulingEnum.fabricated,
     );
 
     emit(

@@ -5,14 +5,7 @@ import 'package:flutter/material.dart';
 ///   والحديث المتروك (ضعيف جدا، مرسل ضعيف جدا)
 ///   والحديث المكذوب (مكذوب)
 
-enum HadithGradeEnum {
-  athar(
-    title: "أثر",
-    color: Colors.green,
-    lookupWords: [],
-    lookupOrder: 4,
-  ),
-
+enum HadithRulingEnum {
   authentic(
     title: "صحيح",
     color: Colors.green,
@@ -39,30 +32,15 @@ enum HadithGradeEnum {
   ),
   ;
 
-  const HadithGradeEnum({
+  const HadithRulingEnum({
     required this.title,
     required this.color,
     required this.lookupWords,
     required this.lookupOrder,
   });
 
-  static HadithGradeEnum getFromString(String gradeText) {
-    HadithGradeEnum? hadithGradeEnum;
-    for (final grade in HadithGradeEnum.values.reversed) {
-      if (hadithGradeEnum != null) break;
-      for (final dbG in grade.lookupWords) {
-        if (gradeText.contains(dbG)) {
-          hadithGradeEnum = grade;
-          break;
-        }
-      }
-    }
-
-    return hadithGradeEnum ?? HadithGradeEnum.athar;
-  }
-
-  static HadithGradeEnum fromString(String rulingText) {
-    return HadithGradeEnum.values.where((e) => e.title == rulingText).first;
+  static HadithRulingEnum fromString(String rulingText) {
+    return HadithRulingEnum.values.where((e) => e.title == rulingText).first;
   }
 
   final List<String> lookupWords;

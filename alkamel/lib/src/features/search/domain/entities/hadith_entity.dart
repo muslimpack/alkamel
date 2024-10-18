@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
+import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class HadithEntity extends Equatable {
@@ -8,7 +8,7 @@ class HadithEntity extends Equatable {
   final String narrator;
   final String narratorReference;
   final String rank;
-  final HadithGradeEnum ruling;
+  final HadithRulingEnum ruling;
   final String hadith;
 
   const HadithEntity({

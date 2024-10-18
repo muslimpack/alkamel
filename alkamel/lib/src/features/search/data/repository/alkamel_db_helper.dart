@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:alkamel/src/core/utils/db_helper.dart';
-import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
+import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -88,7 +88,7 @@ class AlkamelDbHelper {
     });
   }
 
-  Future<Hadith?> randomHadith(HadithGradeEnum ruling) async {
+  Future<Hadith?> randomHadith(HadithRulingEnum ruling) async {
     final Database db = await database;
 
     final List<Map<String, dynamic>> maps = await db.rawQuery(
