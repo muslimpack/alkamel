@@ -2,25 +2,22 @@
 import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
 import 'package:equatable/equatable.dart';
 
-/// ID	numbers in book b4	rawy	texts_in_first_bracket	texts_in_second_bracket	hadith
-/// id (int) | order (int) | narrators (string) | hadith (string) | collection (string) | reference (string) | grade (string) | note (string)
-
 class HadithEntity extends Equatable {
   final int id;
-  final int number;
-  final String rawy;
-  final String rawyReference;
-  final String grade;
+  final int srcBookId;
+  final String narrator;
+  final String narratorReference;
+  final String rank;
+  final HadithGradeEnum ruling;
   final String hadith;
-
-  HadithGradeEnum get gradeEnum => HadithGradeEnum.getFromString(grade);
 
   const HadithEntity({
     required this.id,
-    required this.number,
-    required this.rawy,
-    required this.rawyReference,
-    required this.grade,
+    required this.srcBookId,
+    required this.narrator,
+    required this.narratorReference,
+    required this.rank,
+    required this.ruling,
     required this.hadith,
   });
 
@@ -28,10 +25,11 @@ class HadithEntity extends Equatable {
   List<Object> get props {
     return [
       id,
-      number,
-      rawy,
-      rawyReference,
-      grade,
+      srcBookId,
+      narrator,
+      narratorReference,
+      rank,
+      ruling,
       hadith,
     ];
   }

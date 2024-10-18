@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:alkamel/src/core/utils/db_helper.dart';
+import 'package:alkamel/src/features/home/data/models/hadith_grade_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -87,12 +88,12 @@ class AlkamelDbHelper {
     });
   }
 
-  Future<Hadith?> randomHadith(String grade) async {
+  Future<Hadith?> randomHadith(HadithGradeEnum ruling) async {
     final Database db = await database;
 
     final List<Map<String, dynamic>> maps = await db.rawQuery(
-      'SELECT * FROM hadith WHERE grade like ? ORDER BY RANDOM() LIMIT 1',
-      ['%$grade%'],
+      'SELECT * FROM hadith WHERE ruling like ? ORDER BY RANDOM() LIMIT 1',
+      ['%${ruling.title}%'],
     );
 
     if (maps.isNotEmpty) {

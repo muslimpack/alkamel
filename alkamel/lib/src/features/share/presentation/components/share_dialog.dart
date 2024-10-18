@@ -27,12 +27,14 @@ class ShareDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final StringBuffer sb = StringBuffer();
-    sb.write(hadith.rawy);
-    if (hadith.rawyReference.isNotEmpty) sb.write("(${hadith.rawyReference})");
+    sb.write(hadith.narrator);
+    if (hadith.narratorReference.isNotEmpty) {
+      sb.write("(${hadith.narratorReference})");
+    }
     sb.write("\n\n-------\n\n");
     sb.write(hadith.hadith);
     sb.write("\n\n-------\n\n");
-    sb.write("المرتبة: ${hadith.grade}  |  الحكم: [${hadith.gradeEnum.title}]");
+    sb.write("المرتبة: ${hadith.rank}  |  الحكم: [${hadith.ruling.title}]");
 
     final shareText = sb.toString();
 

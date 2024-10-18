@@ -61,6 +61,10 @@ enum HadithGradeEnum {
     return hadithGradeEnum ?? HadithGradeEnum.athar;
   }
 
+  static HadithGradeEnum fromString(String rulingText) {
+    return HadithGradeEnum.values.where((e) => e.title == rulingText).first;
+  }
+
   final List<String> lookupWords;
   final String title;
   final Color color;

@@ -75,9 +75,9 @@ class HadithAsImageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  hadith.rawy +
-                      (hadith.rawyReference.isNotEmpty
-                          ? "(${hadith.rawyReference})"
+                  hadith.narrator +
+                      (hadith.narratorReference.isNotEmpty
+                          ? "(${hadith.narratorReference})"
                           : ""),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
@@ -106,7 +106,7 @@ class HadithAsImageCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 50),
                   child: Text(
-                    "المرتبة: ${hadith.grade}\nالحكم: [${hadith.gradeEnum.title}]",
+                    "المرتبة: ${hadith.rank}\nالحكم: [${hadith.ruling.title}]",
                     style: const TextStyle(
                       fontSize: 30,
                       color: secondaryColor,

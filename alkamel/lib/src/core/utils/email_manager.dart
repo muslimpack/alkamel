@@ -23,14 +23,14 @@ class EmailManager {
         subject: S.current.misspelled,
         body: '''
 رقم الحديث: ${hadith.id}
-${hadith.rawy}${hadith.rawyReference.isNotEmpty ? "(${hadith.rawyReference})" : ""}
+${hadith.narrator}${hadith.narratorReference.isNotEmpty ? "(${hadith.narratorReference})" : ""}
 -------
 
 ${hadith.hadith}
 
 -------
-المرتبة: ${hadith.grade}
-الحكم: [${hadith.gradeEnum.title}]
+المرتبة: ${hadith.rank}
+الحكم: [${hadith.ruling.title}]
 
 ======= =======
 
