@@ -3,6 +3,7 @@ import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/constants/constant.dart';
 import 'package:alkamel/src/core/functions/open_url.dart';
 import 'package:alkamel/src/core/models/email.dart';
+import 'package:alkamel/src/features/search/data/models/hadith.dart';
 
 class EmailManager {
   static void messageUS() {
@@ -14,16 +15,24 @@ class EmailManager {
     );
   }
 
-  static void sendMisspelled({
-    required String title,
-    required String zikrId,
-    required String zikrBody,
-  }) {
-    sendEmail(
+  static Future sendMisspelled({
+    required Hadith hadith,
+  }) async {
+    await sendEmail(
       email: Email(
         subject: S.current.misspelled,
         body: '''
+رقم الحديث: ${hadith.id}
+${hadith.rawy}${hadith.rawyReference.isNotEmpty ? "(${hadith.rawyReference})" : ""}
+-------
 
+${hadith.hadith}
+
+-------
+المرتبة: ${hadith.grade}
+الحكم: [${hadith.gradeEnum.title}]
+
+======= =======
 
 ''',
       ),
@@ -39,6 +48,6 @@ class EmailManager {
 
     final uri = emailToSend.getURI;
 
-    openURL(uri);
+    await openURL(uri);
   }
 }
