@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("الكامل في السنن"),
         "chat": MessageLookupByLibrary.simpleMessage("تواصل"),
+        "clear": MessageLookupByLibrary.simpleMessage("امحُ"),
+        "close": MessageLookupByLibrary.simpleMessage("أغلق"),
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("تم النسخ إلى الحافظة"),
         "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
@@ -40,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
         "reportMisspelled":
             MessageLookupByLibrary.simpleMessage("تبليغ عن خطأ"),
+        "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "searchResultCount":
             MessageLookupByLibrary.simpleMessage("عدد نتائج البحث"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),

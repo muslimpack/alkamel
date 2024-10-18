@@ -1,3 +1,4 @@
+import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/extensions/extension.dart';
 import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/home/presentation/components/hadith_card.dart';
@@ -33,6 +34,7 @@ class HomeScreen extends StatelessWidget {
               ///toogle search
               if (!state.search)
                 IconButton(
+                  tooltip: S.of(context).search,
                   onPressed: () {
                     context.read<HomeCubit>().toggleSearch(true);
                   },
@@ -40,6 +42,7 @@ class HomeScreen extends StatelessWidget {
                 )
               else
                 IconButton(
+                  tooltip: S.of(context).close,
                   onPressed: () {
                     context.read<HomeCubit>().toggleSearch(false);
                   },

@@ -1,3 +1,4 @@
+import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/shared/custom_field_decoration.dart';
 import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -17,6 +18,7 @@ class SearchField extends StatelessWidget {
             controller: context.read<HomeCubit>().searchController,
             decoration: customInputDecoration.copyWith(
               prefixIcon: IconButton(
+                tooltip: S.of(context).clear,
                 onPressed: () {
                   context.read<HomeCubit>().searchController.clear();
                   context.read<HomeCubit>().search("");

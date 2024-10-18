@@ -70,6 +70,26 @@ class S {
     );
   }
 
+  /// `Clear`
+  String get clear {
+    return Intl.message(
+      'Clear',
+      name: 'clear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message(
+      'Close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Copied to clipboard`
   String get copiedToClipboard {
     return Intl.message(
@@ -165,6 +185,16 @@ class S {
     return Intl.message(
       'Report misspelled',
       name: 'reportMisspelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
       desc: '',
       args: [],
     );

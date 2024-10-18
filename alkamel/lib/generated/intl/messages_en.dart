@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle":
             MessageLookupByLibrary.simpleMessage("Al-Kamel fe al-Sunan"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
+        "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
@@ -40,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "reportMisspelled":
             MessageLookupByLibrary.simpleMessage("Report misspelled"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchResultCount":
             MessageLookupByLibrary.simpleMessage("Search result count"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
