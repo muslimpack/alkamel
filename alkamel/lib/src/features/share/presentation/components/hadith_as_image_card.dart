@@ -31,8 +31,20 @@ class HadithAsImageCard extends StatelessWidget {
     appPrint("WIdth: $imageWidth | Height: $imageHeight");
 
     const imageBackgroundColor = Color(0xff313B47);
-    const secondaryColor = Color(0xfff2dc5d);
+    final secondaryColor = hadith.ruling.color;
+    final secondaryElementsColor = hadith.ruling.color.withOpacity(.15);
 
+    const mainTextStyle = TextStyle(
+      fontSize: 80,
+      fontFamily: "djadli_sarkha",
+      color: Colors.white,
+    );
+
+    final secondaryTextStyle = TextStyle(
+      fontSize: 30,
+      color: secondaryColor,
+      fontFamily: "alhadari-medium",
+    );
     return Container(
       color: imageBackgroundColor,
       width: imageWidth.toDouble(),
@@ -40,22 +52,19 @@ class HadithAsImageCard extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Opacity(
-            opacity: .04,
-            child: Image.asset(
-              "assets/images/grid.png",
-              fit: BoxFit.cover,
-            ),
+          Image.asset(
+            "assets/images/grid.png",
+            fit: BoxFit.cover,
+            color: secondaryElementsColor,
           ),
           Container(
             decoration: const BoxDecoration(
               gradient: RadialGradient(
-                focalRadius: 200,
                 colors: [
                   imageBackgroundColor,
                   Colors.transparent,
                 ],
-                radius: 1,
+                radius: 1.25,
               ),
             ),
           ),
@@ -64,6 +73,10 @@ class HadithAsImageCard extends StatelessWidget {
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(.11),
+              border: Border.all(
+                color: secondaryElementsColor,
+                width: 5,
+              ),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(50),
                 topRight: Radius.circular(50),
@@ -80,11 +93,7 @@ class HadithAsImageCard extends StatelessWidget {
                           ? "(${hadith.narratorReference})"
                           : ""),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    color: secondaryColor,
-                    fontFamily: "alhadari-medium",
-                  ),
+                  style: secondaryTextStyle,
                 ),
                 const SizedBox(height: 30),
                 Expanded(
@@ -94,11 +103,7 @@ class HadithAsImageCard extends StatelessWidget {
                       minFontSize: 30,
                       hadithText,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 80,
-                        fontFamily: "djadli_sarkha",
-                        color: Colors.white,
-                      ),
+                      style: mainTextStyle,
                     ),
                   ),
                 ),
@@ -107,11 +112,7 @@ class HadithAsImageCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 50),
                   child: Text(
                     "المرتبة: ${hadith.rank}\nالحكم: [${hadith.ruling.title}]",
-                    style: const TextStyle(
-                      fontSize: 30,
-                      color: secondaryColor,
-                      fontFamily: "alhadari-medium",
-                    ),
+                    style: secondaryTextStyle,
                   ),
                 ),
               ],
