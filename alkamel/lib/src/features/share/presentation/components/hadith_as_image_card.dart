@@ -32,7 +32,7 @@ class HadithAsImageCard extends StatelessWidget {
 
     const imageBackgroundColor = Color(0xff313B47);
     final secondaryColor = hadith.ruling.color;
-    final secondaryElementsColor = hadith.ruling.color.withOpacity(.15);
+    final secondaryElementsColor = secondaryColor.withOpacity(.15);
 
     const mainTextStyle = TextStyle(
       fontSize: 80,
