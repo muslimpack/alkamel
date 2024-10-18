@@ -31,8 +31,8 @@ class HadithAsImageCard extends StatelessWidget {
     appPrint("WIdth: $imageWidth | Height: $imageHeight");
 
     const imageBackgroundColor = Color(0xff313B47);
-    final secondaryColor = hadith.ruling.color;
-    final secondaryElementsColor = secondaryColor.withOpacity(.15);
+    const secondaryColor = Color(0xfff2dc5d);
+    final secondaryElementsColor = hadith.ruling.color.withOpacity(.15);
 
     const mainTextStyle = TextStyle(
       fontSize: 80,
@@ -40,7 +40,7 @@ class HadithAsImageCard extends StatelessWidget {
       color: Colors.white,
     );
 
-    final secondaryTextStyle = TextStyle(
+    const secondaryTextStyle = TextStyle(
       fontSize: 30,
       color: secondaryColor,
       fontFamily: "alhadari-medium",
@@ -64,7 +64,7 @@ class HadithAsImageCard extends StatelessWidget {
                   imageBackgroundColor,
                   Colors.transparent,
                 ],
-                radius: 1.25,
+                radius: 1,
               ),
             ),
           ),
