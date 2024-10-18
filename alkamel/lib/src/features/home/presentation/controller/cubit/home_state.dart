@@ -15,7 +15,6 @@ class HomeLoadedState extends HomeState {
   final Hadith? weakHadith;
   final Hadith? fabricatedHadith;
   final Hadith? abandonedHadith;
-  final String searchText;
   final bool search;
 
   const HomeLoadedState({
@@ -23,7 +22,6 @@ class HomeLoadedState extends HomeState {
     required this.weakHadith,
     required this.fabricatedHadith,
     this.abandonedHadith,
-    required this.searchText,
     required this.search,
   });
 
@@ -32,7 +30,6 @@ class HomeLoadedState extends HomeState {
     Hadith? weakHadith,
     Hadith? fabricatedHadith,
     Hadith? abandonedHadith,
-    String? searchText,
     bool? search,
   }) {
     return HomeLoadedState(
@@ -40,7 +37,6 @@ class HomeLoadedState extends HomeState {
       weakHadith: weakHadith ?? this.weakHadith,
       fabricatedHadith: fabricatedHadith ?? this.fabricatedHadith,
       abandonedHadith: abandonedHadith ?? this.abandonedHadith,
-      searchText: searchText ?? this.searchText,
       search: search ?? this.search,
     );
   }
@@ -51,7 +47,6 @@ class HomeLoadedState extends HomeState {
         weakHadith,
         abandonedHadith,
         fabricatedHadith,
-        searchText,
         search,
       ];
 }

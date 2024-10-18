@@ -1,6 +1,5 @@
 import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/extensions/extension.dart';
-import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/home/presentation/components/hadith_card.dart';
 import 'package:alkamel/src/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:alkamel/src/features/search/presentation/components/search_field.dart';
@@ -24,8 +23,6 @@ class HomeScreen extends StatelessWidget {
           );
         }
 
-        appPrint(state.search);
-        appPrint(state.searchText.isNotEmpty);
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,

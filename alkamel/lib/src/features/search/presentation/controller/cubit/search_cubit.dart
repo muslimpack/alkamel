@@ -6,16 +6,29 @@ import 'package:alkamel/src/features/search/data/repository/alkamel_db_helper.da
 import 'package:alkamel/src/features/search/domain/repository/search_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 part 'search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {
+  final TextEditingController searchController = TextEditingController();
   final AlkamelDbHelper alkamelDbHelper;
   final SearchRepo searchRepo;
+
   SearchCubit(
     this.alkamelDbHelper,
     this.searchRepo,
   ) : super(const SearchLoadingState());
+
+  Future start() async {
+    final state = SearchLoadedState(
+      searchText: "",
+      activeRuling: searchRepo.searchRulingFilters,
+      dbHadith: const [],
+      isSeaching: false,
+    );
+    emit(state);
+  }
 
   Future search(String searchText) async {
     appPrint(searchText);
@@ -57,7 +70,10 @@ class SearchCubit extends Cubit<SearchState> {
     );
   }
 
-  Future clear() async {}
+  Future clear() async {
+    searchController.clear();
+    await search("");
+  }
 
   Future changeActiveRuling(List<HadithRulingEnum> activeRuling) async {
     final state = this.state;

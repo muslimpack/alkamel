@@ -33,7 +33,7 @@ Future<void> initSL() async {
   sl.registerLazySingleton(() => SettingsCubit(sl()));
   sl.registerLazySingleton(() => ThemeCubit(sl()));
   sl.registerLazySingleton(() => SearchCubit(sl(), sl()));
-  sl.registerLazySingleton(() => HomeCubit(sl(), sl()));
+  sl.registerLazySingleton(() => HomeCubit(sl()));
 
   /// Factory BLoC
   sl.registerFactory(() => ShareImageCubit());

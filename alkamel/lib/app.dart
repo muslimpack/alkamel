@@ -22,7 +22,7 @@ class AlkamelApp extends StatelessWidget {
         BlocProvider(create: (_) => sl<SettingsCubit>()),
         BlocProvider(create: (_) => sl<ThemeCubit>()),
         BlocProvider(create: (_) => sl<HomeCubit>()..start()),
-        BlocProvider(create: (_) => sl<SearchCubit>()),
+        BlocProvider(create: (_) => sl<SearchCubit>()..start()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
