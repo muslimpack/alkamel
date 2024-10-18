@@ -24,15 +24,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle":
             MessageLookupByLibrary.simpleMessage("Al-Kamel fe al-Sunan"),
+        "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
-        "fontDecreaeSize":
-            MessageLookupByLibrary.simpleMessage("Decreae font size"),
-        "fontIncreaeSize":
+        "fontDecreaseSize":
+            MessageLookupByLibrary.simpleMessage("Decrease font size"),
+        "fontIncreaseSize":
             MessageLookupByLibrary.simpleMessage("Increase font size"),
         "fontResetSize":
             MessageLookupByLibrary.simpleMessage("Reset font size"),
@@ -43,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reportMisspelled":
             MessageLookupByLibrary.simpleMessage("Report misspelled"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "searchFilters": MessageLookupByLibrary.simpleMessage("Search filters"),
         "searchResultCount":
             MessageLookupByLibrary.simpleMessage("Search result count"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),

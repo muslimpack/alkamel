@@ -23,15 +23,16 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appTitle": MessageLookupByLibrary.simpleMessage("الكامل في السنن"),
+        "apply": MessageLookupByLibrary.simpleMessage("تطبيق"),
         "chat": MessageLookupByLibrary.simpleMessage("تواصل"),
         "clear": MessageLookupByLibrary.simpleMessage("امحُ"),
         "close": MessageLookupByLibrary.simpleMessage("أغلق"),
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("تم النسخ إلى الحافظة"),
         "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
-        "fontDecreaeSize":
+        "fontDecreaseSize":
             MessageLookupByLibrary.simpleMessage("تقليل حجم الخط"),
-        "fontIncreaeSize":
+        "fontIncreaseSize":
             MessageLookupByLibrary.simpleMessage("تكبير حجم الخط"),
         "fontResetSize":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين حجم الخط"),
@@ -43,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reportMisspelled":
             MessageLookupByLibrary.simpleMessage("تبليغ عن خطأ"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
+        "searchFilters": MessageLookupByLibrary.simpleMessage("مرشحات البحث"),
         "searchResultCount":
             MessageLookupByLibrary.simpleMessage("عدد نتائج البحث"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),

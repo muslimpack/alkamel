@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Apply`
+  String get apply {
+    return Intl.message(
+      'Apply',
+      name: 'apply',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Al-Kamel fe al-Sunan`
   String get appTitle {
     return Intl.message(
@@ -110,21 +120,21 @@ class S {
     );
   }
 
-  /// `Decreae font size`
-  String get fontDecreaeSize {
+  /// `Decrease font size`
+  String get fontDecreaseSize {
     return Intl.message(
-      'Decreae font size',
-      name: 'fontDecreaeSize',
+      'Decrease font size',
+      name: 'fontDecreaseSize',
       desc: '',
       args: [],
     );
   }
 
   /// `Increase font size`
-  String get fontIncreaeSize {
+  String get fontIncreaseSize {
     return Intl.message(
       'Increase font size',
-      name: 'fontIncreaeSize',
+      name: 'fontIncreaseSize',
       desc: '',
       args: [],
     );
@@ -195,6 +205,16 @@ class S {
     return Intl.message(
       'Search',
       name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search filters`
+  String get searchFilters {
+    return Intl.message(
+      'Search filters',
+      name: 'searchFilters',
       desc: '',
       args: [],
     );
