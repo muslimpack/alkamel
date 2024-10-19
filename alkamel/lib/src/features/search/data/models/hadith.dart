@@ -9,7 +9,7 @@ class Hadith extends HadithEntity {
     required super.narrator,
     required super.narratorReference,
     required super.rank,
-    required super.ruling,
+    required super.rulingEnum,
     required super.hadith,
   });
 
@@ -21,7 +21,7 @@ class Hadith extends HadithEntity {
       narratorReference:
           (map['narratorReference'] as String? ?? "").removeBrackets(),
       rank: (map['rank'] as String).removeBrackets(),
-      ruling: HadithRulingEnum.fromString(map['ruling'] as String),
+      rulingEnum: HadithRulingEnum.fromString(map['ruling'] as String),
       hadith: map['hadith'] as String,
     );
   }

@@ -32,7 +32,7 @@ class HadithAsImageCard extends StatelessWidget {
 
     const imageBackgroundColor = Color(0xff313B47);
     const secondaryColor = Color(0xfff2dc5d);
-    final secondaryElementsColor = hadith.ruling.color.withOpacity(.15);
+    final secondaryElementsColor = hadith.rulingEnum.color.withOpacity(.15);
 
     const mainTextStyle = TextStyle(
       fontSize: 150,
@@ -110,7 +110,7 @@ class HadithAsImageCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 50),
                   child: Text(
-                    "المرتبة: ${hadith.rank}\nالحكم: [${hadith.ruling.title}]",
+                    "المرتبة: ${hadith.rank}\nالحكم: [${hadith.rulingEnum.title}]",
                     style: secondaryTextStyle,
                   ),
                 ),

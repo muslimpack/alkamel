@@ -27,7 +27,7 @@ class HadithCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             right: BorderSide(
-              color: hadith.ruling.color.withOpacity(.3),
+              color: hadith.rulingEnum.color.withOpacity(.3),
               width: 7,
             ),
           ),
@@ -69,10 +69,10 @@ class HadithCard extends StatelessWidget {
               ),
               const Divider(),
               Text(
-                "المرتبة: ${hadith.rank}  |  الحكم: [${hadith.ruling.title}]",
+                "المرتبة: ${hadith.rank}  |  الحكم: [${hadith.rulingEnum.title}]",
                 style: TextStyle(
                   fontSize: context.watch<SettingsCubit>().state.fontSize * 6,
-                  color: hadith.ruling.color,
+                  color: hadith.rulingEnum.color,
                   fontWeight: FontWeight.bold,
                 ),
               ),

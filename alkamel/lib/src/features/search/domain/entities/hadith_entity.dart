@@ -8,7 +8,7 @@ class HadithEntity extends Equatable {
   final String narrator;
   final String narratorReference;
   final String rank;
-  final HadithRulingEnum ruling;
+  final HadithRulingEnum rulingEnum;
   final String hadith;
 
   const HadithEntity({
@@ -17,7 +17,7 @@ class HadithEntity extends Equatable {
     required this.narrator,
     required this.narratorReference,
     required this.rank,
-    required this.ruling,
+    required this.rulingEnum,
     required this.hadith,
   });
 
@@ -29,7 +29,7 @@ class HadithEntity extends Equatable {
       narrator,
       narratorReference,
       rank,
-      ruling,
+      rulingEnum,
       hadith,
     ];
   }

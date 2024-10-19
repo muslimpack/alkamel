@@ -18,7 +18,7 @@ class SearchLoadedState extends SearchState {
   final List<Hadith> dbHadith;
   final List<HadithRulingEnum> activeRuling;
   List<Hadith> get hadithToView =>
-      dbHadith.where((e) => activeRuling.contains(e.ruling)).toList();
+      dbHadith.where((e) => activeRuling.contains(e.rulingEnum)).toList();
 
   const SearchLoadedState({
     required this.searchText,
