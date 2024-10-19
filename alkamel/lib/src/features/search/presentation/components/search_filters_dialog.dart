@@ -33,39 +33,6 @@ class SearchFiltersButton extends StatelessWidget {
   }
 }
 
-class SearchFiltersBar extends StatelessWidget {
-  const SearchFiltersBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<SearchCubit, SearchState>(
-      builder: (context, state) {
-        if (state is! SearchLoadedState) return const SizedBox.shrink();
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: HadithRulingEnum.values.map((e) {
-              return Padding(
-                padding: const EdgeInsets.all(5),
-                child: ToggleButton(
-                  label: Text(
-                    "${e.title} (${state.dbHadith.where((h) => h.rulingEnum == e).length})",
-                  ),
-                  showCheckmark: false,
-                  selected: state.activeRuling.contains(e),
-                  onSelected: (value) async {
-                    context.read<SearchCubit>().toggleRulingStatus(e, value);
-                  },
-                ),
-              );
-            }).toList(),
-          ),
-        );
-      },
-    );
-  }
-}
-
 Future<List<HadithRulingEnum>?> showSearchFilterDialog(
   BuildContext context, {
   required List<HadithRulingEnum> activeRuling,

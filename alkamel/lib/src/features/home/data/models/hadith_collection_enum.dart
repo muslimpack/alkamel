@@ -41,11 +41,18 @@ enum HadithCollectionEnum {
     required this.loookupWord,
   });
 
-  static HadithCollectionEnum fromString(String collectoion) {
-    return HadithCollectionEnum.values
-            .where((e) => e.title == collectoion)
-            .firstOrNull ??
-        HadithCollectionEnum.other;
+  static HadithCollectionEnum fromString(String collectoionText) {
+    HadithCollectionEnum? collectionEnum;
+    for (final collection in values) {
+      if (collectionEnum != null) break;
+      for (final lookup in collection.loookupWord) {
+        if (collectoionText.contains(lookup)) {
+          collectionEnum = collection;
+          break;
+        }
+      }
+    }
+    return collectionEnum ?? HadithCollectionEnum.other;
   }
 
   final int id;
