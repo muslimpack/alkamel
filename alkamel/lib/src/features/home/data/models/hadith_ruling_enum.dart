@@ -24,7 +24,7 @@ enum HadithRulingEnum {
   fabricated(
     id: 4,
     title: "مكذوب",
-    color: Colors.deepOrange,
+    color: Colors.red,
   ),
   ;
 
