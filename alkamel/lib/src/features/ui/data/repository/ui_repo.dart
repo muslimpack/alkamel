@@ -12,7 +12,7 @@ class UIRepo {
   ///* ******* desktop Window Size ******* */
   static const String desktopWindowSizeKey = "desktopWindowSize";
   Size? get desktopWindowSize {
-    const Size defaultSize = Size(450, 950);
+    const Size defaultSize = Size(950, 950);
     try {
       final data = jsonDecode(
         box.get(desktopWindowSizeKey) as String? ??
