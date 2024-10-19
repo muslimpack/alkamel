@@ -1,6 +1,6 @@
 import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/features/home/presentation/components/hadith_card.dart';
-import 'package:alkamel/src/features/search/presentation/components/search_filters_bar.dart';
+import 'package:alkamel/src/features/search/presentation/components/search_ruling_filters_bar.dart';
 import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,9 +18,8 @@ class SearchScreen extends StatelessWidget {
 
         return Column(
           children: [
-            const SearchFiltersBar(),
-            const CollectionsFiltersBar(),
             const SizedBox(height: 15),
+            const SearchRullingFiltersBar(),
             if (state.isSeaching) const LinearProgressIndicator(),
             Padding(
               padding: const EdgeInsets.all(15),
