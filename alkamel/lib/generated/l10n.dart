@@ -120,6 +120,16 @@ class S {
     );
   }
 
+  /// `Displayed results count`
+  String get displayedResultsCount {
+    return Intl.message(
+      'Displayed results count',
+      name: 'displayedResultsCount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Decrease font size`
   String get fontDecreaseSize {
     return Intl.message(

@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("Copied to clipboard"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
+        "displayedResultsCount":
+            MessageLookupByLibrary.simpleMessage("Displayed results count"),
         "fontDecreaseSize":
             MessageLookupByLibrary.simpleMessage("Decrease font size"),
         "fontIncreaseSize":

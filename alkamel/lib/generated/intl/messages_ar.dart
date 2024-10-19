@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copiedToClipboard":
             MessageLookupByLibrary.simpleMessage("تم النسخ إلى الحافظة"),
         "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
+        "displayedResultsCount":
+            MessageLookupByLibrary.simpleMessage("عدد النتائج المعروضة"),
         "fontDecreaseSize":
             MessageLookupByLibrary.simpleMessage("تقليل حجم الخط"),
         "fontIncreaseSize":

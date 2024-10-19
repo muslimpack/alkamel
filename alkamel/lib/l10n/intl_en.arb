@@ -7,6 +7,7 @@
   "close": "Close",
   "copiedToClipboard": "Copied to clipboard",
   "copy": "Copy",
+  "displayedResultsCount": "Displayed results count",
   "fontDecreaseSize": "Decrease font size",
   "fontIncreaseSize": "Increase font size",
   "fontResetSize": "Reset font size",

@@ -25,7 +25,7 @@ class SearchScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(15),
               child: Text(
-                "${S.of(context).searchResultCount}: ${state.hadithToView.length}",
+                "${S.of(context).searchResultCount}: ${state.dbHadith.length} | ${S.of(context).displayedResultsCount}: ${state.hadithToView.length}",
               ),
             ),
             Expanded(
