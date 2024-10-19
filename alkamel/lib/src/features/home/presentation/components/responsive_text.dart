@@ -28,9 +28,24 @@ class _ResponsiveTextState extends State<ResponsiveText> {
 
   @override
   void initState() {
+    init();
+    super.initState();
+  }
+
+  void init() {
     isLong = widget.text.length > length;
     expanded = !isLong;
-    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ResponsiveText oldWidget) {
+    if (oldWidget.searchedText != widget.searchedText ||
+        oldWidget.text != widget.text) {
+      setState(() {
+        init();
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
