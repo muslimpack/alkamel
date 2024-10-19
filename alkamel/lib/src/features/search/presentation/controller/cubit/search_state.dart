@@ -17,6 +17,7 @@ class SearchLoadedState extends SearchState {
   final bool isSeaching;
   final List<Hadith> dbHadith;
   final List<HadithRulingEnum> activeRuling;
+  final List<HadithCollectionEnum> activeCollections;
   List<Hadith> get hadithToView =>
       dbHadith.where((e) => activeRuling.contains(e.rulingEnum)).toList();
 
@@ -25,22 +26,31 @@ class SearchLoadedState extends SearchState {
     required this.isSeaching,
     required this.dbHadith,
     required this.activeRuling,
+    required this.activeCollections,
   });
 
   @override
-  List<Object> get props => [searchText, dbHadith, isSeaching, activeRuling];
+  List<Object> get props => [
+        searchText,
+        dbHadith,
+        isSeaching,
+        activeRuling,
+        activeCollections,
+      ];
 
   SearchLoadedState copyWith({
     String? searchText,
     bool? isSeaching,
     List<Hadith>? dbHadith,
     List<HadithRulingEnum>? activeRuling,
+    List<HadithCollectionEnum>? activeCollections,
   }) {
     return SearchLoadedState(
       searchText: searchText ?? this.searchText,
       isSeaching: isSeaching ?? this.isSeaching,
       dbHadith: dbHadith ?? this.dbHadith,
       activeRuling: activeRuling ?? this.activeRuling,
+      activeCollections: activeCollections ?? this.activeCollections,
     );
   }
 }

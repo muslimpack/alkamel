@@ -56,8 +56,10 @@ class CollectionsFiltersBar extends StatelessWidget {
                   "${e.title} (${state.dbHadith.where((h) => h.collectionEnum == e).length})",
                 ),
                 showCheckmark: false,
-                selected: true,
-                onSelected: (value) async {},
+                selected: state.activeCollections.contains(e),
+                onSelected: (value) async {
+                  context.read<SearchCubit>().toggleCollectionsStatus(e, value);
+                },
               ),
             );
           }).toList(),
