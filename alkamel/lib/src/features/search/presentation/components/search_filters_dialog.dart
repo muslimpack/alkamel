@@ -48,7 +48,9 @@ class SearchFiltersBar extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(5),
                 child: ToggleButton(
-                  label: Text(e.title),
+                  label: Text(
+                    "${e.title} (${state.dbHadith.where((h) => h.ruling == e).length})",
+                  ),
                   showCheckmark: false,
                   selected: state.activeRuling.contains(e),
                   onSelected: (value) async {
