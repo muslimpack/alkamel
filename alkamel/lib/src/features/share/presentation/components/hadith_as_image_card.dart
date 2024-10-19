@@ -35,7 +35,7 @@ class HadithAsImageCard extends StatelessWidget {
     final secondaryElementsColor = hadith.ruling.color.withOpacity(.15);
 
     const mainTextStyle = TextStyle(
-      fontSize: 80,
+      fontSize: 150,
       fontFamily: "djadli_sarkha",
       color: Colors.white,
     );
@@ -99,9 +99,8 @@ class HadithAsImageCard extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: AutoSizeText(
-                      maxFontSize: 80,
-                      minFontSize: 30,
                       hadithText,
+                      minFontSize: 30,
                       textAlign: TextAlign.center,
                       style: mainTextStyle,
                     ),
