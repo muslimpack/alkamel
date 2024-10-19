@@ -83,4 +83,21 @@ class SearchCubit extends Cubit<SearchState> {
 
     emit(state.copyWith(activeRuling: activeRuling));
   }
+
+  Future toggleRulingStatus(HadithRulingEnum ruling, bool activate) async {
+    final state = this.state;
+    if (state is! SearchLoadedState) return;
+
+    final activeRuling = List.of(state.activeRuling);
+
+    if (activate) {
+      activeRuling.add(ruling);
+    } else {
+      activeRuling.remove(ruling);
+    }
+
+    await searchRepo.setSearchRulingFilters(activeRuling);
+
+    emit(state.copyWith(activeRuling: activeRuling));
+  }
 }
