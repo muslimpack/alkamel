@@ -20,13 +20,16 @@ class SearchScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 15),
             const SearchRullingFiltersBar(),
-            if (state.isSeaching) const LinearProgressIndicator(),
             Padding(
               padding: const EdgeInsets.all(15),
               child: Text(
                 "${S.of(context).searchResultCount}: ${state.dbHadith.length} | ${S.of(context).displayedResultsCount}: ${state.hadithToView.length}",
               ),
             ),
+            if (state.isSeaching) ...[
+              const SizedBox(height: 10),
+              const LinearProgressIndicator(),
+            ],
             Expanded(
               child: () {
                 if (state.searchText.isNotEmpty && state.hadithToView.isEmpty) {
