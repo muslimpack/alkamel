@@ -15,6 +15,7 @@ class SearchField extends StatelessWidget {
       children: [
         Expanded(
           child: TextField(
+            autofocus: true,
             controller: context.read<SearchCubit>().searchController,
             decoration: customInputDecoration.copyWith(
               prefixIcon: IconButton(
