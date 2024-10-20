@@ -62,6 +62,8 @@ class AlkamelDbHelper {
   }
 
   Future<List<Hadith>> searchByHadithText(String hadithText) async {
+    if (hadithText.isEmpty) return [];
+
     final Database db = await database;
 
     ///TODO |  ORDER BY `order` ASC
@@ -79,6 +81,8 @@ class AlkamelDbHelper {
     String hadithText, {
     required List<HadithRulingEnum> ruling,
   }) async {
+    if (hadithText.isEmpty || ruling.isEmpty) return SearchHeader.empty();
+
     final Database db = await database;
 
     final rulingString = ruling
@@ -103,6 +107,8 @@ class AlkamelDbHelper {
     required int limit, // Number of items per page
     required int offset, // Offset to start fetching items from
   }) async {
+    if (hadithText.isEmpty || ruling.isEmpty) return [];
+
     final Database db = await database;
 
     // Build the ruling filter string
