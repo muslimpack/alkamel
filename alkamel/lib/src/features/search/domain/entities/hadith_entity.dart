@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:alkamel/src/features/home/data/models/hadith_collection_enum.dart';
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:equatable/equatable.dart';
 
@@ -10,7 +8,6 @@ class HadithEntity extends Equatable {
   final String narratorReference;
   final String rank;
   final HadithRulingEnum rulingEnum;
-  final HadithCollectionEnum collectionEnum;
   final String hadith;
 
   const HadithEntity({
@@ -20,7 +17,6 @@ class HadithEntity extends Equatable {
     required this.narratorReference,
     required this.rank,
     required this.rulingEnum,
-    required this.collectionEnum,
     required this.hadith,
   });
 
@@ -33,7 +29,6 @@ class HadithEntity extends Equatable {
       narratorReference,
       rank,
       rulingEnum,
-      collectionEnum,
       hadith,
     ];
   }

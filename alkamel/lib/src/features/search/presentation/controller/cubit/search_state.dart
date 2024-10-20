@@ -17,18 +17,14 @@ class SearchLoadedState extends SearchState {
   final bool isSeaching;
   final List<Hadith> dbHadith;
   final List<HadithRulingEnum> activeRuling;
-  final List<HadithCollectionEnum> activeCollections;
-  List<Hadith> get hadithToView => dbHadith
-      .where((e) => activeRuling.contains(e.rulingEnum))
-      .where((e) => activeCollections.contains(e.collectionEnum))
-      .toList();
+  List<Hadith> get hadithToView =>
+      dbHadith.where((e) => activeRuling.contains(e.rulingEnum)).toList();
 
   const SearchLoadedState({
     required this.searchText,
     required this.isSeaching,
     required this.dbHadith,
     required this.activeRuling,
-    required this.activeCollections,
   });
 
   @override
@@ -37,7 +33,6 @@ class SearchLoadedState extends SearchState {
         dbHadith,
         isSeaching,
         activeRuling,
-        activeCollections,
       ];
 
   SearchLoadedState copyWith({
@@ -45,14 +40,12 @@ class SearchLoadedState extends SearchState {
     bool? isSeaching,
     List<Hadith>? dbHadith,
     List<HadithRulingEnum>? activeRuling,
-    List<HadithCollectionEnum>? activeCollections,
   }) {
     return SearchLoadedState(
       searchText: searchText ?? this.searchText,
       isSeaching: isSeaching ?? this.isSeaching,
       dbHadith: dbHadith ?? this.dbHadith,
       activeRuling: activeRuling ?? this.activeRuling,
-      activeCollections: activeCollections ?? this.activeCollections,
     );
   }
 }

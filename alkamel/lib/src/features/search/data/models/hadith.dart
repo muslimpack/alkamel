@@ -1,5 +1,4 @@
 import 'package:alkamel/src/core/extensions/string_extension.dart';
-import 'package:alkamel/src/features/home/data/models/hadith_collection_enum.dart';
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/domain/entities/hadith_entity.dart';
 
@@ -11,7 +10,6 @@ class Hadith extends HadithEntity {
     required super.narratorReference,
     required super.rank,
     required super.rulingEnum,
-    required super.collectionEnum,
     required super.hadith,
   });
 
@@ -26,7 +24,6 @@ class Hadith extends HadithEntity {
       narratorReference: narratorReference,
       rank: (map['rank'] as String).removeBrackets(),
       rulingEnum: HadithRulingEnum.fromString(map['ruling'] as String),
-      collectionEnum: HadithCollectionEnum.fromString(narrator),
       hadith: map['hadith'] as String,
     );
   }
