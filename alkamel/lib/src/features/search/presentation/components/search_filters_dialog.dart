@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/features/search/presentation/components/search_ruling_filters_bar.dart';
+import 'package:alkamel/src/features/search/presentation/components/search_type_bar.dart';
 import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,8 +48,9 @@ class SearchFiltersDialog extends StatelessWidget {
         child: const Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            SearchTypeBar(),
+            Divider(),
             SearchRullingFiltersBar(),
-    
           ],
         ),
       ),
