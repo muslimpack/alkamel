@@ -17,6 +17,7 @@ class SearchResultViewer extends StatelessWidget {
         return PagedListView<int, Hadith>(
           pagingController: context.read<SearchCubit>().pagingController,
           builderDelegate: PagedChildBuilderDelegate<Hadith>(
+            animateTransitions: true,
             itemBuilder: (context, hadith, index) => HadithCard(
               hadith: hadith,
               searchedText: state.searchText,
