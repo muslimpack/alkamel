@@ -1,4 +1,5 @@
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
+import 'package:alkamel/src/features/search/data/models/search_type.dart';
 import 'package:hive/hive.dart';
 
 class SearchRepo {
@@ -31,5 +32,17 @@ class SearchRepo {
       searchRulingFiltersKey,
       rulingSearchFilters.map((x) => x.id).join(","),
     );
+  }
+
+  /// Search Type
+  static const String searchTypeKey = "searchType";
+  SearchType get searchType {
+    final data = box.get(searchTypeKey) as String?;
+    if (data == null) return SearchType.typical;
+    return SearchType.fromString(data);
+  }
+
+  Future setSearchType(SearchType searchType) async {
+    return box.put(searchTypeKey, searchType.name);
   }
 }
