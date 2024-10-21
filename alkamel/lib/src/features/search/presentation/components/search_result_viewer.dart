@@ -1,3 +1,4 @@
+import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/features/home/presentation/components/hadith_card.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
@@ -28,22 +29,22 @@ class SearchResultViewer extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
             ),
-            noMoreItemsIndicatorBuilder: (context) => const Card(
+            noMoreItemsIndicatorBuilder: (context) => Card(
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Text(
-                  "noMoreItemsIndicatorBuilder",
+                  S.of(context).noMoreResultsMsg,
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
-            noItemsFoundIndicatorBuilder: (context) => const Column(
+            noItemsFoundIndicatorBuilder: (context) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.search),
-                SizedBox(height: 10),
+                const Icon(Icons.search),
+                const SizedBox(height: 10),
                 Text(
-                  "noItemsFoundIndicatorBuilder",
+                  S.of(context).noResultsFound,
                   textAlign: TextAlign.center,
                 ),
               ],

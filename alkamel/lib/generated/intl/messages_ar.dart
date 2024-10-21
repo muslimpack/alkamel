@@ -40,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إعادة تعيين حجم الخط"),
         "fontSettings": MessageLookupByLibrary.simpleMessage("إعدادات الخط"),
         "misspelled": MessageLookupByLibrary.simpleMessage("خطأ إملائي"),
+        "noMoreResultsMsg": MessageLookupByLibrary.simpleMessage(
+            "هذا كل شيء لا يوجد المزيد من النتائج."),
+        "noResultsFound": MessageLookupByLibrary.simpleMessage("لا توجد نتائج"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
         "prefThemeDarkMode":
             MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
