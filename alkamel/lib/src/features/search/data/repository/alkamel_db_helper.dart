@@ -80,34 +80,57 @@ class AlkamelDbHelper {
   }
 
   Future<SearchResultInfo> searchByHadithTextWithFiltersInfo(
-    String hadithText, {
+    String searchText, {
     required List<HadithRulingEnum> ruling,
+    required SearchType searchType,
   }) async {
-    if (hadithText.isEmpty || ruling.isEmpty) return SearchResultInfo.empty();
+    if (searchText.isEmpty || ruling.isEmpty) return SearchResultInfo.empty();
+
+    final total = await _searchByHadithTextWithFiltersInfo(
+      searchText,
+      ruling: ruling,
+      searchType: searchType,
+      useFilters: false,
+    );
+    final filtered = await _searchByHadithTextWithFiltersInfo(
+      searchText,
+      ruling: ruling,
+      searchType: searchType,
+      useFilters: true,
+    );
+
+    return SearchResultInfo(total: total, filtered: filtered);
+  }
+
+  Future<SearchHeader> _searchByHadithTextWithFiltersInfo(
+    String searchText, {
+    required SearchType searchType,
+    required List<HadithRulingEnum> ruling,
+    required bool useFilters,
+  }) async {
+    if (searchText.isEmpty || (useFilters && ruling.isEmpty)) {
+      return SearchHeader.empty();
+    }
 
     final Database db = await database;
 
-    final rulingString = ruling
-        .map((e) => e.title)
-        .map((word) => "ruling LIKE '%$word%'")
-        .join(' OR ');
+    final String sql;
+    final List<Object?> sqlParams = [];
+    switch (useFilters) {
+      case true:
+        final rulingString = ruling.map((e) => "ruling LIKE ?").join(' OR ');
+        final rulingParams = ruling.map((e) => '%${e.title}%');
+        sql =
+            'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ? AND ($rulingString)';
+        sqlParams.addAll(['%$searchText%', ...rulingParams]);
+      case false:
+        sql = 'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ?';
+        sqlParams.addAll(['%$searchText%']);
+    }
 
-    final sqlFiltered =
-        'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ? AND ($rulingString)';
+    final List<Map<String, dynamic>> maps = await db.rawQuery(sql, sqlParams);
 
-    final sqlTotal =
-        'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ?';
-
-    final List<Map<String, dynamic>> totalMaps =
-        await db.rawQuery(sqlTotal, ['%$hadithText%']);
-
-    final List<Map<String, dynamic>> filteredMap =
-        await db.rawQuery(sqlFiltered, ['%$hadithText%']);
-
-    final total = SearchHeader.fromMap(totalMaps.first);
-    final filtered = SearchHeader.fromMap(filteredMap.first);
-
-    return SearchResultInfo(total: total, filtered: filtered);
+    return SearchHeader.fromMap(maps.first);
   }
 
   Future<List<Hadith>> searchByHadithTextWithFilters(

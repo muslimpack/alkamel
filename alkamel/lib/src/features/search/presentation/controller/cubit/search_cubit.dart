@@ -48,6 +48,7 @@ class SearchCubit extends Cubit<SearchState> {
     final searchinfo = await alkamelDbHelper.searchByHadithTextWithFiltersInfo(
       state.searchText,
       ruling: state.activeRuling,
+      searchType: state.searchType,
     );
 
     emit(state.copyWith(searchinfo: searchinfo));
