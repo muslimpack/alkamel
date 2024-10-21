@@ -34,17 +34,31 @@ class HighlightText extends StatelessWidget {
     required String source,
     required String query,
   }) {
-    if (query.isEmpty || !source.contains(query)) {
+    if (query.isEmpty) {
       return [TextSpan(text: source)];
     }
-    final matches = query.allMatches(source);
+
+    // Split the query into words and remove any empty strings.
+    final queryWords =
+        query.split(' ').where((word) => word.isNotEmpty).toList();
+    if (queryWords.isEmpty) {
+      return [TextSpan(text: source)];
+    }
+
+    // Build a regex that matches any word from the query.
+    final pattern =
+        RegExp(queryWords.map((word) => RegExp.escape(word)).join('|'));
+
+    final matches = pattern.allMatches(source);
 
     int lastMatchEnd = 0;
 
     final List<TextSpan> children = [];
+
     for (var i = 0; i < matches.length; i++) {
       final match = matches.elementAt(i);
 
+      // Add text before the match
       if (match.start != lastMatchEnd) {
         children.add(
           TextSpan(
@@ -53,6 +67,7 @@ class HighlightText extends StatelessWidget {
         );
       }
 
+      // Add the matched word with the highlight style
       children.add(
         TextSpan(
           text: source.substring(match.start, match.end),
@@ -60,6 +75,7 @@ class HighlightText extends StatelessWidget {
         ),
       );
 
+      // Add text after the last match if this is the final match
       if (i == matches.length - 1 && match.end != source.length) {
         children.add(
           TextSpan(
@@ -70,6 +86,12 @@ class HighlightText extends StatelessWidget {
 
       lastMatchEnd = match.end;
     }
+
+    // If no matches, return the source text as-is
+    if (children.isEmpty) {
+      return [TextSpan(text: source)];
+    }
+
     return children;
   }
 
