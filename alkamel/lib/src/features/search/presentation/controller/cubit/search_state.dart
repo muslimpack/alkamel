@@ -14,14 +14,14 @@ final class SearchLoadingState extends SearchState {
 
 class SearchLoadedState extends SearchState {
   final String searchText;
-  final SearchHeader searchHeader;
+  final SearchResultInfo searchinfo;
   final List<HadithRulingEnum> activeRuling;
 
   int get pageSize => 10;
 
   const SearchLoadedState({
     required this.searchText,
-    required this.searchHeader,
+    required this.searchinfo,
     required this.activeRuling,
   });
 
@@ -29,17 +29,17 @@ class SearchLoadedState extends SearchState {
   List<Object> get props => [
         searchText,
         activeRuling,
-        searchHeader,
+        searchinfo,
       ];
 
   SearchLoadedState copyWith({
     String? searchText,
-    SearchHeader? searchHeader,
+    SearchResultInfo? searchinfo,
     List<HadithRulingEnum>? activeRuling,
   }) {
     return SearchLoadedState(
       searchText: searchText ?? this.searchText,
-      searchHeader: searchHeader ?? this.searchHeader,
+      searchinfo: searchinfo ?? this.searchinfo,
       activeRuling: activeRuling ?? this.activeRuling,
     );
   }

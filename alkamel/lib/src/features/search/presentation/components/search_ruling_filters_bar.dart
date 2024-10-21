@@ -18,7 +18,7 @@ class SearchRullingFiltersBar extends StatelessWidget {
           runSpacing: 10,
           spacing: 10,
           children: HadithRulingEnum.values.map((e) {
-            final count = state.searchHeader.rulingStats[e] ?? 0;
+            final count = state.searchinfo.total.rulingStats[e] ?? 0;
             return ToggleButton(
               label: Text(
                 "${e.title} ($count)",

@@ -26,7 +26,7 @@ class SearchScreen extends StatelessWidget {
               child: Text(
                 state.searchText.isEmpty
                     ? ""
-                    : "${S.of(context).searchResultCount}: ${state.searchHeader.searchResultLength}",
+                    : "${S.of(context).searchResultCount}: ${state.searchinfo.filtered.searchResultLength}",
                 textAlign: TextAlign.center,
               ),
             ),

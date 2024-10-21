@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
-import 'package:alkamel/src/features/search/data/models/search_header.dart';
+import 'package:alkamel/src/features/search/data/models/search_result_info.dart';
 import 'package:alkamel/src/features/search/data/repository/alkamel_db_helper.dart';
 import 'package:alkamel/src/features/search/domain/repository/search_repo.dart';
 import 'package:bloc/bloc.dart';
@@ -24,7 +23,6 @@ class SearchCubit extends Cubit<SearchState> {
     this.searchRepo,
   ) : super(const SearchLoadingState()) {
     pagingController.addPageRequestListener((pageKey) {
-      appPrint("object");
       _fetchPage(pageKey);
     });
   }
@@ -33,7 +31,7 @@ class SearchCubit extends Cubit<SearchState> {
     final state = SearchLoadedState(
       searchText: "",
       activeRuling: searchRepo.searchRulingFilters,
-      searchHeader: SearchHeader.empty(),
+      searchinfo: SearchResultInfo.empty(),
     );
     emit(state);
   }
@@ -45,13 +43,12 @@ class SearchCubit extends Cubit<SearchState> {
 
     pagingController.refresh();
 
-    final searchHeader =
-        await alkamelDbHelper.searchByHadithTextWithFiltersInfo(
+    final searchinfo = await alkamelDbHelper.searchByHadithTextWithFiltersInfo(
       state.searchText,
       ruling: state.activeRuling,
     );
 
-    emit(state.copyWith(searchHeader: searchHeader));
+    emit(state.copyWith(searchinfo: searchinfo));
   }
 
   ///MARK: Search text
@@ -108,9 +105,6 @@ class SearchCubit extends Cubit<SearchState> {
 
     final pageSize = state.pageSize;
     final searchText = state.searchText;
-
-    appPrint(searchText);
-    await Future.delayed(const Duration(seconds: 2));
 
     try {
       final newItems = await alkamelDbHelper.searchByHadithTextWithFilters(
