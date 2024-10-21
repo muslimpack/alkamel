@@ -20,7 +20,7 @@ class SearchTypeBar extends StatelessWidget {
           children: SearchType.values.map((e) {
             return ToggleButton(
               label: Text(
-                e.name,
+                e.localeName(context),
               ),
               showCheckmark: false,
               selected: state.searchType == e,

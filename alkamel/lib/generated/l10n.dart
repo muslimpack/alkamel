@@ -260,6 +260,36 @@ class S {
     );
   }
 
+  /// `All words`
+  String get searchTypeAllWords {
+    return Intl.message(
+      'All words',
+      name: 'searchTypeAllWords',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Any words`
+  String get searchTypeAnyWords {
+    return Intl.message(
+      'Any words',
+      name: 'searchTypeAnyWords',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Typical`
+  String get SearchTypeTypical {
+    return Intl.message(
+      'Typical',
+      name: 'SearchTypeTypical',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message(
