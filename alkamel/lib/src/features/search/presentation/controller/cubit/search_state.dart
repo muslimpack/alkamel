@@ -16,6 +16,7 @@ class SearchLoadedState extends SearchState {
   final String searchText;
   final SearchResultInfo searchinfo;
   final List<HadithRulingEnum> activeRuling;
+  final SearchType searchType;
 
   int get pageSize => 10;
 
@@ -23,6 +24,7 @@ class SearchLoadedState extends SearchState {
     required this.searchText,
     required this.searchinfo,
     required this.activeRuling,
+    required this.searchType,
   });
 
   @override
@@ -30,17 +32,20 @@ class SearchLoadedState extends SearchState {
         searchText,
         activeRuling,
         searchinfo,
+        searchType,
       ];
 
   SearchLoadedState copyWith({
     String? searchText,
     SearchResultInfo? searchinfo,
     List<HadithRulingEnum>? activeRuling,
+    SearchType? searchType,
   }) {
     return SearchLoadedState(
       searchText: searchText ?? this.searchText,
       searchinfo: searchinfo ?? this.searchinfo,
       activeRuling: activeRuling ?? this.activeRuling,
+      searchType: searchType ?? this.searchType,
     );
   }
 }
