@@ -16,6 +16,11 @@ class SearchHeader extends Equatable {
     required this.rulingStats,
   });
 
+  SearchHeader.empty()
+      : searchResultLength = 0,
+        rulingStats = HadithRulingEnum.values
+            .fold({}, (previousValue, element) => previousValue..[element] = 0);
+
   @override
   List<Object> get props => [
         searchResultLength,
@@ -31,7 +36,7 @@ class SearchHeader extends Equatable {
 
       if (r == null) return previousValue;
 
-      return previousValue..[r] = e.value as int;
+      return previousValue..[r] = e.value as int? ?? 0;
     });
 
     return SearchHeader(
