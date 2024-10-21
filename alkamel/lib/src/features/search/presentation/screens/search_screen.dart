@@ -1,5 +1,5 @@
 import 'package:alkamel/generated/l10n.dart';
-import 'package:alkamel/src/features/home/presentation/components/hadith_card.dart';
+import 'package:alkamel/src/features/search/presentation/components/search_result_viewer.dart';
 import 'package:alkamel/src/features/search/presentation/components/search_ruling_filters_bar.dart';
 import 'package:alkamel/src/features/search/presentation/controller/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
@@ -17,40 +17,21 @@ class SearchScreen extends StatelessWidget {
         }
 
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 15),
             const SearchRullingFiltersBar(),
             Padding(
               padding: const EdgeInsets.all(15),
               child: Text(
-                "${S.of(context).searchResultCount}: ${state.dbHadith.length} | ${S.of(context).displayedResultsCount}: ${state.hadithToView.length}",
+                state.searchText.isEmpty
+                    ? ""
+                    : "${S.of(context).searchResultCount}: ${state.searchinfo.filtered.searchResultLength}",
+                textAlign: TextAlign.center,
               ),
             ),
-            if (state.isSeaching) ...[
-              const SizedBox(height: 10),
-              const LinearProgressIndicator(),
-            ],
-            Expanded(
-              child: () {
-                if (state.searchText.isNotEmpty && state.hadithToView.isEmpty) {
-                  return Center(
-                    child: Text(
-                      "${S.of(context).searchResultCount}: ${state.searchText}",
-                    ),
-                  );
-                }
-
-                return ListView.builder(
-                  padding: const EdgeInsets.all(15),
-                  itemCount: state.hadithToView.length,
-                  itemBuilder: (context, index) {
-                    return HadithCard(
-                      hadith: state.hadithToView[index],
-                      searchedText: state.searchText,
-                    );
-                  },
-                );
-              }(),
+            const Expanded(
+              child: SearchResultViewer(),
             ),
           ],
         );

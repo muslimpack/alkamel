@@ -1,81 +1,71 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:alkamel/src/features/search/data/models/search_result_info.dart';
 import 'package:alkamel/src/features/search/data/repository/alkamel_db_helper.dart';
 import 'package:alkamel/src/features/search/domain/repository/search_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 part 'search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {
   final TextEditingController searchController = TextEditingController();
+  final PagingController<int, Hadith> pagingController =
+      PagingController(firstPageKey: 0);
   final AlkamelDbHelper alkamelDbHelper;
   final SearchRepo searchRepo;
 
   SearchCubit(
     this.alkamelDbHelper,
     this.searchRepo,
-  ) : super(const SearchLoadingState());
+  ) : super(const SearchLoadingState()) {
+    pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+  }
 
   Future start() async {
     final state = SearchLoadedState(
       searchText: "",
       activeRuling: searchRepo.searchRulingFilters,
-      dbHadith: const [],
-      isSeaching: false,
+      searchinfo: SearchResultInfo.empty(),
     );
     emit(state);
   }
 
-  Future search(String searchText) async {
-    appPrint(searchText);
+  ///MARK: Search header
+  Future _startNewSearch() async {
     final state = this.state;
+    if (state is! SearchLoadedState) return;
 
-    if (state is! SearchLoadedState) {
-      final state = SearchLoadedState(
-        searchText: searchText,
-        activeRuling: searchRepo.searchRulingFilters,
-        dbHadith: const [],
-        isSeaching: false,
-      );
+    pagingController.refresh();
 
-      await _search(searchText, state);
-    } else {
-      await _search(searchText, state);
-    }
+    final searchinfo = await alkamelDbHelper.searchByHadithTextWithFiltersInfo(
+      state.searchText,
+      ruling: state.activeRuling,
+    );
+
+    emit(state.copyWith(searchinfo: searchinfo));
   }
 
-  Future _search(String searchText, SearchLoadedState state) async {
-    emit(state.copyWith(searchText: searchText, isSeaching: true));
-    if (searchText.isEmpty) {
-      emit(
-        state.copyWith(
-          isSeaching: false,
-          dbHadith: [],
-          searchText: searchText,
-        ),
-      );
-      return;
-    }
-    final searchResult = await alkamelDbHelper.searchByHadithText(searchText);
+  ///MARK: Search text
+
+  Future updateSearchText(String searchText) async {
+    final state = this.state;
+    if (state is! SearchLoadedState) return;
+
     emit(
       state.copyWith(
-        isSeaching: false,
-        dbHadith: searchResult,
         searchText: searchText,
       ),
     );
+    await _startNewSearch();
   }
 
-  Future clear() async {
-    searchController.clear();
-    await search("");
-  }
-
-  /// Ruling
+  ///MARK: Ruling
   Future changeActiveRuling(List<HadithRulingEnum> activeRuling) async {
     final state = this.state;
     if (state is! SearchLoadedState) return;
@@ -83,6 +73,7 @@ class SearchCubit extends Cubit<SearchState> {
     await searchRepo.setSearchRulingFilters(activeRuling);
 
     emit(state.copyWith(activeRuling: activeRuling));
+    await _startNewSearch();
   }
 
   Future toggleRulingStatus(HadithRulingEnum ruling, bool activate) async {
@@ -97,8 +88,49 @@ class SearchCubit extends Cubit<SearchState> {
       activeRuling.remove(ruling);
     }
 
-    await searchRepo.setSearchRulingFilters(activeRuling);
+    await changeActiveRuling(activeRuling);
+  }
 
-    emit(state.copyWith(activeRuling: activeRuling));
+  ///MARK: clear
+  Future clear() async {
+    searchController.clear();
+    await updateSearchText("");
+  }
+
+  ///MARK: Pagination
+  Future _fetchPage(int pageKey) async {
+    final state = this.state;
+
+    if (state is! SearchLoadedState) return;
+
+    final pageSize = state.pageSize;
+    final searchText = state.searchText;
+
+    try {
+      final newItems = await alkamelDbHelper.searchByHadithTextWithFilters(
+        searchText,
+        ruling: state.activeRuling,
+        limit: pageSize,
+        offset: pageKey,
+      );
+
+      final isLastPage = newItems.length < pageSize;
+      if (isLastPage) {
+        pagingController.appendLastPage(newItems);
+      } else {
+        final nextPageKey = pageKey + newItems.length;
+        pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      pagingController.error = error;
+    }
+  }
+
+  ///MARK: close
+  @override
+  Future<void> close() {
+    pagingController.dispose();
+    searchController.dispose();
+    return super.close();
   }
 }

@@ -13,6 +13,8 @@
   "fontResetSize": "إعادة تعيين حجم الخط",
   "fontSettings": "إعدادات الخط",
   "misspelled": "خطأ إملائي",
+  "noMoreResultsMsg": "هذا كل شيء لا يوجد المزيد من النتائج.",
+  "noResultsFound": "لا توجد نتائج",
   "prefAppLanguage": "لغة التطبيق",
   "prefThemeDarkMode": "الوضع الليلي",
   "reportMisspelled": "تبليغ عن خطأ",

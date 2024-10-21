@@ -41,6 +41,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reset font size"),
         "fontSettings": MessageLookupByLibrary.simpleMessage("Font settings"),
         "misspelled": MessageLookupByLibrary.simpleMessage("Misspelled"),
+        "noMoreResultsMsg": MessageLookupByLibrary.simpleMessage(
+            "That\'s it, there are no more results."),
+        "noResultsFound":
+            MessageLookupByLibrary.simpleMessage("No results found"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("App language"),
         "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "reportMisspelled":

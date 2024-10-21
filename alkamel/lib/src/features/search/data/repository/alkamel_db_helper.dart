@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:alkamel/src/core/utils/db_helper.dart';
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:alkamel/src/features/search/data/models/search_header.dart';
+import 'package:alkamel/src/features/search/data/models/search_result_info.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AlkamelDbHelper {
@@ -61,6 +63,8 @@ class AlkamelDbHelper {
   }
 
   Future<List<Hadith>> searchByHadithText(String hadithText) async {
+    if (hadithText.isEmpty) return [];
+
     final Database db = await database;
 
     ///TODO |  ORDER BY `order` ASC
@@ -68,6 +72,66 @@ class AlkamelDbHelper {
       'SELECT * FROM hadith WHERE hadith LIKE ?',
       ['%$hadithText%'],
     );
+
+    return List.generate(maps.length, (i) {
+      return Hadith.fromMap(maps[i]);
+    });
+  }
+
+  Future<SearchResultInfo> searchByHadithTextWithFiltersInfo(
+    String hadithText, {
+    required List<HadithRulingEnum> ruling,
+  }) async {
+    if (hadithText.isEmpty || ruling.isEmpty) return SearchResultInfo.empty();
+
+    final Database db = await database;
+
+    final rulingString = ruling
+        .map((e) => e.title)
+        .map((word) => "ruling LIKE '%$word%'")
+        .join(' OR ');
+
+    final sqlFiltered =
+        'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ? AND ($rulingString)';
+
+    final sqlTotal =
+        'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ?';
+
+    final List<Map<String, dynamic>> totalMaps =
+        await db.rawQuery(sqlTotal, ['%$hadithText%']);
+
+    final List<Map<String, dynamic>> filteredMap =
+        await db.rawQuery(sqlFiltered, ['%$hadithText%']);
+
+    final total = SearchHeader.fromMap(totalMaps.first);
+    final filtered = SearchHeader.fromMap(filteredMap.first);
+
+    return SearchResultInfo(total: total, filtered: filtered);
+  }
+
+  Future<List<Hadith>> searchByHadithTextWithFilters(
+    String hadithText, {
+    required List<HadithRulingEnum> ruling,
+    required int limit, // Number of items per page
+    required int offset, // Offset to start fetching items from
+  }) async {
+    if (hadithText.isEmpty || ruling.isEmpty) return [];
+
+    final Database db = await database;
+
+    // Build the ruling filter string
+    final rulingString = ruling
+        .map((e) => e.title)
+        .map((word) => "ruling LIKE '%$word%'")
+        .join(' OR ');
+
+    // Add LIMIT and OFFSET to the SQL query
+    final sqlString =
+        'SELECT * FROM hadith WHERE hadith LIKE ? AND ($rulingString) '
+        'LIMIT ? OFFSET ?';
+
+    final List<Map<String, dynamic>> maps =
+        await db.rawQuery(sqlString, ['%$hadithText%', limit, offset]);
 
     return List.generate(maps.length, (i) {
       return Hadith.fromMap(maps[i]);

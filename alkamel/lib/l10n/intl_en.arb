@@ -13,6 +13,8 @@
   "fontResetSize": "Reset font size",
   "fontSettings": "Font settings",
   "misspelled": "Misspelled",
+  "noMoreResultsMsg": "That's it, there are no more results.",
+  "noResultsFound": "No results found",
   "prefAppLanguage": "App language",
   "prefThemeDarkMode": "Dark Mode",
   "reportMisspelled": "Report misspelled",

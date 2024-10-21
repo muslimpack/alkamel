@@ -180,6 +180,26 @@ class S {
     );
   }
 
+  /// `That's it, there are no more results.`
+  String get noMoreResultsMsg {
+    return Intl.message(
+      'That\'s it, there are no more results.',
+      name: 'noMoreResultsMsg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results found`
+  String get noResultsFound {
+    return Intl.message(
+      'No results found',
+      name: 'noResultsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `App language`
   String get prefAppLanguage {
     return Intl.message(
