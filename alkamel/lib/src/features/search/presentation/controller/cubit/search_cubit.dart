@@ -123,6 +123,7 @@ class SearchCubit extends Cubit<SearchState> {
       final newItems = await alkamelDbHelper.searchByHadithTextWithFilters(
         searchText,
         ruling: state.activeRuling,
+        searchType: state.searchType,
         limit: pageSize,
         offset: pageKey,
       );

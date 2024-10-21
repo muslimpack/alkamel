@@ -5,6 +5,7 @@ import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/search/data/models/search_header.dart';
 import 'package:alkamel/src/features/search/data/models/search_result_info.dart';
+import 'package:alkamel/src/features/search/data/models/search_type.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AlkamelDbHelper {
@@ -110,14 +111,17 @@ class AlkamelDbHelper {
   }
 
   Future<List<Hadith>> searchByHadithTextWithFilters(
-    String hadithText, {
+    String searchText, {
     required List<HadithRulingEnum> ruling,
+    required SearchType searchType,
     required int limit, // Number of items per page
     required int offset, // Offset to start fetching items from
   }) async {
-    if (hadithText.isEmpty || ruling.isEmpty) return [];
+    if (searchText.isEmpty || ruling.isEmpty) return [];
 
     final Database db = await database;
+
+    final List<String> splittedSearchWords = searchText.trim().split(' ');
 
     // Build the ruling filter string
     final rulingString = ruling
@@ -125,13 +129,39 @@ class AlkamelDbHelper {
         .map((word) => "ruling LIKE '%$word%'")
         .join(' OR ');
 
-    // Add LIMIT and OFFSET to the SQL query
-    final sqlString =
-        'SELECT * FROM hadith WHERE hadith LIKE ? AND ($rulingString) '
-        'LIMIT ? OFFSET ?';
+    final String sqlString;
+    final List<Object?> sqlParams = [];
+
+    switch (searchType) {
+      case SearchType.typical:
+        sqlString =
+            'SELECT * FROM hadith WHERE hadith LIKE ? AND ($rulingString) '
+            'LIMIT ? OFFSET ?';
+        sqlParams.addAll(['%$searchText%', limit, offset]);
+
+      case SearchType.allWords:
+        final String allWordsQuery =
+            splittedSearchWords.map((word) => 'hadith LIKE ?').join(' AND ');
+        final List<String> params =
+            splittedSearchWords.map((word) => '%$word%').toList();
+        sqlString =
+            'SELECT * FROM hadith WHERE ($allWordsQuery) AND ($rulingString) '
+            'LIMIT ? OFFSET ?';
+        sqlParams.addAll([...params, limit, offset]);
+
+      case SearchType.anyWords:
+        final String allWordsQuery =
+            splittedSearchWords.map((word) => 'hadith LIKE ?').join(' OR ');
+        final List<String> params =
+            splittedSearchWords.map((word) => '%$word%').toList();
+        sqlString =
+            'SELECT * FROM hadith WHERE ($allWordsQuery) AND ($rulingString) '
+            'LIMIT ? OFFSET ?';
+        sqlParams.addAll([...params, limit, offset]);
+    }
 
     final List<Map<String, dynamic>> maps =
-        await db.rawQuery(sqlString, ['%$hadithText%', limit, offset]);
+        await db.rawQuery(sqlString, sqlParams);
 
     return List.generate(maps.length, (i) {
       return Hadith.fromMap(maps[i]);
