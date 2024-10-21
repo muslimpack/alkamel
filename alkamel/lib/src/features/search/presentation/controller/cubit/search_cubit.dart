@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/search/data/models/search_header.dart';
@@ -23,6 +24,7 @@ class SearchCubit extends Cubit<SearchState> {
     this.searchRepo,
   ) : super(const SearchLoadingState()) {
     pagingController.addPageRequestListener((pageKey) {
+      appPrint("object");
       _fetchPage(pageKey);
     });
   }
@@ -36,9 +38,8 @@ class SearchCubit extends Cubit<SearchState> {
     emit(state);
   }
 
-  ///MARK: Search
-
-  Future search(String searchText) async {
+  ///MARK: Search header
+  Future _startNewSearch() async {
     final state = this.state;
     if (state is! SearchLoadedState) return;
 
@@ -46,28 +47,70 @@ class SearchCubit extends Cubit<SearchState> {
 
     final searchHeader =
         await alkamelDbHelper.searchByHadithTextWithFiltersInfo(
-      searchText,
+      state.searchText,
       ruling: state.activeRuling,
     );
+
+    emit(state.copyWith(searchHeader: searchHeader));
+  }
+
+  ///MARK: Search text
+
+  Future updateSearchText(String searchText) async {
+    final state = this.state;
+    if (state is! SearchLoadedState) return;
 
     emit(
       state.copyWith(
         searchText: searchText,
-        searchHeader: searchHeader,
       ),
     );
+    await _startNewSearch();
+  }
+
+  ///MARK: Ruling
+  Future changeActiveRuling(List<HadithRulingEnum> activeRuling) async {
+    final state = this.state;
+    if (state is! SearchLoadedState) return;
+
+    await searchRepo.setSearchRulingFilters(activeRuling);
+
+    emit(state.copyWith(activeRuling: activeRuling));
+    await _startNewSearch();
+  }
+
+  Future toggleRulingStatus(HadithRulingEnum ruling, bool activate) async {
+    final state = this.state;
+    if (state is! SearchLoadedState) return;
+
+    final activeRuling = List.of(state.activeRuling);
+
+    if (activate) {
+      activeRuling.add(ruling);
+    } else {
+      activeRuling.remove(ruling);
+    }
+
+    await changeActiveRuling(activeRuling);
+  }
+
+  ///MARK: clear
+  Future clear() async {
+    searchController.clear();
+    await updateSearchText("");
   }
 
   ///MARK: Pagination
-  Future<void> _fetchPage(int pageKey) async {
+  Future _fetchPage(int pageKey) async {
     final state = this.state;
 
     if (state is! SearchLoadedState) return;
 
-    await Future.delayed(const Duration(seconds: 5));
-
     final pageSize = state.pageSize;
     final searchText = state.searchText;
+
+    appPrint(searchText);
+    await Future.delayed(const Duration(seconds: 2));
 
     try {
       final newItems = await alkamelDbHelper.searchByHadithTextWithFilters(
@@ -89,39 +132,7 @@ class SearchCubit extends Cubit<SearchState> {
     }
   }
 
-  Future clear() async {
-    searchController.clear();
-    await search("");
-  }
-
-  ///MARK: Ruling
-  Future changeActiveRuling(List<HadithRulingEnum> activeRuling) async {
-    final state = this.state;
-    if (state is! SearchLoadedState) return;
-
-    await searchRepo.setSearchRulingFilters(activeRuling);
-
-    emit(state.copyWith(activeRuling: activeRuling));
-
-    await search(state.searchText);
-  }
-
-  Future toggleRulingStatus(HadithRulingEnum ruling, bool activate) async {
-    final state = this.state;
-    if (state is! SearchLoadedState) return;
-
-    final activeRuling = List.of(state.activeRuling);
-
-    if (activate) {
-      activeRuling.add(ruling);
-    } else {
-      activeRuling.remove(ruling);
-    }
-
-    await changeActiveRuling(activeRuling);
-  }
-
-  ///MARK: dispose
+  ///MARK: close
   @override
   Future<void> close() {
     pagingController.dispose();

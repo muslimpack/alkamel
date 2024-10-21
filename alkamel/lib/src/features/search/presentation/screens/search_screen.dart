@@ -30,10 +30,8 @@ class SearchScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Expanded(
-              child: state.searchText.isEmpty
-                  ? const SizedBox.shrink()
-                  : const SearchResultViewer(),
+            const Expanded(
+              child: SearchResultViewer(),
             ),
           ],
         );

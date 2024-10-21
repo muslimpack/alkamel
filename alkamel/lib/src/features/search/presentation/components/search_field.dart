@@ -31,7 +31,7 @@ class SearchField extends StatelessWidget {
                 'search',
                 const Duration(milliseconds: 500),
                 () {
-                  context.read<SearchCubit>().search(value);
+                  context.read<SearchCubit>().updateSearchText(value);
                 },
               );
             },
