@@ -34,10 +34,10 @@ class HighlightText extends StatelessWidget {
     required String source,
     required String query,
   }) {
-    if (query.isEmpty || !source.toLowerCase().contains(query.toLowerCase())) {
+    if (query.isEmpty || !source.contains(query)) {
       return [TextSpan(text: source)];
     }
-    final matches = query.toLowerCase().allMatches(source.toLowerCase());
+    final matches = query.allMatches(source);
 
     int lastMatchEnd = 0;
 
