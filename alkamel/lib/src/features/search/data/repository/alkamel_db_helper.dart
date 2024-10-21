@@ -116,16 +116,37 @@ class AlkamelDbHelper {
 
     final String sql;
     final List<Object?> sqlParams = [];
-    switch (useFilters) {
-      case true:
-        final rulingString = ruling.map((e) => "ruling LIKE ?").join(' OR ');
-        final rulingParams = ruling.map((e) => '%${e.title}%');
+
+    final rulingString = ruling
+        .map((e) => e.title)
+        .map((word) => "ruling LIKE '%$word%'")
+        .join(' OR ');
+    final rulingQuery = !useFilters ? "" : ' AND ($rulingString) ';
+
+    final List<String> splittedSearchWords = searchText.trim().split(' ');
+    switch (searchType) {
+      case SearchType.typical:
         sql =
-            'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ? AND ($rulingString)';
-        sqlParams.addAll(['%$searchText%', ...rulingParams]);
-      case false:
-        sql = 'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ?';
+            'SELECT ${SearchHeader.query} FROM hadith WHERE hadith LIKE ? $rulingQuery';
         sqlParams.addAll(['%$searchText%']);
+
+      case SearchType.allWords:
+        final String allWordsQuery =
+            splittedSearchWords.map((word) => 'hadith LIKE ?').join(' AND ');
+        final List<String> params =
+            splittedSearchWords.map((word) => '%$word%').toList();
+        sql =
+            'SELECT ${SearchHeader.query} FROM hadith WHERE ($allWordsQuery) $rulingQuery';
+        sqlParams.addAll([...params]);
+
+      case SearchType.anyWords:
+        final String allWordsQuery =
+            splittedSearchWords.map((word) => 'hadith LIKE ?').join(' OR ');
+        final List<String> params =
+            splittedSearchWords.map((word) => '%$word%').toList();
+        sql =
+            'SELECT ${SearchHeader.query} FROM hadith WHERE ($allWordsQuery) $rulingQuery';
+        sqlParams.addAll([...params]);
     }
 
     final List<Map<String, dynamic>> maps = await db.rawQuery(sql, sqlParams);
