@@ -2,6 +2,7 @@
 import 'package:alkamel/src/features/home/data/models/hadith_ruling_enum.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/search/data/models/search_result_info.dart';
+import 'package:alkamel/src/features/search/data/models/search_type.dart';
 import 'package:alkamel/src/features/search/data/repository/alkamel_db_helper.dart';
 import 'package:alkamel/src/features/search/domain/repository/search_repo.dart';
 import 'package:bloc/bloc.dart';
@@ -31,6 +32,7 @@ class SearchCubit extends Cubit<SearchState> {
     final state = SearchLoadedState(
       searchText: "",
       activeRuling: searchRepo.searchRulingFilters,
+      searchType: searchRepo.searchType,
       searchinfo: SearchResultInfo.empty(),
     );
     emit(state);
@@ -46,6 +48,7 @@ class SearchCubit extends Cubit<SearchState> {
     final searchinfo = await alkamelDbHelper.searchByHadithTextWithFiltersInfo(
       state.searchText,
       ruling: state.activeRuling,
+      searchType: state.searchType,
     );
 
     emit(state.copyWith(searchinfo: searchinfo));
@@ -62,6 +65,17 @@ class SearchCubit extends Cubit<SearchState> {
         searchText: searchText,
       ),
     );
+    await _startNewSearch();
+  }
+
+  ///MARK: SearchType
+  Future changeSearchType(SearchType searchType) async {
+    final state = this.state;
+    if (state is! SearchLoadedState) return;
+
+    await searchRepo.setSearchType(searchType);
+
+    emit(state.copyWith(searchType: searchType));
     await _startNewSearch();
   }
 
@@ -110,6 +124,7 @@ class SearchCubit extends Cubit<SearchState> {
       final newItems = await alkamelDbHelper.searchByHadithTextWithFilters(
         searchText,
         ruling: state.activeRuling,
+        searchType: state.searchType,
         limit: pageSize,
         offset: pageKey,
       );
