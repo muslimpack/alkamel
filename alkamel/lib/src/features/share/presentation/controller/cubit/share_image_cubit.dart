@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:alkamel/src/core/extensions/extension_platform.dart';
 import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:alkamel/src/features/share/data/models/hadith_image_card_settings.dart';
 import 'package:bloc/bloc.dart';
 import 'package:capture_widget/core/widget_capture_controller.dart';
 import 'package:equatable/equatable.dart';
@@ -25,10 +26,12 @@ class ShareImageCubit extends Cubit<ShareImageState> {
   ShareImageCubit() : super(ShareImageLoadingState());
 
   FutureOr start(Hadith hadith) async {
+    const settings = HadithImageCardSettings.defaultSettings();
     emit(
       ShareImageLoadedState(
         hadith: hadith,
         showLoadingIndicator: false,
+        settings: settings,
       ),
     );
   }

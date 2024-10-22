@@ -58,7 +58,10 @@ class ShareAsImageScreen extends StatelessWidget {
                       controller: context
                           .read<ShareImageCubit>()
                           .captureWidgetController,
-                      child: HadithAsImageCard(hadith: hadith),
+                      child: HadithAsImageCard(
+                        hadith: hadith,
+                        settings: state.settings,
+                      ),
                     ),
                   ),
                 ],

@@ -1,24 +1,24 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:math';
 
-import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:alkamel/src/features/share/data/models/hadith_image_card_settings.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class HadithAsImageCard extends StatelessWidget {
   final Hadith hadith;
+  final HadithImageCardSettings settings;
   const HadithAsImageCard({
     super.key,
     required this.hadith,
+    required this.settings,
   });
 
   @override
   Widget build(BuildContext context) {
-    const int standardImageSize = 1080;
-    const int charLengthPer1080 = 1500;
-    // ignore: unused_local_variable
-    const goldenRatio = 1.618;
+    final int standardImageSize = settings.imageSize.width.toInt();
+    final int charLengthPer1080 = settings.charLengthPerSize;
 
     final String hadithText = hadith.hadith;
 
@@ -28,22 +28,20 @@ class HadithAsImageCard extends StatelessWidget {
     final int imageHeight = imageSize;
     final int imageWidth = imageSize;
 
-    appPrint("WIdth: $imageWidth | Height: $imageHeight");
-
     const imageBackgroundColor = Color(0xff313B47);
     const secondaryColor = Color(0xfff2dc5d);
     final secondaryElementsColor = hadith.rulingEnum.color.withOpacity(.15);
 
-    const mainTextStyle = TextStyle(
+    final mainTextStyle = TextStyle(
       fontSize: 150,
-      fontFamily: "djadli_sarkha",
+      fontFamily: settings.mainFontFamily,
       color: Colors.white,
     );
 
-    const secondaryTextStyle = TextStyle(
+    final secondaryTextStyle = TextStyle(
       fontSize: 30,
       color: secondaryColor,
-      fontFamily: "alhadari-medium",
+      fontFamily: settings.secondaryFontFamily,
     );
     return Container(
       color: imageBackgroundColor,
@@ -90,7 +88,7 @@ class HadithAsImageCard extends StatelessWidget {
                 Text(
                   hadith.narrator +
                       (hadith.narratorReference.isNotEmpty
-                          ? "(${hadith.narratorReference})"
+                          ? " (${hadith.narratorReference})"
                           : ""),
                   textAlign: TextAlign.center,
                   style: secondaryTextStyle,
