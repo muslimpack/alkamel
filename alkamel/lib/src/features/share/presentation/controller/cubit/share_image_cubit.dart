@@ -36,30 +36,6 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     );
   }
 
-  void fitImageToScreen(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-    final Size imageSize = captureWidgetController.getWidgetSize() ?? Size.zero;
-
-    if (imageSize == Size.zero) return;
-
-    // Calculate the scale factors for both width and height
-    final double widthScale = screenSize.width / imageSize.width;
-    final double heightScale = screenSize.height / imageSize.height;
-
-    // Choose the smaller scale to ensure the image fits within the screen
-    final double scale = widthScale < heightScale ? widthScale : heightScale;
-
-    // Create the fitMatrix with the uniform scale
-    final Matrix4 fitMatrix = Matrix4.diagonal3Values(scale, scale, scale);
-
-    // Center the image horizontally and vertically
-    fitMatrix[12] = (screenSize.width - imageSize.width * scale) / 2;
-    fitMatrix[13] = (screenSize.height - imageSize.height * scale) / 2;
-
-    // Apply the transformation
-    transformationController.value = fitMatrix;
-  }
-
   /// MARK: Save Image
 
   Future<void> shareImage() async {

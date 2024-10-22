@@ -45,27 +45,21 @@ class ShareAsImageScreen extends StatelessWidget {
                     : const SizedBox.shrink(),
               ),
             ),
-            body: GestureDetector(
-              onDoubleTap: () {
-                context.read<ShareImageCubit>().fitImageToScreen(context);
-              },
-              child: Stack(
-                fit: StackFit.expand,
-                alignment: Alignment.center,
-                children: [
-                  FittedBox(
-                    child: CaptureWidget(
-                      controller: context
-                          .read<ShareImageCubit>()
-                          .captureWidgetController,
-                      child: HadithAsImageCard(
-                        hadith: hadith,
-                        settings: state.settings,
-                      ),
+            body: Stack(
+              fit: StackFit.expand,
+              alignment: Alignment.center,
+              children: [
+                FittedBox(
+                  child: CaptureWidget(
+                    controller:
+                        context.read<ShareImageCubit>().captureWidgetController,
+                    child: HadithAsImageCard(
+                      hadith: hadith,
+                      settings: state.settings,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },
