@@ -34,7 +34,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
 
   FutureOr start(Hadith hadith) async {
     final settings = const HadithImageCardSettings.defaultSettings().copyWith(
-      charLengthPerSize: 840,
+      charLengthPerSize: 560,
     );
 
     final List<TextRange> splittedMatnRanges = splitStringIntoChunksRange(
