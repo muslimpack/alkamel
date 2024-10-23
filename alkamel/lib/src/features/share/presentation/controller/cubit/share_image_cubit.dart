@@ -129,7 +129,10 @@ class ShareImageCubit extends Cubit<ShareImageState> {
       final byteData = await image?.toByteData(format: ImageByteFormat.png);
 
       if (PlatformExtension.isDesktop) {
-        await _saveDesktop(byteData);
+        await _saveDesktop(
+          byteData,
+          outputFileName: "Alkamel-${state.hadith.id}_${state.activeIndex}",
+        );
       } else {
         await _savePhone(byteData);
       }
@@ -140,7 +143,10 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     emit(state.copyWith(showLoadingIndicator: false));
   }
 
-  Future _saveDesktop(ByteData? byteData) async {
+  Future _saveDesktop(
+    ByteData? byteData, {
+    String outputFileName = 'SharedImage',
+  }) async {
     if (byteData == null) return;
 
     final Uint8List uint8List = byteData.buffer.asUint8List();
@@ -148,7 +154,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     String? outputFile = await FilePicker.platform.saveFile(
       dialogTitle: 'Please select an output file:',
-      fileName: 'SharedImage-$timestamp.png',
+      fileName: '$outputFileName-$timestamp.png',
     );
 
     if (outputFile == null) return;
