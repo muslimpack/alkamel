@@ -33,20 +33,28 @@ class ShareImageCubit extends Cubit<ShareImageState> {
   }
 
   FutureOr start(Hadith hadith) async {
-    const settings = HadithImageCardSettings.defaultSettings();
+    final settings = const HadithImageCardSettings.defaultSettings().copyWith(
+      charLengthPerSize: 840,
+    );
     final List<String> splittedMatn = splitStringIntoChunks(
+      hadith.hadith,
+      settings.charLengthPerSize,
+    );
+    final List<RangeValues> splittedMatnRanges = splitStringIntoChunksRange(
       hadith.hadith,
       settings.charLengthPerSize,
     );
 
     appPrint(splittedMatn.length);
 
+    appPrint(splittedMatnRanges);
+
     emit(
       ShareImageLoadedState(
         hadith: hadith,
         showLoadingIndicator: false,
         settings: settings,
-        splittedMatn: splittedMatn,
+        splittedMatn: splittedMatnRanges,
         activeIndex: 0,
       ),
     );
@@ -98,49 +106,58 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     return chunks;
   }
 
-  List<List<int>> splitStringIntoChunksRange(String text, int charsPerChunk) {
+  List<RangeValues> splitStringIntoChunksRange(String text, int charsPerChunk) {
     // Split the text into individual words
     final List<String> words = text.split(' ');
-    final List<List<int>> chunkIndices = [];
+    final List<RangeValues> chunkIndices = [];
 
+    int chunkStart = 0;
+    int chunkCharCount = 0;
     int start = 0;
     String currentChunk = '';
 
     for (final String word in words) {
+      // Get the word's position in the original text
       final int wordStart = text.indexOf(word, start);
       final int wordEnd = wordStart + word.length;
 
-      // Check if adding this word to the current chunk will exceed charsPerChunk
-      if (currentChunk.length + word.length + 1 <= charsPerChunk) {
+      // Check if adding the word will exceed charsPerChunk
+      if (chunkCharCount + word.length + 1 <= charsPerChunk) {
         // Add the word to the current chunk
-        if (currentChunk.isEmpty) {
-          currentChunk = word;
-          start = wordStart;
-        } else {
-          currentChunk += ' $word';
-        }
+        currentChunk += (currentChunk.isEmpty ? word : ' $word');
+        chunkCharCount = currentChunk.length;
+        start = wordEnd;
       } else {
-        // Before adding the chunk, ensure it's larger than 1/3 of charsPerChunk
-        if (currentChunk.length >= charsPerChunk / 3) {
-          chunkIndices.add([start, wordEnd]); // Save start and end indices
-          currentChunk = word; // Start a new chunk with the current word
-          start = wordStart;
+        // If current chunk size is valid, add it to the list of ranges
+        if (chunkCharCount >= charsPerChunk / 3) {
+          chunkIndices
+              .add(RangeValues(chunkStart.toDouble(), wordStart.toDouble()));
+
+          // Start a new chunk with the current word
+          currentChunk = word;
+          chunkCharCount = word.length;
+          chunkStart = wordStart;
         } else {
-          // Merge it into the previous chunk if it's too small
+          // Merge small chunk into the previous one
           if (chunkIndices.isNotEmpty) {
-            chunkIndices.last[1] = wordEnd;
+            chunkIndices.last =
+                RangeValues(chunkIndices.last.start, wordEnd.toDouble());
           } else {
-            chunkIndices.add([start, wordEnd]);
+            chunkIndices
+                .add(RangeValues(chunkStart.toDouble(), wordEnd.toDouble()));
           }
           currentChunk = word;
-          start = wordStart;
+          chunkStart = wordStart;
         }
+
+        start = wordEnd;
       }
     }
 
     // Add the last chunk if it's non-empty
     if (currentChunk.isNotEmpty) {
-      chunkIndices.add([start, text.length]);
+      chunkIndices
+          .add(RangeValues(chunkStart.toDouble(), text.length.toDouble()));
     }
 
     return chunkIndices;

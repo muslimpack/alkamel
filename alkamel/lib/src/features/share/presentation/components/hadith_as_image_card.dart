@@ -1,32 +1,51 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:math';
-
+import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/share/data/models/hadith_image_card_settings.dart';
+import 'package:alkamel/src/features/share/presentation/components/dot_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class HadithAsImageCard extends StatelessWidget {
   final Hadith hadith;
   final HadithImageCardSettings settings;
+  final RangeValues? matnRange;
+  final int splittedLength;
+  final int splittedindex;
   const HadithAsImageCard({
     super.key,
     required this.hadith,
     required this.settings,
+    this.matnRange,
+    this.splittedLength = 0,
+    this.splittedindex = 0,
   });
+
+  String get hadithText {
+    const String separator = "...";
+    String hadithText = matnRange != null
+        ? hadith.hadith.substring(
+            matnRange!.start.toInt(),
+            matnRange!.end.toInt(),
+          )
+        : hadith.hadith;
+
+    if (splittedLength > 1) {
+      if (splittedindex == 0) {
+        hadithText += separator;
+      } else if (splittedindex == splittedLength - 1) {
+        hadithText = "$separator$hadithText";
+      } else {
+        hadithText = "$separator$hadithText$separator";
+      }
+    }
+
+    return hadithText;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final int standardImageSize = settings.imageSize.width.toInt();
-    final int charLengthPer1080 = settings.charLengthPerSize;
-
-    final String hadithText = hadith.hadith;
-
-    final double heightFactor = hadithText.length / charLengthPer1080;
-
-    final int imageSize = (standardImageSize * max(1, heightFactor)).toInt();
-    final int imageHeight = imageSize;
-    final int imageWidth = imageSize;
+    appPrint(hadithText.length);
 
     const imageBackgroundColor = Color(0xff313B47);
     const secondaryColor = Color(0xfff2dc5d);
@@ -45,8 +64,8 @@ class HadithAsImageCard extends StatelessWidget {
     );
     return Container(
       color: imageBackgroundColor,
-      width: imageWidth.toDouble(),
-      height: imageHeight.toDouble(),
+      width: settings.imageSize.width,
+      height: settings.imageSize.height,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -115,6 +134,17 @@ class HadithAsImageCard extends StatelessWidget {
               ],
             ),
           ),
+          if (splittedLength > 1)
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: DotBar(
+                  activeIndex: splittedindex,
+                  length: splittedLength,
+                ),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.all(15),
             child: Align(

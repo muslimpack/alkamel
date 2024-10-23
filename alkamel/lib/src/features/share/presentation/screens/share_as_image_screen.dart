@@ -58,6 +58,9 @@ class ShareAsImageScreen extends StatelessWidget {
                       child: HadithAsImageCard(
                         hadith: hadith,
                         settings: state.settings,
+                        matnRange: state.splittedMatn[index],
+                        splittedLength: state.splittedMatn.length,
+                        splittedindex: index,
                       ),
                     ),
                   ],
