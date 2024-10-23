@@ -37,7 +37,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
       charLengthPerSize: 840,
     );
 
-    final List<RangeValues> splittedMatnRanges = splitStringIntoChunksRange(
+    final List<TextRange> splittedMatnRanges = splitStringIntoChunksRange(
       hadith.hadith,
       settings.charLengthPerSize,
     );
@@ -57,10 +57,10 @@ class ShareImageCubit extends Cubit<ShareImageState> {
 
   ///MARK: Split
 
-  List<RangeValues> splitStringIntoChunksRange(String text, int charsPerChunk) {
+  List<TextRange> splitStringIntoChunksRange(String text, int charsPerChunk) {
     // Split the text into individual words
     final List<String> words = text.split(' ');
-    final List<RangeValues> chunkIndices = [];
+    final List<TextRange> chunkIndices = [];
 
     int chunkStart = 0;
     int chunkCharCount = 0;
@@ -81,8 +81,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
       } else {
         // If current chunk size is valid, add it to the list of ranges
         if (chunkCharCount >= charsPerChunk / 3) {
-          chunkIndices
-              .add(RangeValues(chunkStart.toDouble(), wordStart.toDouble()));
+          chunkIndices.add(TextRange(start: chunkStart, end: wordStart));
 
           // Start a new chunk with the current word
           currentChunk = word;
@@ -92,10 +91,9 @@ class ShareImageCubit extends Cubit<ShareImageState> {
           // Merge small chunk into the previous one
           if (chunkIndices.isNotEmpty) {
             chunkIndices.last =
-                RangeValues(chunkIndices.last.start, wordEnd.toDouble());
+                TextRange(start: chunkIndices.last.start, end: wordEnd);
           } else {
-            chunkIndices
-                .add(RangeValues(chunkStart.toDouble(), wordEnd.toDouble()));
+            chunkIndices.add(TextRange(start: chunkStart, end: wordEnd));
           }
           currentChunk = word;
           chunkStart = wordStart;
@@ -107,8 +105,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
 
     // Add the last chunk if it's non-empty
     if (currentChunk.isNotEmpty) {
-      chunkIndices
-          .add(RangeValues(chunkStart.toDouble(), text.length.toDouble()));
+      chunkIndices.add(TextRange(start: chunkStart, end: text.length));
     }
 
     return chunkIndices;

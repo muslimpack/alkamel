@@ -13,7 +13,7 @@ final class ShareImageLoadingState extends ShareImageState {}
 class ShareImageLoadedState extends ShareImageState {
   final Hadith hadith;
   final bool showLoadingIndicator;
-  final List<RangeValues> splittedMatn;
+  final List<TextRange> splittedMatn;
   final HadithImageCardSettings settings;
   final int activeIndex;
   const ShareImageLoadedState({
@@ -36,7 +36,7 @@ class ShareImageLoadedState extends ShareImageState {
   ShareImageLoadedState copyWith({
     Hadith? hadith,
     bool? showLoadingIndicator,
-    List<RangeValues>? splittedMatn,
+    List<TextRange>? splittedMatn,
     HadithImageCardSettings? settings,
     int? activeIndex,
   }) {

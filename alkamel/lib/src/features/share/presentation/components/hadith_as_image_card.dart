@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class HadithAsImageCard extends StatelessWidget {
   final Hadith hadith;
   final HadithImageCardSettings settings;
-  final RangeValues? matnRange;
+  final TextRange? matnRange;
   final int splittedLength;
   final int splittedindex;
   const HadithAsImageCard({
@@ -25,8 +25,8 @@ class HadithAsImageCard extends StatelessWidget {
     const String separator = "...";
     String hadithText = matnRange != null
         ? hadith.hadith.substring(
-            matnRange!.start.toInt(),
-            matnRange!.end.toInt(),
+            matnRange!.start,
+            matnRange!.end,
           )
         : hadith.hadith;
 
