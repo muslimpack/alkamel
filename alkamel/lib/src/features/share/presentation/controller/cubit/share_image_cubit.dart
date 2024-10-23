@@ -18,12 +18,19 @@ import 'package:share_plus/share_plus.dart';
 part 'share_image_state.dart';
 
 class ShareImageCubit extends Cubit<ShareImageState> {
-  TransformationController transformationController =
-      TransformationController();
-
   final CaptureWidgetController captureWidgetController =
       CaptureWidgetController();
+
+  final PageController pageController = PageController();
+
   ShareImageCubit() : super(ShareImageLoadingState());
+
+  Future onPageChanged(int index) async {
+    final state = this.state;
+    if (state is! ShareImageLoadedState) return;
+
+    emit(state.copyWith(activeIndex: index));
+  }
 
   FutureOr start(Hadith hadith) async {
     const settings = HadithImageCardSettings.defaultSettings();
@@ -40,10 +47,12 @@ class ShareImageCubit extends Cubit<ShareImageState> {
         showLoadingIndicator: false,
         settings: settings,
         splittedMatn: splittedMatn,
+        activeIndex: 0,
       ),
     );
   }
 
+  ///MARK: Split
   List<String> splitStringIntoChunks(String text, int charsPerChunk) {
     // Split the text into individual words
     final List<String> words = text.split(' ');
@@ -87,6 +96,54 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     }
 
     return chunks;
+  }
+
+  List<List<int>> splitStringIntoChunksRange(String text, int charsPerChunk) {
+    // Split the text into individual words
+    final List<String> words = text.split(' ');
+    final List<List<int>> chunkIndices = [];
+
+    int start = 0;
+    String currentChunk = '';
+
+    for (final String word in words) {
+      final int wordStart = text.indexOf(word, start);
+      final int wordEnd = wordStart + word.length;
+
+      // Check if adding this word to the current chunk will exceed charsPerChunk
+      if (currentChunk.length + word.length + 1 <= charsPerChunk) {
+        // Add the word to the current chunk
+        if (currentChunk.isEmpty) {
+          currentChunk = word;
+          start = wordStart;
+        } else {
+          currentChunk += ' $word';
+        }
+      } else {
+        // Before adding the chunk, ensure it's larger than 1/3 of charsPerChunk
+        if (currentChunk.length >= charsPerChunk / 3) {
+          chunkIndices.add([start, wordEnd]); // Save start and end indices
+          currentChunk = word; // Start a new chunk with the current word
+          start = wordStart;
+        } else {
+          // Merge it into the previous chunk if it's too small
+          if (chunkIndices.isNotEmpty) {
+            chunkIndices.last[1] = wordEnd;
+          } else {
+            chunkIndices.add([start, wordEnd]);
+          }
+          currentChunk = word;
+          start = wordStart;
+        }
+      }
+    }
+
+    // Add the last chunk if it's non-empty
+    if (currentChunk.isNotEmpty) {
+      chunkIndices.add([start, text.length]);
+    }
+
+    return chunkIndices;
   }
 
   /// MARK: Save Image
@@ -154,7 +211,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
 
   @override
   Future<void> close() {
-    transformationController.dispose();
+    pageController.dispose();
     return super.close();
   }
 }

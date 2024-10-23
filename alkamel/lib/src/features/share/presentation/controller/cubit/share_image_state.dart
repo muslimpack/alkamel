@@ -15,12 +15,13 @@ class ShareImageLoadedState extends ShareImageState {
   final bool showLoadingIndicator;
   final List<String> splittedMatn;
   final HadithImageCardSettings settings;
-
+  final int activeIndex;
   const ShareImageLoadedState({
     required this.hadith,
     required this.showLoadingIndicator,
     required this.splittedMatn,
     required this.settings,
+    required this.activeIndex,
   });
 
   @override
@@ -29,6 +30,7 @@ class ShareImageLoadedState extends ShareImageState {
         hadith,
         settings,
         splittedMatn,
+        activeIndex,
       ];
 
   ShareImageLoadedState copyWith({
@@ -36,12 +38,14 @@ class ShareImageLoadedState extends ShareImageState {
     bool? showLoadingIndicator,
     List<String>? splittedMatn,
     HadithImageCardSettings? settings,
+    int? activeIndex,
   }) {
     return ShareImageLoadedState(
       hadith: hadith ?? this.hadith,
       showLoadingIndicator: showLoadingIndicator ?? this.showLoadingIndicator,
       splittedMatn: splittedMatn ?? this.splittedMatn,
       settings: settings ?? this.settings,
+      activeIndex: activeIndex ?? this.activeIndex,
     );
   }
 }

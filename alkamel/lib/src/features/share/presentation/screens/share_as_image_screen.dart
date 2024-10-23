@@ -2,9 +2,9 @@
 import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/di/dependency_injection.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
+import 'package:alkamel/src/features/share/presentation/components/dot_bar.dart';
 import 'package:alkamel/src/features/share/presentation/components/hadith_as_image_card.dart';
 import 'package:alkamel/src/features/share/presentation/controller/cubit/share_image_cubit.dart';
-import 'package:capture_widget/capture_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,21 +45,31 @@ class ShareAsImageScreen extends StatelessWidget {
                     : const SizedBox.shrink(),
               ),
             ),
-            body: Stack(
-              fit: StackFit.expand,
-              alignment: Alignment.center,
-              children: [
-                FittedBox(
-                  child: CaptureWidget(
-                    controller:
-                        context.read<ShareImageCubit>().captureWidgetController,
-                    child: HadithAsImageCard(
-                      hadith: hadith,
-                      settings: state.settings,
+            body: PageView.builder(
+              controller: context.read<ShareImageCubit>().pageController,
+              itemCount: state.splittedMatn.length,
+              onPageChanged: context.read<ShareImageCubit>().onPageChanged,
+              itemBuilder: (context, index) {
+                return Stack(
+                  fit: StackFit.expand,
+                  alignment: Alignment.center,
+                  children: [
+                    FittedBox(
+                      child: HadithAsImageCard(
+                        hadith: hadith,
+                        settings: state.settings,
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                  ],
+                );
+              },
+            ),
+            bottomNavigationBar: BottomAppBar(
+              height: kToolbarHeight,
+              child: DotBar(
+                length: state.splittedMatn.length,
+                activeIndex: state.activeIndex,
+              ),
             ),
           );
         },
