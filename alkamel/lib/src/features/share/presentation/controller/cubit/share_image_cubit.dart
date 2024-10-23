@@ -36,16 +36,11 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     final settings = const HadithImageCardSettings.defaultSettings().copyWith(
       charLengthPerSize: 840,
     );
-    final List<String> splittedMatn = splitStringIntoChunks(
-      hadith.hadith,
-      settings.charLengthPerSize,
-    );
+
     final List<RangeValues> splittedMatnRanges = splitStringIntoChunksRange(
       hadith.hadith,
       settings.charLengthPerSize,
     );
-
-    appPrint(splittedMatn.length);
 
     appPrint(splittedMatnRanges);
 
@@ -61,50 +56,6 @@ class ShareImageCubit extends Cubit<ShareImageState> {
   }
 
   ///MARK: Split
-  List<String> splitStringIntoChunks(String text, int charsPerChunk) {
-    // Split the text into individual words
-    final List<String> words = text.split(' ');
-    final List<String> chunks = [];
-
-    String currentChunk = '';
-
-    for (final String word in words) {
-      // Check if adding this word to the current chunk will exceed charsPerChunk
-      if (currentChunk.length + word.length + 1 <= charsPerChunk) {
-        // Add the word to the current chunk
-        if (currentChunk.isEmpty) {
-          currentChunk = word;
-        } else {
-          currentChunk += ' $word';
-        }
-      } else {
-        // Before adding the chunk, ensure it's larger than 1/3 of charsPerChunk
-        if (currentChunk.length >= charsPerChunk / 3) {
-          chunks.add(currentChunk); // Save the current chunk
-          currentChunk = word; // Start a new chunk with the current word
-        } else {
-          // Merge it into the previous chunk if it's too small
-          if (chunks.isNotEmpty) {
-            chunks[chunks.length - 1] += ' $currentChunk';
-          } else {
-            chunks.add(currentChunk);
-          }
-          currentChunk = word;
-        }
-      }
-    }
-
-    // Add the last chunk if it's non-empty
-    if (currentChunk.isNotEmpty) {
-      if (currentChunk.length >= charsPerChunk / 3 || chunks.isEmpty) {
-        chunks.add(currentChunk);
-      } else {
-        chunks[chunks.length - 1] += ' $currentChunk';
-      }
-    }
-
-    return chunks;
-  }
 
   List<RangeValues> splitStringIntoChunksRange(String text, int charsPerChunk) {
     // Split the text into individual words
