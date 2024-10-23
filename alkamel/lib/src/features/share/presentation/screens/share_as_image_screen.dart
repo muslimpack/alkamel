@@ -55,12 +55,15 @@ class ShareAsImageScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     FittedBox(
-                      child: HadithAsImageCard(
-                        hadith: hadith,
-                        settings: state.settings,
-                        matnRange: state.splittedMatn[index],
-                        splittedLength: state.splittedMatn.length,
-                        splittedindex: index,
+                      child: RepaintBoundary(
+                        key: context.read<ShareImageCubit>().imageKeys[index],
+                        child: HadithAsImageCard(
+                          hadith: hadith,
+                          settings: state.settings,
+                          matnRange: state.splittedMatn[index],
+                          splittedLength: state.splittedMatn.length,
+                          splittedindex: index,
+                        ),
                       ),
                     ),
                   ],

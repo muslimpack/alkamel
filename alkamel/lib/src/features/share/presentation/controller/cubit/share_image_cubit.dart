@@ -18,10 +18,9 @@ import 'package:share_plus/share_plus.dart';
 part 'share_image_state.dart';
 
 class ShareImageCubit extends Cubit<ShareImageState> {
-  final CaptureWidgetController captureWidgetController =
-      CaptureWidgetController();
-
   final PageController pageController = PageController();
+
+  late final List<GlobalKey> imageKeys;
 
   ShareImageCubit() : super(ShareImageLoadingState());
 
@@ -41,6 +40,9 @@ class ShareImageCubit extends Cubit<ShareImageState> {
       hadith.hadith,
       settings.charLengthPerSize,
     );
+
+    imageKeys =
+        List.generate(splittedMatnRanges.length, (index) => GlobalKey());
 
     appPrint(splittedMatnRanges);
 
@@ -120,6 +122,8 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     emit(state.copyWith(showLoadingIndicator: true));
 
     try {
+      final captureWidgetController =
+          CaptureWidgetController(imageKey: imageKeys[state.activeIndex]);
       const double pixelRatio = 2;
       final image = await captureWidgetController.getImage(pixelRatio);
       final byteData = await image?.toByteData(format: ImageByteFormat.png);
