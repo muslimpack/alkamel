@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "SearchTypeTypical": MessageLookupByLibrary.simpleMessage("بحث مطابق"),
+        "alkamelHashtag":
+            MessageLookupByLibrary.simpleMessage("#الكامل_في_السنن"),
         "appTitle": MessageLookupByLibrary.simpleMessage("الكامل في السنن"),
         "apply": MessageLookupByLibrary.simpleMessage("تطبيق"),
         "chat": MessageLookupByLibrary.simpleMessage("تواصل"),

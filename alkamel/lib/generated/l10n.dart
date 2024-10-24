@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `#AlKamelFiAlSunan`
+  String get alkamelHashtag {
+    return Intl.message(
+      '#AlKamelFiAlSunan',
+      name: 'alkamelHashtag',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Apply`
   String get apply {
     return Intl.message(
