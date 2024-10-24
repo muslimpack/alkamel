@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "SearchTypeTypical": MessageLookupByLibrary.simpleMessage("Typical"),
+        "aboutApp": MessageLookupByLibrary.simpleMessage("About app"),
         "alkamelHashtag":
             MessageLookupByLibrary.simpleMessage("#AlKamelFiAlSunan"),
         "appTitle":
@@ -43,11 +44,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "fontResetSize":
             MessageLookupByLibrary.simpleMessage("Reset font size"),
         "fontSettings": MessageLookupByLibrary.simpleMessage("Font settings"),
+        "freeAdFreeAndOpenSourceApp": MessageLookupByLibrary.simpleMessage(
+            "Free, ad-free and open source app"),
+        "github": MessageLookupByLibrary.simpleMessage("Github source code"),
+        "hadithBookAuthor":
+            MessageLookupByLibrary.simpleMessage("Dr. Amer Ahmed Al-Husseini"),
+        "hadithBookAuthorDesc": MessageLookupByLibrary.simpleMessage(
+            "We have made every effort and thrown down our Sinwar stick in search of the author and to communicate with him. Therefore, we kindly ask that if this work reaches him, he contacts us."),
+        "hadithBookSource":
+            MessageLookupByLibrary.simpleMessage("AlKamil Fi AlSunan"),
+        "hadithBookSourceDesc": MessageLookupByLibrary.simpleMessage(
+            "The Prophetic Sunnah from the most authentic to the weakest"),
         "misspelled": MessageLookupByLibrary.simpleMessage("Misspelled"),
         "noMoreResultsMsg": MessageLookupByLibrary.simpleMessage(
             "That\'s it, there are no more results."),
         "noResultsFound":
             MessageLookupByLibrary.simpleMessage("No results found"),
+        "prayForUsAndParents": MessageLookupByLibrary.simpleMessage(
+            "Pray for us and our parents."),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("App language"),
         "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "reportMisspelled":
@@ -62,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Share"),
         "shareAsImage": MessageLookupByLibrary.simpleMessage("Share as image"),
         "showDiacritics":
-            MessageLookupByLibrary.simpleMessage("Show diacritics")
+            MessageLookupByLibrary.simpleMessage("Show diacritics"),
+        "source": MessageLookupByLibrary.simpleMessage("Source"),
+        "sourceBookAuthor": MessageLookupByLibrary.simpleMessage("Book Author")
       };
 }

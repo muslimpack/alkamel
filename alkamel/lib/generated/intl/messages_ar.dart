@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "SearchTypeTypical": MessageLookupByLibrary.simpleMessage("بحث مطابق"),
+        "aboutApp": MessageLookupByLibrary.simpleMessage("عن التطبيق"),
         "alkamelHashtag":
             MessageLookupByLibrary.simpleMessage("#الكامل_في_السنن"),
         "appTitle": MessageLookupByLibrary.simpleMessage("الكامل في السنن"),
@@ -42,10 +43,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "fontResetSize":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين حجم الخط"),
         "fontSettings": MessageLookupByLibrary.simpleMessage("إعدادات الخط"),
+        "freeAdFreeAndOpenSourceApp": MessageLookupByLibrary.simpleMessage(
+            "تطبيق مجاني خالي من الإعلانات ومفتوح المصدر"),
+        "github": MessageLookupByLibrary.simpleMessage("الكود المصدري للمشروع"),
+        "hadithBookAuthor":
+            MessageLookupByLibrary.simpleMessage("الدكتور عامر أحمد الحسيني"),
+        "hadithBookAuthorDesc": MessageLookupByLibrary.simpleMessage(
+            "بذلنا جهدنا حتى ألقينا عصا السنوار بحثا عن المؤلف والتواصل معه لذا برجاء إن وصله هذا العمل ليتواصل معنا"),
+        "hadithBookSource":
+            MessageLookupByLibrary.simpleMessage("كتاب الكامل في السنن"),
+        "hadithBookSourceDesc": MessageLookupByLibrary.simpleMessage(
+            "السنة النبوية من أصح الصحيح إلى أضعف الضعيف"),
         "misspelled": MessageLookupByLibrary.simpleMessage("خطأ إملائي"),
         "noMoreResultsMsg": MessageLookupByLibrary.simpleMessage(
             "هذا كل شيء لا يوجد المزيد من النتائج."),
         "noResultsFound": MessageLookupByLibrary.simpleMessage("لا توجد نتائج"),
+        "prayForUsAndParents":
+            MessageLookupByLibrary.simpleMessage("نسألكم الدعاء لنا ولوالدينا"),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
         "prefThemeDarkMode":
             MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
@@ -61,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
         "shareAsImage": MessageLookupByLibrary.simpleMessage("مشاركة كصورة"),
-        "showDiacritics": MessageLookupByLibrary.simpleMessage("عرض التشكيل")
+        "showDiacritics": MessageLookupByLibrary.simpleMessage("عرض التشكيل"),
+        "source": MessageLookupByLibrary.simpleMessage("المصدر"),
+        "sourceBookAuthor": MessageLookupByLibrary.simpleMessage("مؤلف الكتاب")
       };
 }

@@ -1,5 +1,7 @@
 import 'package:alkamel/generated/l10n.dart';
+import 'package:alkamel/src/core/extensions/extension.dart';
 import 'package:alkamel/src/features/settings/presentation/components/font_settings_widgets.dart';
+import 'package:alkamel/src/features/settings/presentation/screens/about_screen.dart';
 import 'package:alkamel/src/features/themes/presentation/controller/cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +64,14 @@ class SettingsScreen extends StatelessWidget {
               ),
               const Divider(),
               const FontSettingsToolbox(),
+              const Divider(),
+              ListTile(
+                leading: const Icon(Icons.info_outline),
+                title: Text(S.of(context).aboutApp),
+                onTap: () {
+                  context.push(const AboutScreen());
+                },
+              ),
             ],
           ),
         );

@@ -1,5 +1,6 @@
 {
   "@@locale": "ar",
+  "aboutApp": "عن التطبيق",
   "alkamelHashtag": "#الكامل_في_السنن",
   "apply": "تطبيق",
   "appTitle": "الكامل في السنن",
@@ -13,9 +14,16 @@
   "fontIncreaseSize": "تكبير حجم الخط",
   "fontResetSize": "إعادة تعيين حجم الخط",
   "fontSettings": "إعدادات الخط",
+  "freeAdFreeAndOpenSourceApp": "تطبيق مجاني خالي من الإعلانات ومفتوح المصدر",
+  "github": "الكود المصدري للمشروع",
+  "hadithBookAuthor": "الدكتور عامر أحمد الحسيني",
+  "hadithBookAuthorDesc": "بذلنا جهدنا حتى ألقينا عصا السنوار بحثا عن المؤلف والتواصل معه لذا برجاء إن وصله هذا العمل ليتواصل معنا",
+  "hadithBookSource": "كتاب الكامل في السنن",
+  "hadithBookSourceDesc": "السنة النبوية من أصح الصحيح إلى أضعف الضعيف",
   "misspelled": "خطأ إملائي",
   "noMoreResultsMsg": "هذا كل شيء لا يوجد المزيد من النتائج.",
   "noResultsFound": "لا توجد نتائج",
+  "prayForUsAndParents": "نسألكم الدعاء لنا ولوالدينا",
   "prefAppLanguage": "لغة التطبيق",
   "prefThemeDarkMode": "الوضع الليلي",
   "reportMisspelled": "تبليغ عن خطأ",
@@ -28,5 +36,7 @@
   "settings": "الإعدادات",
   "share": "مشاركة",
   "shareAsImage": "مشاركة كصورة",
-  "showDiacritics": "عرض التشكيل"
+  "showDiacritics": "عرض التشكيل",
+  "source": "المصدر",
+  "sourceBookAuthor": "مؤلف الكتاب"
 }

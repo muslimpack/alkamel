@@ -1,5 +1,6 @@
 {
   "@@locale": "en",
+  "aboutApp": "About app",
   "alkamelHashtag": "#AlKamelFiAlSunan",
   "apply": "Apply",
   "appTitle": "Al-Kamel fe al-Sunan",
@@ -13,9 +14,16 @@
   "fontIncreaseSize": "Increase font size",
   "fontResetSize": "Reset font size",
   "fontSettings": "Font settings",
+  "freeAdFreeAndOpenSourceApp": "Free, ad-free and open source app",
+  "github": "Github source code",
+  "hadithBookAuthor": "Dr. Amer Ahmed Al-Husseini",
+  "hadithBookAuthorDesc": "We have made every effort and thrown down our Sinwar stick in search of the author and to communicate with him. Therefore, we kindly ask that if this work reaches him, he contacts us.",
+  "hadithBookSource": "AlKamil Fi AlSunan",
+  "hadithBookSourceDesc": "The Prophetic Sunnah from the most authentic to the weakest",
   "misspelled": "Misspelled",
   "noMoreResultsMsg": "That's it, there are no more results.",
   "noResultsFound": "No results found",
+  "prayForUsAndParents": "Pray for us and our parents.",
   "prefAppLanguage": "App language",
   "prefThemeDarkMode": "Dark Mode",
   "reportMisspelled": "Report misspelled",
@@ -28,5 +36,7 @@
   "settings": "Settings",
   "share": "Share",
   "shareAsImage": "Share as image",
-  "showDiacritics": "Show diacritics"
+  "showDiacritics": "Show diacritics",
+  "source": "Source",
+  "sourceBookAuthor": "Book Author"
 }

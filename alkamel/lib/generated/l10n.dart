@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `About app`
+  String get aboutApp {
+    return Intl.message(
+      'About app',
+      name: 'aboutApp',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `#AlKamelFiAlSunan`
   String get alkamelHashtag {
     return Intl.message(
@@ -180,6 +190,66 @@ class S {
     );
   }
 
+  /// `Free, ad-free and open source app`
+  String get freeAdFreeAndOpenSourceApp {
+    return Intl.message(
+      'Free, ad-free and open source app',
+      name: 'freeAdFreeAndOpenSourceApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Github source code`
+  String get github {
+    return Intl.message(
+      'Github source code',
+      name: 'github',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dr. Amer Ahmed Al-Husseini`
+  String get hadithBookAuthor {
+    return Intl.message(
+      'Dr. Amer Ahmed Al-Husseini',
+      name: 'hadithBookAuthor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We have made every effort and thrown down our Sinwar stick in search of the author and to communicate with him. Therefore, we kindly ask that if this work reaches him, he contacts us.`
+  String get hadithBookAuthorDesc {
+    return Intl.message(
+      'We have made every effort and thrown down our Sinwar stick in search of the author and to communicate with him. Therefore, we kindly ask that if this work reaches him, he contacts us.',
+      name: 'hadithBookAuthorDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AlKamil Fi AlSunan`
+  String get hadithBookSource {
+    return Intl.message(
+      'AlKamil Fi AlSunan',
+      name: 'hadithBookSource',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The Prophetic Sunnah from the most authentic to the weakest`
+  String get hadithBookSourceDesc {
+    return Intl.message(
+      'The Prophetic Sunnah from the most authentic to the weakest',
+      name: 'hadithBookSourceDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Misspelled`
   String get misspelled {
     return Intl.message(
@@ -205,6 +275,16 @@ class S {
     return Intl.message(
       'No results found',
       name: 'noResultsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pray for us and our parents.`
+  String get prayForUsAndParents {
+    return Intl.message(
+      'Pray for us and our parents.',
+      name: 'prayForUsAndParents',
       desc: '',
       args: [],
     );
@@ -335,6 +415,26 @@ class S {
     return Intl.message(
       'Show diacritics',
       name: 'showDiacritics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Source`
+  String get source {
+    return Intl.message(
+      'Source',
+      name: 'source',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book Author`
+  String get sourceBookAuthor {
+    return Intl.message(
+      'Book Author',
+      name: 'sourceBookAuthor',
       desc: '',
       args: [],
     );
