@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:alkamel/generated/l10n.dart';
 import 'package:alkamel/src/core/di/dependency_injection.dart';
-import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
-import 'package:alkamel/src/features/share/presentation/components/ask_share_all_dialog.dart';
 import 'package:alkamel/src/features/share/presentation/components/hadith_as_image_card.dart';
 import 'package:alkamel/src/features/share/presentation/controller/cubit/share_image_cubit.dart';
 import 'package:flutter/material.dart';
@@ -34,18 +32,7 @@ class ShareAsImageScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () async {
-                    final bool shareAll;
-                    if (state.splittedMatn.length > 1) {
-                      final result = await showAskShareAllDialog(context);
-                      if (result == null || !context.mounted) return;
-                      shareAll = result;
-                    } else {
-                      shareAll = true;
-                    }
-
-                    appPrint(shareAll);
-
-                    await context.read<ShareImageCubit>().shareImage(shareAll);
+                    await context.read<ShareImageCubit>().shareImage(false);
                   },
                   icon: const Icon(Icons.share),
                 ),
