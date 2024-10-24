@@ -142,6 +142,7 @@ class HadithAsImageCard extends StatelessWidget {
                 child: DotBar(
                   activeIndex: splittedindex,
                   length: splittedLength,
+                  dotColor: secondaryColor,
                 ),
               ),
             ),
