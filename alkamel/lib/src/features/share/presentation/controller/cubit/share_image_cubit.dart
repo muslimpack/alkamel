@@ -32,26 +32,43 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     emit(state.copyWith(activeIndex: index));
   }
 
+  int charPer1080(int standardLength, String text) {
+    if (text.length < standardLength) {
+      return standardLength;
+    }
+
+    final chunkCount = (text.length / standardLength).ceil();
+
+    final charLength = text.length ~/ chunkCount;
+    final overflowChars = text.length % chunkCount;
+    final result = charLength + overflowChars;
+
+    appPrint(overflowChars);
+
+    return result;
+  }
+
   FutureOr start(Hadith hadith) async {
     final settings = const HadithImageCardSettings.defaultSettings().copyWith(
       charLengthPerSize: 560,
     );
 
+    final charsPerChunk =
+        charPer1080(settings.charLengthPerSize, hadith.hadith);
+
     final List<TextRange> splittedMatnRanges = splitStringIntoChunksRange(
       hadith.hadith,
-      settings.charLengthPerSize,
+      charsPerChunk,
     );
 
     imageKeys =
         List.generate(splittedMatnRanges.length, (index) => GlobalKey());
 
-    appPrint(splittedMatnRanges);
-
     emit(
       ShareImageLoadedState(
         hadith: hadith,
         showLoadingIndicator: false,
-        settings: settings,
+        settings: settings.copyWith(charLengthPerSize: charsPerChunk),
         splittedMatn: splittedMatnRanges,
         activeIndex: 0,
       ),
