@@ -1,14 +1,17 @@
+import 'package:alkamel/src/core/extensions/extension_color.dart';
 import 'package:flutter/material.dart';
 
 class DotBar extends StatelessWidget {
   final int length;
   final int activeIndex;
   final Color? dotColor;
+  final bool showNumber;
   const DotBar({
     super.key,
     required this.length,
     required this.activeIndex,
     this.dotColor,
+    this.showNumber = false,
   });
 
   @override
@@ -21,6 +24,7 @@ class DotBar extends StatelessWidget {
           index: index,
           isActive: index == activeIndex,
           color: dotColor,
+          showNumber: showNumber,
         ),
       ),
     );
@@ -30,17 +34,35 @@ class DotBar extends StatelessWidget {
 class Dot extends StatelessWidget {
   final int index;
   final bool isActive;
+  final bool showNumber;
   final Color? color;
   const Dot({
     super.key,
     required this.index,
     required this.isActive,
+    required this.showNumber,
     this.color,
   });
 
   @override
   Widget build(BuildContext context) {
     final Color dotColor = color ?? Theme.of(context).colorScheme.primary;
+
+    if (showNumber) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: CircleAvatar(
+          backgroundColor: dotColor,
+          child: Text(
+            "${index + 1}",
+            style: TextStyle(
+              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+              color: dotColor.getContrastColor,
+            ),
+          ),
+        ),
+      );
+    }
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       height: 10,

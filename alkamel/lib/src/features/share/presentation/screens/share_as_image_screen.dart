@@ -88,6 +88,7 @@ class ShareAsImageScreen extends StatelessWidget {
               child: DotBar(
                 length: state.splittedMatn.length,
                 activeIndex: state.activeIndex,
+                showNumber: true,
               ),
             ),
           );
