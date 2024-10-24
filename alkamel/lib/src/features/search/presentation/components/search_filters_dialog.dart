@@ -15,6 +15,7 @@ class SearchFiltersButton extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         return IconButton(
+          tooltip: S.of(context).searchFilters,
           onPressed: () async {
             await showSearchFilterDialog(context);
           },

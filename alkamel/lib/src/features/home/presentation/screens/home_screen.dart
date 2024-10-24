@@ -51,6 +51,7 @@ class HomeScreen extends StatelessWidget {
 
               ///settings screen
               IconButton(
+                tooltip: S.of(context).settings,
                 onPressed: () {
                   context.push(const SettingsScreen());
                 },
