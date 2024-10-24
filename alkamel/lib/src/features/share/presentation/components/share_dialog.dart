@@ -29,7 +29,7 @@ class ShareDialog extends StatelessWidget {
     final StringBuffer sb = StringBuffer();
     sb.write(hadith.narrator);
     if (hadith.narratorReference.isNotEmpty) {
-      sb.write("(${hadith.narratorReference})");
+      sb.write(" (${hadith.narratorReference})");
     }
     sb.write("\n\n-------\n\n");
     sb.write(hadith.hadith);
