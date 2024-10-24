@@ -56,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "السنة النبوية من أصح الصحيح إلى أضعف الضعيف"),
         "misspelled": MessageLookupByLibrary.simpleMessage("خطأ إملائي"),
         "noMoreResultsMsg": MessageLookupByLibrary.simpleMessage(
-            "هذا كل شيء لا يوجد المزيد من النتائج."),
+            "هذا كل شيء لا مزيد من النتائج."),
         "noResultsFound": MessageLookupByLibrary.simpleMessage("لا توجد نتائج"),
         "prayForUsAndParents":
             MessageLookupByLibrary.simpleMessage("نسألكم الدعاء لنا ولوالدينا"),
