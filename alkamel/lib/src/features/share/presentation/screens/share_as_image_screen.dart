@@ -4,7 +4,6 @@ import 'package:alkamel/src/core/di/dependency_injection.dart';
 import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/share/presentation/components/ask_share_all_dialog.dart';
-import 'package:alkamel/src/features/share/presentation/components/dot_bar.dart';
 import 'package:alkamel/src/features/share/presentation/components/hadith_as_image_card.dart';
 import 'package:alkamel/src/features/share/presentation/controller/cubit/share_image_cubit.dart';
 import 'package:flutter/material.dart';
@@ -83,14 +82,15 @@ class ShareAsImageScreen extends StatelessWidget {
                 );
               },
             ),
-            bottomNavigationBar: BottomAppBar(
-              height: kToolbarHeight,
-              child: DotBar(
-                length: state.splittedMatn.length,
-                activeIndex: state.activeIndex,
-                showNumber: true,
-              ),
-            ),
+            bottomNavigationBar: state.splittedMatn.length < 2
+                ? null
+                : BottomAppBar(
+                    height: kToolbarHeight,
+                    child: Text(
+                      "${state.splittedMatn.length} : ${state.activeIndex + 1}",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
           );
         },
       ),

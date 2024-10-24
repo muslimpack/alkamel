@@ -136,14 +136,17 @@ class HadithAsImageCard extends StatelessWidget {
           ),
           if (splittedLength > 1)
             Padding(
-              padding: const EdgeInsets.all(15),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: DotBar(
-                  activeIndex: splittedindex,
-                  length: splittedLength,
-                  dotColor: secondaryColor,
-                ),
+              padding: const EdgeInsets.all(15).copyWith(left: 200, right: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  DotBar(
+                    activeIndex: splittedindex,
+                    length: splittedLength,
+                    dotColor: secondaryColor,
+                  ),
+                ],
               ),
             ),
           Padding(
