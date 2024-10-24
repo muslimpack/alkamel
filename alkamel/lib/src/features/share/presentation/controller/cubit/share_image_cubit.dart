@@ -12,6 +12,7 @@ import 'package:capture_widget/core/widget_capture_controller.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -113,28 +114,63 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     return chunkIndices;
   }
 
-  /// MARK: Save Image
+  /// MARK: share Image
 
-  Future<void> shareImage() async {
+  Future<void> shareImage(bool shareAll) async {
     final state = this.state;
     if (state is! ShareImageLoadedState) return;
 
     emit(state.copyWith(showLoadingIndicator: true));
 
     try {
-      final captureWidgetController =
-          CaptureWidgetController(imageKey: imageKeys[state.activeIndex]);
       const double pixelRatio = 2;
-      final image = await captureWidgetController.getImage(pixelRatio);
-      final byteData = await image?.toByteData(format: ImageByteFormat.png);
+
+      final List<ByteData> filesData = [];
+      final List<String> filesName = [];
+
+      if (shareAll) {
+        for (var i = 0; i < state.splittedMatn.length; i++) {
+          final captureWidgetController =
+              CaptureWidgetController(imageKey: imageKeys[i]);
+          final image = await captureWidgetController.getImage(pixelRatio);
+          final byteData = await image?.toByteData(format: ImageByteFormat.png);
+
+          if (byteData == null) continue;
+
+          final fileName = _getHadithOutputFileName(
+            state.hadith,
+            i,
+            state.splittedMatn.length,
+          );
+          filesData.add(byteData);
+          filesName.add(fileName);
+        }
+      } else {
+        final captureWidgetController =
+            CaptureWidgetController(imageKey: imageKeys[state.activeIndex]);
+        final image = await captureWidgetController.getImage(pixelRatio);
+
+        final byteData = await image?.toByteData(format: ImageByteFormat.png);
+
+        if (byteData == null) return;
+
+        final fileName = _getHadithOutputFileName(
+          state.hadith,
+          state.activeIndex,
+          state.splittedMatn.length,
+        );
+
+        filesData.add(byteData);
+        filesName.add(fileName);
+      }
+
+      appPrint(filesData.length);
+      appPrint(filesName);
 
       if (PlatformExtension.isDesktop) {
-        await _saveDesktop(
-          byteData,
-          outputFileName: "Alkamel-${state.hadith.id}_${state.activeIndex}",
-        );
+        await _saveDesktop(filesData, fileName: filesName);
       } else {
-        await _savePhone(byteData);
+        await _savePhone(filesData);
       }
     } catch (e) {
       appPrint(e.toString());
@@ -143,43 +179,55 @@ class ShareImageCubit extends Cubit<ShareImageState> {
     emit(state.copyWith(showLoadingIndicator: false));
   }
 
-  Future _saveDesktop(
-    ByteData? byteData, {
-    String outputFileName = 'SharedImage',
-  }) async {
-    if (byteData == null) return;
+  ///MARK: save Image
 
-    final Uint8List uint8List = byteData.buffer.asUint8List();
-
-    final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-    String? outputFile = await FilePicker.platform.saveFile(
-      dialogTitle: 'Please select an output file:',
-      fileName: '$outputFileName-$timestamp.png',
+  String _getHadithOutputFileName(Hadith hadith, int index, int length) {
+    return _getOutputFileName(
+      "Alkamel-${hadith.id}_${index + 1}_of_$length",
     );
-
-    if (outputFile == null) return;
-
-    if (!outputFile.endsWith(".png")) {
-      outputFile += ".png";
-    }
-
-    appPrint(outputFile);
-
-    final File file = File(outputFile);
-    await file.writeAsBytes(uint8List);
   }
 
-  Future _savePhone(ByteData? byteData) async {
-    if (byteData == null) return;
+  String _getOutputFileName(String outputFileName) {
+    final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final fileName = "$outputFileName-$timestamp.png";
+    return fileName;
+  }
 
+  Future _saveDesktop(
+    List<ByteData> filesData, {
+    required List<String> fileName,
+  }) async {
+    final String? dir = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: 'Please select an output file:',
+    );
+
+    if (dir == null) return;
+
+    appPrint(dir);
+
+    for (var i = 0; i < filesData.length; i++) {
+      final Uint8List uint8List = filesData[i].buffer.asUint8List();
+      final File file = File(path.join(dir, fileName[i]));
+      await file.writeAsBytes(uint8List);
+    }
+  }
+
+  Future _savePhone(List<ByteData> filesData) async {
     final tempDir = await getTemporaryDirectory();
 
-    final File file = await File('${tempDir.path}/SharedImage.png').create();
-    await file.writeAsBytes(byteData.buffer.asUint8List());
+    final List<XFile> xFiles = [];
+    for (int i = 0; i < filesData.length; i++) {
+      final File file =
+          await File('${tempDir.path}/SharedImage$i.png').create();
+      await file.writeAsBytes(filesData[i].buffer.asUint8List());
+      xFiles.add(XFile(file.path));
+    }
 
-    await Share.shareXFiles([XFile(file.path)]);
+    await Share.shareXFiles(xFiles);
 
-    await file.delete();
+    for (final file in xFiles) {
+      await File(file.path).delete();
+    }
   }
 
   /// **************************
