@@ -4,7 +4,6 @@ import 'package:alkamel/src/core/di/dependency_injection.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/share/presentation/components/hadith_as_image_card.dart';
 import 'package:alkamel/src/features/share/presentation/controller/cubit/share_image_cubit.dart';
-import 'package:capture_widget/capture_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +32,7 @@ class ShareAsImageScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () async {
-                    await context.read<ShareImageCubit>().shareImage();
+                    await context.read<ShareImageCubit>().shareImage(false);
                   },
                   icon: const Icon(Icons.share),
                 ),
@@ -45,25 +44,40 @@ class ShareAsImageScreen extends StatelessWidget {
                     : const SizedBox.shrink(),
               ),
             ),
-            body: GestureDetector(
-              onDoubleTap: () {
-                context.read<ShareImageCubit>().fitImageToScreen(context);
+            body: PageView.builder(
+              controller: context.read<ShareImageCubit>().pageController,
+              itemCount: state.splittedMatn.length,
+              onPageChanged: context.read<ShareImageCubit>().onPageChanged,
+              itemBuilder: (context, index) {
+                return Stack(
+                  fit: StackFit.expand,
+                  alignment: Alignment.center,
+                  children: [
+                    FittedBox(
+                      child: RepaintBoundary(
+                        key: context.read<ShareImageCubit>().imageKeys[index],
+                        child: HadithAsImageCard(
+                          hadith: hadith,
+                          settings: state.settings,
+                          matnRange: state.splittedMatn[index],
+                          splittedLength: state.splittedMatn.length,
+                          splittedindex: index,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
               },
-              child: Stack(
-                fit: StackFit.expand,
-                alignment: Alignment.center,
-                children: [
-                  FittedBox(
-                    child: CaptureWidget(
-                      controller: context
-                          .read<ShareImageCubit>()
-                          .captureWidgetController,
-                      child: HadithAsImageCard(hadith: hadith),
+            ),
+            bottomNavigationBar: state.splittedMatn.length < 2
+                ? null
+                : BottomAppBar(
+                    height: kToolbarHeight,
+                    child: Text(
+                      "${state.splittedMatn.length} : ${state.activeIndex + 1}",
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                ],
-              ),
-            ),
           );
         },
       ),
