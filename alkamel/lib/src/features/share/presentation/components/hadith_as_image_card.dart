@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:alkamel/src/core/functions/print.dart';
 import 'package:alkamel/src/features/search/data/models/hadith.dart';
 import 'package:alkamel/src/features/share/data/models/hadith_image_card_settings.dart';
 import 'package:alkamel/src/features/share/presentation/components/dot_bar.dart';
@@ -45,8 +44,6 @@ class HadithAsImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    appPrint(hadithText.length);
-
     const imageBackgroundColor = Color(0xff313B47);
     const secondaryColor = Color(0xfff2dc5d);
     final secondaryElementsColor = hadith.rulingEnum.color.withOpacity(.15);
