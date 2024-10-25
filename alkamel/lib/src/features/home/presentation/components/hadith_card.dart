@@ -43,7 +43,7 @@ class HadithCard extends StatelessWidget {
                     child: Text(
                       hadith.narrator +
                           (hadith.narratorReference.isNotEmpty
-                              ? "(${hadith.narratorReference})"
+                              ? " (${hadith.narratorReference})"
                               : ""),
                       style: TextStyle(
                         fontSize:
