@@ -30,7 +30,10 @@ class AlkamelApp extends StatelessWidget {
             onGenerateTitle: (context) => S.of(context).appTitle,
             theme: state.theme,
             locale: state.locale,
-            supportedLocales: S.delegate.supportedLocales,
+
+            ///TODO(001) uncomment when add translation for whole app
+            // supportedLocales: S.delegate.supportedLocales,
+            supportedLocales: const [Locale('ar')],
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               S.delegate,

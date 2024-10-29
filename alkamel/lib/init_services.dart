@@ -70,7 +70,7 @@ Future initWindowsManager() async {
 Future loadLocalizations() async {
   Locale? localeToSet = sl<ThemeRepo>().appLocale;
   final languageCode = PlatformExtension.languageCode;
-  localeToSet ??= Locale.fromSubtags(languageCode: languageCode ?? "en");
+  localeToSet ??= Locale.fromSubtags(languageCode: languageCode ?? "ar");
   await S.load(localeToSet);
 }
 

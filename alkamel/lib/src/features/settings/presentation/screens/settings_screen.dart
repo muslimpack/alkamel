@@ -36,7 +36,9 @@ class SettingsScreen extends StatelessWidget {
                   }
                 },
               ),
-              ListTile(
+
+              ///TODO(001) uncomment when add translation for whole app
+              /*  ListTile(
                 title: Text(S.of(context).prefAppLanguage),
                 subtitle: Wrap(
                   children: List.generate(
@@ -61,7 +63,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                 ),
-              ),
+              ), */
               const Divider(),
               const FontSettingsToolbox(),
               const Divider(),
