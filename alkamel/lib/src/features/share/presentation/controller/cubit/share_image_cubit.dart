@@ -45,7 +45,7 @@ class ShareImageCubit extends Cubit<ShareImageState> {
 
     appPrint(overflowChars);
 
-    return result;
+    return result + 2;
   }
 
   FutureOr start(Hadith hadith) async {
