@@ -45,7 +45,7 @@ class SearchResultViewer extends StatelessWidget {
                 const Icon(Icons.search),
                 const SizedBox(height: 10),
                 Text(
-                  S.of(context).noResultsFound,
+                  '${S.of(context).noResultsFound}\n"${state.searchText}"',
                   textAlign: TextAlign.center,
                 ),
               ],
