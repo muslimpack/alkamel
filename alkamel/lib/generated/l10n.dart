@@ -310,6 +310,16 @@ class S {
     );
   }
 
+  /// `Refresh`
+  String get refresh {
+    return Intl.message(
+      'Refresh',
+      name: 'refresh',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report misspelled`
   String get reportMisspelled {
     return Intl.message(

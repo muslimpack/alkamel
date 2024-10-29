@@ -38,6 +38,33 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
+  Future refresh() async {
+    final state = this.state;
+    if (state is! HomeLoadedState) return;
+
+    final authenticHadith = await alkamelDbHelper.randomHadith(
+      HadithRulingEnum.authentic,
+    );
+    final weakHadith = await alkamelDbHelper.randomHadith(
+      HadithRulingEnum.weak,
+    );
+    final abandonedHadith = await alkamelDbHelper.randomHadith(
+      HadithRulingEnum.abandoned,
+    );
+    final fabricatedHadith = await alkamelDbHelper.randomHadith(
+      HadithRulingEnum.fabricated,
+    );
+
+    emit(
+      state.copyWith(
+        authenticHadith: authenticHadith,
+        weakHadith: weakHadith,
+        abandonedHadith: abandonedHadith,
+        fabricatedHadith: fabricatedHadith,
+      ),
+    );
+  }
+
   Future toggleSearch(bool search) async {
     final state = this.state;
     if (state is! HomeLoadedState) return;

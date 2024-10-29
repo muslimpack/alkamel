@@ -64,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pray for us and our parents."),
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("App language"),
         "prefThemeDarkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "refresh": MessageLookupByLibrary.simpleMessage("Refresh"),
         "reportMisspelled":
             MessageLookupByLibrary.simpleMessage("Report misspelled"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),

@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "prefAppLanguage": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
         "prefThemeDarkMode":
             MessageLookupByLibrary.simpleMessage("الوضع الليلي"),
+        "refresh": MessageLookupByLibrary.simpleMessage("تحديث"),
         "reportMisspelled":
             MessageLookupByLibrary.simpleMessage("تبليغ عن خطأ"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),

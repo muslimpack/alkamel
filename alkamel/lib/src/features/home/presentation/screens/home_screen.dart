@@ -75,6 +75,14 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
+                      IconButton(
+                        tooltip: S.of(context).refresh,
+                        onPressed: () {
+                          context.read<HomeCubit>().refresh();
+                        },
+                        icon: const Icon(Icons.refresh),
+                      ),
+                      const SizedBox(height: 20),
                       if (state.authenticHadith != null)
                         HadithCard(hadith: state.authenticHadith!),
                       if (state.weakHadith != null)
