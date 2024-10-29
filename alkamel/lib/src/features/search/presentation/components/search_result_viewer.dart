@@ -16,6 +16,7 @@ class SearchResultViewer extends StatelessWidget {
         if (state is! SearchLoadedState) return const SizedBox.shrink();
 
         return PagedListView<int, Hadith>(
+          padding: const EdgeInsets.all(15),
           pagingController: context.read<SearchCubit>().pagingController,
           builderDelegate: PagedChildBuilderDelegate<Hadith>(
             animateTransitions: true,
